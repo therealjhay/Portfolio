@@ -3,14 +3,14 @@ import { z } from "zod";
 // Easily edit everything below without touching the component code.
 export const siteContent: SiteContent = {
   personalInfo: {
-    name: "Jhay A.",
+    name: "Johnson Oyemade",
     role: "Web3 + Fullstack Developer",
     headline:
-      "Hi, I build decentralized protocols and scalable fullstack applications.",
+      "Hi I'm 0xJhay, I build decentralized protocols and scalable fullstack applications.",
     bio: "Hybrid Web3 and fullstack engineer bridging Django/React systems with Ethereum smart contracts.",
     about:
       "I translate product ideas into secure smart contracts and production-grade web apps. My sweet spot is designing Web2 architectures that plug cleanly into Web3 infrastructure without compromising UX or security.",
-    email: "hello@yourdomain.com",
+    email: "johnsonoca@gmail.com",
     githubUrl: "https://github.com/therealjhay",
   },
   socialLinks: [
@@ -23,7 +23,7 @@ export const siteContent: SiteContent = {
     },
     {
       name: "Etherscan",
-      url: "https://etherscan.io/address/0x0000000000000000000000000000000000000000",
+      url: "https://etherscan.io/address/0x611885e1907E469cCb2E3AA154c2076A1458a33B",
       icon: "etherscan",
     },
   ],
@@ -37,12 +37,12 @@ export const siteContent: SiteContent = {
       id: "ARES",
       title: "Ares Protocol",
       description:
-        "An over-collateralized lending protocol with modular vaults and safety rails. Built audit-first with a developer SDK that makes integration painless.",
+        "ARES is a modular treasury management protocol designed to manage high-value assets for autonomous organizations.",
       category: "web3",
       githubUrl: "https://github.com/therealjhay/ARES-TREASURY",
       liveUrl:
         "https://substack.com/@therealjhay/note/p-190595895?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
-      techStack: ["Solidity", "Foundry", "Ethers.js", "Next.js"],
+      techStack: ["Solidity", "Foundry", "Merkle Trees", "OpenZeppelin"],
       accentColor: "#00E5FF",
     },
     {
@@ -79,6 +79,45 @@ export const siteContent: SiteContent = {
       accentColor: "#FF8F1F",
     },
   ],
+  articles: [
+    {
+      id: "substack-note-190595895",
+      title: "Substack Note #190595895",
+      description: "Technical note published on Substack.",
+      url: "https://substack.com/@therealjhay/note/p-190595895?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
+      platform: "Substack",
+      tags: ["Substack Note"],
+      accentColor: "#00E5FF",
+    },
+    {
+      id: "substack-note-187978176",
+      title: "Substack Note #187978176",
+      description: "Technical note published on Substack.",
+      url: "https://substack.com/@therealjhay/note/p-187978176?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
+      platform: "Substack",
+      tags: ["Substack Note"],
+      accentColor: "#FF8F1F",
+    },
+    {
+      id: "substack-note-187071784",
+      title: "Substack Note #187071784",
+      description: "Technical note published on Substack.",
+      url: "https://substack.com/@therealjhay/note/p-187071784?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
+      platform: "Substack",
+      tags: ["Substack Note"],
+      accentColor: "#B7FF00",
+    },
+    {
+      id: "react-hooks-practical-guide",
+      title: "React Hooks: A Practical Guide to useState, useEffect, and Beyond",
+      description:
+        "A hands-on walkthrough of React hook fundamentals, patterns, and real-world usage.",
+      url: "https://0xjhay.hashnode.dev/react-hooks-a-practical-guide-to-usestate-useeffect-and-beyond",
+      platform: "Hashnode",
+      tags: ["React", "Hooks", "Frontend"],
+      accentColor: "#FF3B7C",
+    },
+  ],
 };
 
 export const SocialLinkSchema = z.object({
@@ -95,6 +134,16 @@ export const ProjectSchema = z.object({
   githubUrl: z.string().url().optional(),
   liveUrl: z.string().url().optional(),
   techStack: z.array(z.string()),
+  accentColor: z.string(),
+});
+
+export const ArticleSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  url: z.string().url(),
+  platform: z.string(),
+  tags: z.array(z.string()),
   accentColor: z.string(),
 });
 
@@ -117,6 +166,7 @@ export const SiteContentSchema = z.object({
   socialLinks: z.array(SocialLinkSchema),
   skills: SkillGroupsSchema,
   projects: z.array(ProjectSchema),
+  articles: z.array(ArticleSchema),
 });
 
 export type SiteContent = z.infer<typeof SiteContentSchema>;

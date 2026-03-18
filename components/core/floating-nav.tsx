@@ -36,6 +36,9 @@ export function FloatingNav() {
           <a href="#projects" data-cursor="hover" className="hover:translate-x-1 transition-transform">
             Projects
           </a>
+          <a href="#articles" data-cursor="hover" className="hover:translate-x-1 transition-transform">
+            Articles
+          </a>
           <a href="#contact" data-cursor="hover" className="hover:translate-x-1 transition-transform">
             Contact
           </a>
