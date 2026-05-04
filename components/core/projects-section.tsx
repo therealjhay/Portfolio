@@ -1,9 +1,9 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import { siteContent } from "@/config/site-content";
 import { ProjectCard } from "@/components/core/project-card";
+import { siteContent } from "@/config/site-content";
 
 const filters = [
   { label: "All", value: "all" },
@@ -14,8 +14,8 @@ const filters = [
 type FilterValue = (typeof filters)[number]["value"];
 
 export function ProjectsSection() {
-  const { projects } = siteContent;
   const [activeFilter, setActiveFilter] = useState<FilterValue>("all");
+  const { projects } = siteContent;
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "all") return projects;
@@ -23,58 +23,59 @@ export function ProjectsSection() {
   }, [activeFilter, projects]);
 
   return (
-    <section
-      id="projects"
-      className="w-full border-b-4 border-ink bg-paper text-ink"
-    >
-      <div className="mx-auto w-full max-w-6xl px-6 py-24">
+    <section id="projects" className="py-14 md:py-20 lg:py-24">
+      <div className="section-shell">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="flex flex-col gap-6"
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
         >
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <span className="inline-flex border-4 border-ink bg-acid px-4 py-2 text-sm font-semibold uppercase tracking-wide">
-                Projects
-              </span>
-              <h2 className="mt-6 text-3xl font-display md:text-5xl">
-                A snapshot of on-chain and fullstack builds.
-              </h2>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              {filters.map((filter) => {
-                const isActive = activeFilter === filter.value;
-                return (
-                  <button
-                    key={filter.value}
-                    type="button"
-                    data-cursor="hover"
-                    aria-pressed={isActive}
-                    onClick={() => setActiveFilter(filter.value)}
-                    className={`border-4 border-ink px-4 py-2 text-xs font-semibold uppercase tracking-wide transition-transform hover:-translate-y-1 ${
-                      isActive ? "bg-ink text-paper" : "bg-paper text-ink"
-                    }`}
-                  >
-                    {filter.label}
-                  </button>
-                );
-              })}
-            </div>
+          <div>
+            <span className="eyebrow">Projects</span>
+            <h2 className="display-title mt-6 text-[clamp(1.8rem,4.4vw,3.8rem)] max-w-[18ch]">
+              Selected work with production constraints.
+            </h2>
+          </div>
+
+          <div className="surface flex flex-wrap gap-2 p-2">
+            {filters.map((filter) => {
+              const isActive = activeFilter === filter.value;
+              return (
+                <button
+                  key={filter.value}
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => setActiveFilter(filter.value)}
+                  className="rounded-lg px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em]"
+                  style={{
+                    background: isActive ? "var(--color-accent-soft)" : "transparent",
+                    color: isActive ? "var(--color-text)" : "var(--color-muted)",
+                  }}
+                >
+                  {filter.label}
+                </button>
+              );
+            })}
           </div>
         </motion.div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {filteredProjects.map((project, index) => {
-            const isWide = index % 3 === 0;
-            return (
-              <div key={project.id} className={isWide ? "md:col-span-2" : ""}>
-                <ProjectCard project={project} index={index} highlight={isWide} />
-              </div>
-            );
-          })}
+        <div className="mt-10 grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.24 }}
+              >
+                <ProjectCard project={project} index={index} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>

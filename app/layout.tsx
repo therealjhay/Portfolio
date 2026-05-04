@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
-import { Bungee, IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import { Archivo_Black, Fira_Code, Manrope } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/core/lenis-provider";
 import { siteContent } from "@/config/site-content";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const bungee = Bungee({
-  variable: "--font-bungee",
+const archivoBlack = Archivo_Black({
+  variable: "--font-archivo-black",
   subsets: ["latin"],
   weight: ["400"],
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
+const firaCode = Fira_Code({
+  variable: "--font-fira-code",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
@@ -34,9 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${spaceGrotesk.variable} ${bungee.variable} ${ibmPlexMono.variable} antialiased`}
-      >
+      <body className={`${manrope.variable} ${archivoBlack.variable} ${firaCode.variable} antialiased`}>
         <LenisProvider>{children}</LenisProvider>
       </body>
     </html>

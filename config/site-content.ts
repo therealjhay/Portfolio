@@ -34,6 +34,39 @@ export const siteContent: SiteContent = {
   },
   projects: [
     {
+      id: "cheer-brightness",
+      title: "Cheer Brightness",
+      description:
+        "A digital wellness micro-site for mood elevation. Features interactive sun slider, secret garden with petal effects, and gentle affirmations in a distraction-free space.",
+      category: "fullstack",
+      githubUrl: "https://github.com/therealjhay/cheer-brightness",
+      liveUrl: "https://cheer-brightness.vercel.app/",
+      techStack: ["React", "JavaScript", "Vercel", "CSS"],
+      accentColor: "#F59E0B",
+    },
+    {
+      id: "erc20-faucet",
+      title: "ERC20 Token Faucet",
+      description:
+        "A decentralized faucet app for distributing ERC20 testnet tokens. Built with Foundry for smart contracts and React/TypeScript for the frontend.",
+      category: "web3",
+      githubUrl: "https://github.com/therealjhay/erc20-faucet",
+      liveUrl: "https://invincible-flax.vercel.app/",
+      techStack: ["Solidity", "Foundry", "React", "TypeScript", "Viem"],
+      accentColor: "#10B981",
+    },
+    {
+      id: "blue-scribe",
+      title: "Blue Scribe",
+      description:
+        "AI-powered audio-to-text transcription service with file upload and browser recording. Supports MP3, WAV, M4A, AAC, OGG up to 50MB with real-time processing.",
+      category: "fullstack",
+      githubUrl: "https://github.com/therealjhay/blue-scribe",
+      liveUrl: "https://blue-scribe.vercel.app/",
+      techStack: ["Next.js", "React", "Gemini AI", "Vercel"],
+      accentColor: "#3B82F6",
+    },
+    {
       id: "ARES",
       title: "Ares Protocol",
       description:

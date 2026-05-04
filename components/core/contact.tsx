@@ -1,123 +1,199 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ReactNode } from "react";
-import { siteContent } from "@/config/site-content";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { Github, Linkedin, Mail, ScanLine, Twitter } from "lucide-react";
+import { siteContent } from "@/config/site-content";
 
 const iconMap: Record<string, ReactNode> = {
-  github: <Github className="h-5 w-5" />,
-  twitter: <Twitter className="h-5 w-5" />,
-  linkedin: <Linkedin className="h-5 w-5" />,
-  etherscan: <ScanLine className="h-5 w-5" />,
+  github: <Github className="h-4 w-4" />,
+  twitter: <Twitter className="h-4 w-4" />,
+  linkedin: <Linkedin className="h-4 w-4" />,
+  etherscan: <ScanLine className="h-4 w-4" />,
 };
 
 export function Contact() {
   const { email } = siteContent.personalInfo;
+  const [formStatus, setFormStatus] = useState<string | null>(null);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get("name") ?? "").trim();
+    const senderEmail = String(formData.get("email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    if (!name || !senderEmail || !message) {
+      setFormStatus("Please complete all fields before sending your message.");
+      return;
+    }
+
+    const body = `Name: ${name}\nEmail: ${senderEmail}\n\nProject details:\n${message}`;
+    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(
+      `Project inquiry from ${name}`
+    )}&body=${encodeURIComponent(body)}`;
+
+    try {
+      await navigator.clipboard.writeText(body);
+    } catch {
+      // Clipboard can be unavailable in some browser contexts.
+    }
+
+    window.location.href = mailtoUrl;
+    setFormStatus("Email draft opened. Your message was also copied to clipboard.");
+  };
 
   return (
-    <section
-      id="contact"
-      className="w-full border-b-4 border-ink bg-orange text-ink"
-    >
-      <div className="mx-auto w-full max-w-6xl px-6 py-24">
+    <section id="contact" className="py-14 md:py-20 lg:py-24">
+      <div className="section-shell grid gap-8 lg:grid-cols-12 lg:gap-10">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="grid grid-cols-1 gap-10 lg:grid-cols-12"
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          className="lg:col-span-5"
         >
-          <div className="lg:col-span-5">
-            <span className="inline-flex border-4 border-ink bg-paper px-4 py-2 text-sm font-semibold uppercase tracking-wide">
-              Contact / Connect
-            </span>
-            <h2 className="mt-6 text-3xl font-display md:text-5xl">
-              Let’s build something loud and reliable.
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed">
-              Drop a note about your product, protocol, or team. I respond fastest to
-              clear scopes and bold timelines.
+          <span className="eyebrow">Contact</span>
+          <h2 className="display-title mt-6 text-[clamp(1.8rem,4.4vw,3.8rem)] max-w-[16ch]">
+            Let&apos;s ship something durable and ambitious.
+          </h2>
+          <p className="lede mt-5">
+            Send context, timeline, and constraints. I prioritize projects where product quality and
+            execution discipline both matter.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-2">
+            <a href={`mailto:${email}`} className="btn-primary">
+              <Mail className="h-4 w-4" />
+              Email Me
+            </a>
+            <span className="chip !rounded-lg">{email}</span>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {siteContent.socialLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.name}
+                title={link.name}
+                className="btn-secondary"
+              >
+                {iconMap[link.icon.toLowerCase()] ?? link.name[0]}
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+          className="lg:col-span-7"
+        >
+          <form onSubmit={handleSubmit} className="surface p-5 md:p-6">
+            <p className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>
+              Fill this out and I&apos;ll open a prefilled email draft with your details.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={`mailto:${email}`}
-                data-cursor="hover"
-                className="inline-flex items-center gap-2 border-4 border-ink bg-ink px-4 py-2 text-xs font-semibold uppercase tracking-wide text-paper transition-transform hover:-translate-y-1"
-              >
-                <Mail className="h-4 w-4" />
-                Email Me
-              </a>
-              <span className="border-2 border-ink bg-paper px-3 py-2 text-xs font-semibold uppercase tracking-wide">
-                {email}
-              </span>
+            <div className="mt-5 grid gap-4 md:grid-cols-2">
+              <Field
+                label="Name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                autoComplete="name"
+              />
+              <Field
+                label="Email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                autoComplete="email"
+              />
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-3">
-              {siteContent.socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-cursor="hover"
-                  className="inline-flex items-center gap-2 border-2 border-ink bg-paper px-3 py-2 text-xs font-semibold uppercase tracking-wide text-ink transition-transform hover:-translate-y-1"
-                >
-                  {iconMap[link.icon.toLowerCase()] ?? <Mail className="h-4 w-4" />}
-                  {link.name}
-                </a>
-              ))}
+            <div className="mt-4">
+              <Field
+                label="Project details"
+                name="message"
+                type="textarea"
+                placeholder="What are you building, and what do you need from me?"
+              />
             </div>
-          </div>
 
-          <div className="lg:col-span-7">
-            <form
-              className="border-4 border-ink bg-paper p-6 text-ink"
-              action={`mailto:${email}`}
-              method="post"
-              encType="text/plain"
-            >
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <label className="flex flex-col gap-2 text-xs font-semibold uppercase tracking-wide">
-                  Name
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your name"
-                    className="border-2 border-ink bg-white px-3 py-2 text-sm"
-                  />
-                </label>
-                <label className="flex flex-col gap-2 text-xs font-semibold uppercase tracking-wide">
-                  Email
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    className="border-2 border-ink bg-white px-3 py-2 text-sm"
-                  />
-                </label>
-              </div>
-              <label className="mt-4 flex flex-col gap-2 text-xs font-semibold uppercase tracking-wide">
-                Project Details
-                <textarea
-                  name="message"
-                  rows={5}
-                  placeholder="Tell me about your build, timeline, and stack."
-                  className="border-2 border-ink bg-white px-3 py-2 text-sm"
-                />
-              </label>
-              <button
-                type="submit"
-                data-cursor="hover"
-                className="mt-6 inline-flex items-center gap-2 border-4 border-ink bg-cyan px-6 py-3 text-sm font-semibold uppercase tracking-wide transition-transform hover:-translate-y-1"
-              >
-                Send Mailto Form
-              </button>
-            </form>
-          </div>
+            <button type="submit" className="btn-primary mt-5">
+              Send message
+              <Mail className="h-4 w-4" />
+            </button>
+
+            {formStatus ? (
+              <p className="mt-3 text-sm" style={{ color: "var(--color-muted)" }}>
+                {formStatus}
+              </p>
+            ) : null}
+          </form>
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function Field({
+  label,
+  name,
+  type,
+  placeholder,
+  autoComplete,
+}: {
+  label: string;
+  name: string;
+  type: "text" | "email" | "textarea";
+  placeholder: string;
+  autoComplete?: string;
+}) {
+  const baseClassName =
+    "w-full rounded-lg border px-3 py-2.5 text-sm leading-relaxed";
+
+  const style = {
+    borderColor: "var(--color-border)",
+    background: "color-mix(in oklab, var(--color-surface) 75%, transparent)",
+    color: "var(--color-text)",
+  } as const;
+
+  return (
+    <label className="flex flex-col gap-2">
+      <span className="text-xs font-semibold uppercase tracking-[0.08em]" style={{ color: "var(--color-muted)" }}>
+        {label}
+      </span>
+      {type === "textarea" ? (
+        <textarea
+          id={name}
+          name={name}
+          rows={6}
+          required
+          aria-required="true"
+          placeholder={placeholder}
+          className={baseClassName}
+          style={style}
+        />
+      ) : (
+        <input
+          id={name}
+          name={name}
+          type={type}
+          required
+          aria-required="true"
+          autoComplete={autoComplete}
+          placeholder={placeholder}
+          className={baseClassName}
+          style={style}
+        />
+      )}
+    </label>
   );
 }
