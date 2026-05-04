@@ -1,31 +1,36 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Fira_Code, Manrope } from "next/font/google";
-import "./globals.css";
-import { LenisProvider } from "@/components/core/lenis-provider";
-import { siteContent } from "@/config/site-content";
+import { DM_Sans, IBM_Plex_Sans, Space_Mono } from "next/font/google";
+import { Footer } from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/navbar";
+import { AppThemeProvider } from "@/components/layout/theme-provider";
+import { siteConfig } from "@/content/config";
+import { createMetadata } from "@/lib/metadata";
+import "@/styles/globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
-const archivoBlack = Archivo_Black({
-  variable: "--font-archivo-black",
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "700"],
+  display: "swap",
 });
 
-const firaCode = Fira_Code({
-  variable: "--font-fira-code",
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: "--font-ibm-plex-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: `${siteContent.personalInfo.name} | ${siteContent.personalInfo.role}`,
-  description: siteContent.personalInfo.bio,
-};
+export const metadata: Metadata = createMetadata({
+  title: `${siteConfig.name} · ${siteConfig.role}`,
+  description: siteConfig.tagline,
+});
 
 export default function RootLayout({
   children,
@@ -33,9 +38,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${manrope.variable} ${archivoBlack.variable} ${firaCode.variable} antialiased`}>
-        <LenisProvider>{children}</LenisProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${dmSans.variable} ${spaceMono.variable} ${ibmPlexSans.variable}`}>
+        <AppThemeProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </AppThemeProvider>
       </body>
     </html>
   );

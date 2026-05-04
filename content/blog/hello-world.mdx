@@ -1,0 +1,38 @@
+---
+title: "Shipping Signal, Not Noise"
+date: "2026-05-01"
+excerpt: "How I approach building blockchain products that survive contact with production."
+tags:
+  - engineering
+  - blockchain
+  - product
+readTime: "6 min read"
+---
+
+Most Web3 products die in the gap between **demo-ready** and **production-ready**.
+
+I optimize for the second state from day one: deterministic tests, clear failure modes, stable release paths, and interfaces that non-dev users can still operate.
+
+> Production quality is mostly about handling the boring edges before they become expensive incidents.
+
+## What I optimize for
+
+1. **Execution certainty**: clear deploy flow, environment boundaries, rollback path.
+2. **Operational visibility**: logs, alerts, health checks, and contract-level observability.
+3. **Change safety**: typed interfaces, migration scripts, and pre-merge checks.
+
+```ts
+export function shouldDeploy({
+  testsPassing,
+  migrationDryRun,
+  contractDiffReviewed,
+}: {
+  testsPassing: boolean;
+  migrationDryRun: boolean;
+  contractDiffReviewed: boolean;
+}) {
+  return testsPassing && migrationDryRun && contractDiffReviewed;
+}
+```
+
+When these basics are present, shipping becomes boring in the best way.

@@ -28,7 +28,7 @@ export const siteContent: SiteContent = {
     },
   ],
   skills: {
-    web3: ["Solidity", "Ethereum", "Foundry", "Hardhat", "Ethers.js", "Viem"],
+    web3: ["Solidity", "Rust", "Ethereum", "Foundry", "Hardhat", "Ethers.js", "Viem"],
     frontend: ["React", "TypeScript", "JavaScript", "Tailwind CSS"],
     backend: ["Django", "Python", "PostgreSQL", "Node.js"],
   },

@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 40 33% 96%;
+  --foreground: 0 0% 8%;
+  --muted: 40 12% 91%;
+  --muted-foreground: 0 0% 35%;
+  --card: 40 25% 98%;
+  --card-foreground: 0 0% 8%;
+  --border: 0 0% 83%;
+  --primary: 170 100% 50%;
+  --primary-foreground: 0 0% 8%;
+  --secondary: 0 0% 92%;
+  --secondary-foreground: 0 0% 12%;
+  --accent: 190 100% 50%;
+  --accent-foreground: 0 0% 10%;
+  --ring: 170 100% 50%;
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-space-mono);
+  --font-resume: var(--font-ibm-plex-sans);
+}
+
+.dark {
+  --background: 0 0% 4%;
+  --foreground: 40 21% 93%;
+  --muted: 0 0% 9%;
+  --muted-foreground: 40 8% 68%;
+  --card: 0 0% 6%;
+  --card-foreground: 40 21% 93%;
+  --border: 0 0% 17%;
+  --primary: 170 100% 50%;
+  --primary-foreground: 0 0% 4%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 40 21% 93%;
+  --accent: 190 100% 50%;
+  --accent-foreground: 0 0% 4%;
+  --ring: 170 100% 50%;
+}
+
+* {
+  @apply border-border;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    hsl(var(--foreground) / 0.08) 45%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: scan 850ms ease-out forwards;
+}
+
+@keyframes scan {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.noise-bg {
+  background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.04) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+.code-rain::before {
+  content: "function executeSwap() { if (slippage > max) revert(); }\A const tx = await signer.sendTransaction(payload)\A for (const block of chain) settle(block)\A emit StrategyRebalanced(vault, delta)";
+  white-space: pre;
+  font-family: var(--font-mono), monospace;
+  color: hsl(var(--foreground) / 0.09);
+  position: absolute;
+  inset: 8% auto auto -12%;
+  width: 130%;
+  transform: rotate(-5deg);
+  font-size: clamp(0.68rem, 1vw, 0.92rem);
+  line-height: 1.9;
+  pointer-events: none;
+}
+
+.blog-content pre {
+  @apply my-6 overflow-x-auto rounded-none border border-border bg-card p-4;
+}
+
+.blog-content code:not(pre code) {
+  @apply rounded-none border border-border bg-muted px-1.5 py-0.5 text-sm;
+}
+
+.blog-content blockquote {
+  @apply my-6 border-l-2 border-primary pl-4 text-muted-foreground;
+}
+
+.blog-content img {
+  @apply my-8 h-auto w-full border border-border;
+}
+
+.resume-area {
+  background: #fafafa;
+  color: #111;
+  font-family: var(--font-resume), system-ui, sans-serif;
+}
+
+.resume-area a {
+  color: #0b6e4f;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.resume-section {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 24px;
+  margin-top: 24px;
+}
+
+.resume-label {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5c5c5c;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .resume-section {
+    padding-top: 16px;
+    margin-top: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+@media print {
+  @page {
+    margin: 0.75in;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .no-print,
+  nav,
+  footer,
+  .resume-rail {
+    display: none !important;
+  }
+
+  .resume-area {
+    max-width: none !important;
+    margin: 0 !important;
+    background: #fff !important;
+    break-inside: avoid;
+  }
+
+  .resume-entry {
+    break-inside: avoid;
+  }
+}
