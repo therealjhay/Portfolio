@@ -28,7 +28,15 @@ export const siteContent: SiteContent = {
     },
   ],
   skills: {
-    web3: ["Solidity", "Rust", "Ethereum", "Foundry", "Hardhat", "Ethers.js", "Viem"],
+    web3: [
+      "Solidity",
+      "Rust",
+      "Ethereum",
+      "Foundry",
+      "Hardhat",
+      "Ethers.js",
+      "Viem",
+    ],
     frontend: ["React", "TypeScript", "JavaScript", "Tailwind CSS"],
     backend: ["Django", "Python", "PostgreSQL", "Node.js"],
   },
@@ -142,7 +150,8 @@ export const siteContent: SiteContent = {
     },
     {
       id: "react-hooks-practical-guide",
-      title: "React Hooks: A Practical Guide to useState, useEffect, and Beyond",
+      title:
+        "React Hooks: A Practical Guide to useState, useEffect, and Beyond",
       description:
         "A hands-on walkthrough of React hook fundamentals, patterns, and real-world usage.",
       url: "https://0xjhay.hashnode.dev/react-hooks-a-practical-guide-to-usestate-useeffect-and-beyond",

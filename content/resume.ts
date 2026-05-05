@@ -83,44 +83,47 @@ export const resumeData: ResumeData = {
   ],
   projects: [
     {
-      name: "VaultRail",
-      description: "Cross-chain vault rebalancer with policy-based risk controls.",
-      tech: ["Solidity", "Foundry", "TypeScript", "Redis"],
-      github: "github.com/therealjhay/vaultrail",
-      live: "vaultrail.app",
+      name: "AresProctocol",
+      description:
+        "ARES is a modular treasury management protocol designed to manage high-value assets for autonomous organizations.",
+      tech: ["Solidity", "Foundry", "Merkle Trees", "OpenZeppelin"],
+      github: "https://github.com/therealjhay/ARES-TREASURY",
+      live: "https://substack.com/@therealjhay/note/p-190595895?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
     },
     {
-      name: "LedgerPulse",
-      description: "On-chain observability platform for protocol treasury and contract risk.",
-      tech: ["Next.js", "PostgreSQL", "Web3.py", "Docker"],
-      github: "github.com/therealjhay/ledgerpulse",
+      name: "Soul",
+      description:
+        "On-chain reputation aggregation protocol built on Solana.",
+      tech: ["Next.js", "Anchor-Rust", "Web3.py", "Docker"],
+      github: "github.com/therealjhay/Soul",
       live: "ledgerpulse.dev",
     },
     {
       name: "GasLens",
-      description: "Simulation and profiling toolchain for contract gas performance.",
+      description:
+        "Simulation and profiling toolchain for contract gas performance.",
       tech: ["Solidity", "Foundry", "Python"],
       github: "github.com/therealjhay/gaslens",
     },
   ],
   skills: {
-    languages: ["TypeScript", "Python", "Solidity", "SQL"],
+    languages: ["TypeScript", "Python", "Solidity", "Rust"],
     frameworks: ["Next.js", "FastAPI", "Django"],
-    blockchain: ["Foundry", "ethers.js", "Web3.py", "IPFS"],
+    blockchain: ["Foundry", "ethers.js", "Viem"],
     tools: ["PostgreSQL", "Redis", "Docker", "GitHub Actions"],
   },
   education: [
     {
       institution: "National Open University",
       degree: "B.Sc. Computer Science",
-      year: "2022",
+      year: "Present",
     },
   ],
   certifications: [
     {
-      name: "Ethereum Developer Bootcamp",
-      issuer: "Alchemy University",
-      year: "2024",
+      name: "Solidity Developer Bootcamp",
+      issuer: "Web3bridge Africa",
+      year: "2026",
     },
   ],
 };
