@@ -10,12 +10,16 @@ export function Footer() {
         </p>
         <div className="flex flex-wrap gap-4 md:justify-center">
           {siteConfig.nav.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-foreground">
+            <Link
+              key={item.href}
+              href={item.href}
+              className="hover:text-foreground"
+            >
               {item.label}
             </Link>
           ))}
         </div>
-        <p className="text-xs md:text-right">Built with Next.js + deployed on Vercel</p>
+        <p className="text-xs md:text-right">Built with Next.js</p>
       </div>
     </footer>
   );

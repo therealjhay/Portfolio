@@ -1,13 +1,15 @@
 import { siteContent } from "@/config/site-content";
 
 const byName = (name: string) =>
-  siteContent.socialLinks.find((link) => link.name.toLowerCase().includes(name.toLowerCase()))?.url;
+  siteContent.socialLinks.find((link) =>
+    link.name.toLowerCase().includes(name.toLowerCase()),
+  )?.url;
 
 export const siteConfig = {
   name: siteContent.personalInfo.name,
   role: siteContent.personalInfo.role,
   tagline: siteContent.personalInfo.bio,
-  siteUrl: "https://jhay.dev",
+  siteUrl: "https://therealjhay.tech",
   availabilityOpen: true,
   latestPinnedProject: siteContent.projects[0]?.title ?? "Featured Project",
   social: {
@@ -21,12 +23,16 @@ export const siteConfig = {
   },
   socialLinks: siteContent.socialLinks,
   nav: [
-    { label: "Work", href: "/projects" },
+    { label: "Projects", href: "/projects" },
     { label: "Resume", href: "/resume" },
     { label: "Services", href: "/services" },
     { label: "Contact", href: "/contact" },
   ],
-  rotatingTitles: [siteContent.personalInfo.role, "Blockchain Developer", "Full-Stack Engineer"],
+  rotatingTitles: [
+    siteContent.personalInfo.role,
+    "Blockchain Developer",
+    "Full-Stack Engineer",
+  ],
 } as const;
 
 export type SiteConfig = typeof siteConfig;
