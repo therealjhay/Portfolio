@@ -26,7 +26,7 @@ export async function AboutSection() {
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 md:grid-cols-2 md:px-6">
         <div className="space-y-4">
           <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">About</p>
-          <div className="blog-content space-y-4 text-muted-foreground">{content}</div>
+          <div className="mdx-content space-y-4 text-muted-foreground">{content}</div>
         </div>
 
         <div className="space-y-5">

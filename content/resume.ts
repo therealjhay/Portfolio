@@ -58,10 +58,10 @@ export const resumeData: ResumeData = {
     "Blockchain and full-stack engineer with a builder-first mindset, focused on shipping production systems end-to-end. I architect smart contract stacks, data pipelines, and operational tooling that survive real traffic and real users. I move projects from concept to deployment with clear technical ownership across product, backend, and on-chain infrastructure.",
   experience: [
     {
-      company: "Freelance / Contract",
+      company: "Web3bridge Africa",
       role: "Blockchain & Full-Stack Developer",
       location: "Remote",
-      dateRange: "Jan 2024 – Present",
+      dateRange: "Jan 2026 – Present",
       bullets: [
         "Architected and deployed client-facing smart contract systems with upgrade-safe patterns and deterministic test coverage.",
         "Reduced release risk by introducing Foundry-based simulation suites and pre-deployment gas regression checks.",
@@ -70,12 +70,12 @@ export const resumeData: ResumeData = {
       ],
     },
     {
-      company: "Independent Product Studio",
+      company: "Freelance",
       role: "Full-Stack Engineer",
       location: "Hybrid",
-      dateRange: "Jun 2022 – Dec 2023",
+      dateRange: "Jun 2024 – Present",
       bullets: [
-        "Built multi-tenant backend services for analytics-heavy products using FastAPI, PostgreSQL, and Redis.",
+        "Built multi-tenant backend services for analytics-heavy products using Django, PostgreSQL, and Redis.",
         "Deployed containerized workloads and CI pipelines that shortened iteration cycles for cross-functional teams.",
         "Integrated authentication, billing, and operational telemetry for production SaaS delivery.",
       ],
@@ -92,18 +92,18 @@ export const resumeData: ResumeData = {
     },
     {
       name: "Soul",
-      description:
-        "On-chain reputation aggregation protocol built on Solana.",
+      description: "On-chain reputation aggregation protocol built on Solana.",
       tech: ["Next.js", "Anchor-Rust", "Web3.py", "Docker"],
       github: "github.com/therealjhay/Soul",
-      live: "ledgerpulse.dev",
+      live: "soul-srgp.vercel.app/",
     },
     {
-      name: "GasLens",
+      name: "Blue Scribe",
       description:
-        "Simulation and profiling toolchain for contract gas performance.",
-      tech: ["Solidity", "Foundry", "Python"],
-      github: "github.com/therealjhay/gaslens",
+        "An application that utilizes AI to transcribes audio files, featuring automatic speaker detection.",
+      tech: ["TypeScript", "Next.js", "React", "Gemini API", "Supabase"],
+      github: "github.com/therealjhay/Scribe",
+      live: "blue-scribe.vercel.app",
     },
   ],
   skills: {

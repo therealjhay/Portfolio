@@ -96,19 +96,19 @@ body {
   pointer-events: none;
 }
 
-.blog-content pre {
+.mdx-content pre {
   @apply my-6 overflow-x-auto rounded-none border border-border bg-card p-4;
 }
 
-.blog-content code:not(pre code) {
+.mdx-content code:not(pre code) {
   @apply rounded-none border border-border bg-muted px-1.5 py-0.5 text-sm;
 }
 
-.blog-content blockquote {
+.mdx-content blockquote {
   @apply my-6 border-l-2 border-primary pl-4 text-muted-foreground;
 }
 
-.blog-content img {
+.mdx-content img {
   @apply my-8 h-auto w-full border border-border;
 }
 

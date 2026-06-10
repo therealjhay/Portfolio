@@ -22,7 +22,6 @@ export const siteConfig = {
   socialLinks: siteContent.socialLinks,
   nav: [
     { label: "Work", href: "/projects" },
-    { label: "Blog", href: "/blog" },
     { label: "Resume", href: "/resume" },
     { label: "Services", href: "/services" },
     { label: "Contact", href: "/contact" },

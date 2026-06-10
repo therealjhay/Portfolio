@@ -70,7 +70,7 @@ export const siteContent: SiteContent = {
         "AI-powered audio-to-text transcription service with file upload and browser recording. Supports MP3, WAV, M4A, AAC, OGG up to 50MB with real-time processing.",
       category: "fullstack",
       githubUrl: "https://github.com/therealjhay/blue-scribe",
-      liveUrl: "https://blue-scribe.vercel.app/",
+      liveUrl: "https://blue-scribe.vercel.app",
       techStack: ["Next.js", "React", "Gemini AI", "Vercel"],
       accentColor: "#3B82F6",
     },
