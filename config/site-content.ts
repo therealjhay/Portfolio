@@ -42,19 +42,47 @@ export const siteContent: SiteContent = {
   },
   projects: [
     {
-      id: "cheer-brightness",
-      title: "Cheer Brightness",
+      id: "starsight",
+      title: "StarSight",
       description:
-        "A digital wellness micro-site for mood elevation. Features interactive sun slider, secret garden with petal effects, and gentle affirmations in a distraction-free space.",
+        "A Decision support platform for tokenized real-world assets (RWAs) built on Stellar.",
+      category: "web3",
+      githubUrl: "https://github.com/therealjhay/starsight",
+      liveUrl: "",
+      techStack: ["Rust (Soroban + WASM)", "TypeScript", "Shell", "Docker"],
+      accentColor: "#F59E0B",
+    },
+    {
+      id: "soul-srpg",
+      title: "SOUL",
+      description:
+        "Soul is a devnet-ready reputation protocol that turns identity registrations, soulbound credentials, and attestations emitted by the RGP Solana program ino an indexed reputation passport.",
+      category: "web3",
+      githubUrl: "https://github.com/therealjhay/soul",
+      liveUrl: "https://soul-srgp.vercel.app/",
+      techStack: [
+        "Rust (Anchor)",
+        "TypeScript",
+        "PostgreSQL",
+        "NestJS",
+        "web3.js",
+      ],
+      accentColor: "#F59E0B",
+    },
+    {
+      id: "aegis-ai",
+      title: "Aegis AI",
+      description:
+        "AegisAI is a defensive, event-driven geospatial AI powered platform for NGO disaster triage.",
       category: "fullstack",
-      githubUrl: "https://github.com/therealjhay/cheer-brightness",
-      liveUrl: "https://cheer-brightness.vercel.app/",
-      techStack: ["React", "JavaScript", "Vercel", "CSS"],
+      githubUrl: "https://github.com/therealjhay/AegisAi",
+      liveUrl: "",
+      techStack: ["Python", "Typescript", "CSS", "Javascript"],
       accentColor: "#F59E0B",
     },
     {
       id: "erc20-faucet",
-      title: "ERC20 Token Faucet",
+      title: "Invincible Token Faucet",
       description:
         "A decentralized faucet app for distributing ERC20 testnet tokens. Built with Foundry for smart contracts and React/TypeScript for the frontend.",
       category: "web3",
@@ -118,6 +146,17 @@ export const siteContent: SiteContent = {
       liveUrl: "https://example.com/ledgerlight",
       techStack: ["Node.js", "Django", "React", "Tailwind CSS"],
       accentColor: "#FF8F1F",
+    },
+    {
+      id: "cheer-brightness",
+      title: "Cheer Brightness",
+      description:
+        "A digital wellness micro-site for mood elevation. Features interactive sun slider, secret garden with petal effects, and gentle affirmations in a distraction-free space.",
+      category: "fullstack",
+      githubUrl: "https://github.com/therealjhay/cheer-brightness",
+      liveUrl: "https://cheer-brightness.vercel.app/",
+      techStack: ["React", "JavaScript", "Vercel", "CSS"],
+      accentColor: "#F59E0B",
     },
   ],
   articles: [
