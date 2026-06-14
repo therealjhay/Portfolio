@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/content/config";
 import { cn } from "@/lib/utils";
+import { FileDown } from "lucide-react";
+import { Button, ButtonLink } from "@/components/ui/button";
 import { MobileMenu } from "./mobile-menu";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -36,6 +38,17 @@ export function Navbar() {
               />
             </Link>
           ))}
+          {pathname === "/resume" && (
+            <ButtonLink
+              href="/resume.pdf"
+              download
+              variant="secondary"
+              className="no-print"
+            >
+              <FileDown className="h-4 w-4" />
+              PDF
+            </ButtonLink>
+          )}
           <ThemeToggle />
         </div>
 
