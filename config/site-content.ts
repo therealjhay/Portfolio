@@ -137,17 +137,6 @@ export const siteContent: SiteContent = {
       accentColor: "#FF3B7C",
     },
     {
-      id: "ledgerlight",
-      title: "Ledgerlight CRM",
-      description:
-        "A sales intelligence CRM that syncs product usage events into customer timelines. Built to scale with async pipelines and a fast, tactile UI.",
-      category: "fullstack",
-      githubUrl: "https://github.com/yourhandle/ledgerlight",
-      liveUrl: "https://example.com/ledgerlight",
-      techStack: ["Node.js", "Django", "React", "Tailwind CSS"],
-      accentColor: "#FF8F1F",
-    },
-    {
       id: "cheer-brightness",
       title: "Cheer Brightness",
       description:

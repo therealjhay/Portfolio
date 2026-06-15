@@ -26,12 +26,22 @@ export function MobileMenu() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-50 bg-background/95 md:hidden"
+            className="fixed inset-0 z-50 flex flex-col bg-background/95 md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <nav className="flex h-full flex-col justify-center px-6">
+            <div className="flex h-16 items-center justify-end px-4 md:px-6">
+              <button
+                type="button"
+                className="inline-flex h-11 w-11 items-center justify-center border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                aria-label="Close menu"
+                onClick={() => setOpen(false)}
+              >
+                <X className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+            <nav className="flex flex-1 flex-col justify-center px-6">
               <ul className="space-y-5">
                 {siteConfig.nav.map((item, index) => (
                   <motion.li

@@ -48,6 +48,7 @@ const mdxComponents = {
     <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground" {...props} />
   ),
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    // eslint-disable-next-line @next/next/no-img-element
     <img className="rounded-lg" alt="" {...props} />
   ),
   table: (props: React.HTMLAttributes<HTMLTableElement>) => (
