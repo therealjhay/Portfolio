@@ -164,7 +164,7 @@ body {
     margin: 0.75in;
   }
 
-  body {
+  html, body {
     background: #fff !important;
     color: #111 !important;
   }

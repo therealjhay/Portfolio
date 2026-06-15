@@ -28,7 +28,7 @@ export function ResumeRail() {
   }, []);
 
   return (
-    <aside className="resume-rail no-print sticky top-24 hidden h-fit md:block">
+    <aside className="resume-rail print:hidden sticky top-24 hidden h-fit md:block">
       <nav className="group opacity-10 transition-opacity duration-150 hover:opacity-100">
         <ul className="space-y-3">
           {sections.map((id) => (
