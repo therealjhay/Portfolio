@@ -42,6 +42,17 @@ export const siteContent: SiteContent = {
   },
   projects: [
     {
+      id: "betta-pay",
+      title: "BettaPay",
+      description:
+        "A non-custodial merchant payment and settlement platform built on Stellar and Soroban, specifically optimized for African enterprises.",
+      category: "web3",
+      githubUrl: "https://github.com/betta-pay/",
+      liveUrl: "https://betta-pay-frontend.vercel.app/",
+      techStack: ["Rust (Soroban + WASM)", " Stellar RPC", "PostgreSQL", "Node.js", "Typescript"],
+      accentColor: "#B7FF00",
+    },
+    {
       id: "starsight",
       title: "StarSight",
       description:
@@ -115,26 +126,15 @@ export const siteContent: SiteContent = {
       accentColor: "#00E5FF",
     },
     {
-      id: "gasless-mint",
-      title: "Gasless Mint Studio",
+      id: "trust-work",
+      title: "Trust Work Protocol",
       description:
-        "A relayer-backed NFT minting workflow designed for zero-friction onboarding. Includes claim windows, allowlists, and real-time drop analytics.",
+        "A decentralized escrow platform where clients lock stablecoin payments into smart contracts, milestones are defined upfront, funds release automatically on approval, and disputes are resolved via DAO arbitration.",
       category: "web3",
-      githubUrl: "https://github.com/yourhandle/gasless-mint",
-      liveUrl: "https://example.com/gasless-mint",
+      githubUrl: "https://github.com/trustwork-org",
+      liveUrl: "https://trust-work2323.vercel.app/",
       techStack: ["Solidity", "Hardhat", "Viem", "React"],
       accentColor: "#FF3B7C",
-    },
-    {
-      id: "stackforge",
-      title: "StackForge Ops",
-      description:
-        "A fullstack ops dashboard for multi-tenant teams to manage workflows and deployments. Ships with role-based access, audit logs, and automated reporting.",
-      category: "fullstack",
-      githubUrl: "https://github.com/yourhandle/stackforge",
-      liveUrl: "https://example.com/stackforge",
-      techStack: ["Django", "PostgreSQL", "React", "TypeScript"],
-      accentColor: "#B7FF00",
     },
     {
       id: "ledgerlight",
