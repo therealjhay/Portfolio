@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 
 export function Footer() {
   return (

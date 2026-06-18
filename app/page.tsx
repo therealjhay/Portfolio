@@ -1,7 +1,7 @@
 import { AboutSection } from "@/components/sections/about-section";
 import { HeroSection } from "@/components/sections/hero";
 import { ProjectGrid } from "@/components/sections/project-grid";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata = createMetadata({

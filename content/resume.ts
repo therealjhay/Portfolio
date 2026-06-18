@@ -81,31 +81,15 @@ export const resumeData: ResumeData = {
       ],
     },
   ],
-  projects: [
-    {
-      name: "AresProctocol",
-      description:
-        "ARES is a modular treasury management protocol designed to manage high-value assets for autonomous organizations.",
-      tech: ["Solidity", "Foundry", "Merkle Trees", "OpenZeppelin"],
-      github: "github.com/therealjhay/ARES-TREASURY",
-      live: "substack.com/@therealjhay/note/p-190595895?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
-    },
-    {
-      name: "Soul",
-      description: "On-chain reputation aggregation protocol built on Solana.",
-      tech: ["Next.js", "Anchor-Rust", "Web3.py", "Docker"],
-      github: "github.com/therealjhay/Soul",
-      live: "soul-srgp.vercel.app/",
-    },
-    {
-      name: "Blue Scribe",
-      description:
-        "An application that utilizes AI to transcribes audio files, featuring automatic speaker detection.",
-      tech: ["TypeScript", "Next.js", "React", "Gemini API", "Supabase"],
-      github: "github.com/therealjhay/Scribe",
-      live: "blue-scribe.vercel.app",
-    },
-  ],
+  projects: siteContent.projects
+    .filter((p) => ["ARES", "soul-srpg", "blue-scribe"].includes(p.id))
+    .map((p) => ({
+      name: p.title,
+      description: p.description,
+      tech: p.techStack,
+      github: p.githubUrl?.replace(/^https?:\/\//, "") ?? "",
+      live: p.liveUrl?.replace(/^https?:\/\//, "") ?? undefined,
+    })),
   skills: {
     languages: ["TypeScript", "Python", "Solidity", "Rust"],
     frameworks: ["Next.js", "FastAPI", "Django"],

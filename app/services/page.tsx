@@ -1,7 +1,7 @@
 import { Code2, DatabaseZap, Link2, ShieldCheck } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata = createMetadata({

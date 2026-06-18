@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 import { cn } from "@/lib/utils";
 
 export function MobileMenu() {
@@ -26,7 +26,7 @@ export function MobileMenu() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-50 flex flex-col bg-background md:hidden"
+            className="fixed inset-0 z-50 flex flex-col bg-background/80 backdrop-blur-md md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

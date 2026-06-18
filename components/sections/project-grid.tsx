@@ -4,8 +4,8 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Tag } from "@/components/ui/tag";
-import { projectCategories, projects } from "@/content/projects";
+import { Badge } from "@/components/ui/badge";
+import { projectCategories, projects } from "@/config/site-content";
 import { cn } from "@/lib/utils";
 
 export function ProjectGrid() {
@@ -54,7 +54,7 @@ export function ProjectGrid() {
                 <p className="text-sm text-muted-foreground">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
-                    <Tag key={tag}>{tag}</Tag>
+                    <Badge key={tag} variant="tag">{tag}</Badge>
                   ))}
                 </div>
                 <div className="mt-auto flex gap-2">

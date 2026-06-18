@@ -240,3 +240,63 @@ export const SiteContentSchema = z.object({
 });
 
 export type SiteContent = z.infer<typeof SiteContentSchema>;
+
+// --- Consolidated Configuration & Mappings ---
+
+const byName = (name: string) =>
+  siteContent.socialLinks.find((link) =>
+    link.name.toLowerCase().includes(name.toLowerCase()),
+  )?.url;
+
+export const siteConfig = {
+  name: siteContent.personalInfo.name,
+  role: siteContent.personalInfo.role,
+  tagline: siteContent.personalInfo.bio,
+  siteUrl: "https://therealjhay.tech",
+  availabilityOpen: true,
+  latestPinnedProject: siteContent.projects[0]?.title ?? "Featured Project",
+  social: {
+    github: siteContent.personalInfo.githubUrl,
+    linkedin: byName("linkedin") ?? "",
+    twitter: byName("twitter") ?? "",
+    etherscan: byName("etherscan") ?? "",
+    calendly: "",
+    email: siteContent.personalInfo.email,
+    location: "Remote",
+  },
+  socialLinks: siteContent.socialLinks,
+  nav: [
+    { label: "Projects", href: "/projects" },
+    { label: "Resume", href: "/resume" },
+    { label: "Services", href: "/services" },
+    { label: "Contact", href: "/contact" },
+  ],
+  rotatingTitles: [
+    siteContent.personalInfo.role,
+    "Blockchain Developer",
+    "Full-Stack Engineer",
+  ],
+} as const;
+
+export type SiteConfig = typeof siteConfig;
+
+export const projectCategories = ["All", "Smart Contracts", "Full-Stack"] as const;
+export type ProjectCategory = (typeof projectCategories)[number];
+
+export type Project = {
+  name: string;
+  description: string;
+  tags: string[];
+  category: Exclude<ProjectCategory, "All">;
+  githubUrl: string;
+  liveUrl?: string;
+};
+
+export const projects: Project[] = siteContent.projects.map((project) => ({
+  name: project.title,
+  description: project.description,
+  tags: project.techStack,
+  category: project.category === "web3" ? "Smart Contracts" : "Full-Stack",
+  githubUrl: project.githubUrl ?? "#",
+  liveUrl: project.liveUrl,
+}));

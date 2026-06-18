@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 import { getAboutContent } from "@/lib/mdx";
 
 const stack = [

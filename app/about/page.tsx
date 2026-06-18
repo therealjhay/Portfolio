@@ -1,5 +1,5 @@
 import { AboutSection } from "@/components/sections/about-section";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata = createMetadata({

@@ -1,5 +1,5 @@
 import { ResumeRail } from "@/components/sections/resume-rail";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 import { resumeData } from "@/content/resume";
 import { createMetadata } from "@/lib/metadata";
 

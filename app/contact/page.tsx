@@ -1,6 +1,6 @@
 import { ContactStatus } from "@/components/sections/contact-status";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 import { createMetadata } from "@/lib/metadata";
 import { submitContactForm } from "./actions";
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.siteUrl;
 

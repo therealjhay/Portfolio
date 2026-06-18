@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 import { cn } from "@/lib/utils";
 import { FileDown } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";

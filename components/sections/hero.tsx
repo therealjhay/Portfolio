@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { ButtonLink } from "@/components/ui/button";
-import { siteConfig } from "@/content/config";
+import { siteConfig } from "@/config/site-content";
 
 const stagger = [0, 0.08, 0.16, 0.24];
 
