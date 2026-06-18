@@ -39,7 +39,7 @@ export function HeroSection() {
           animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.35, delay: stagger[1], ease: "easeOut" }}
         >
-          I design and ship on-chain + full-stack products that go live.
+          I design and ship <span className="whitespace-nowrap">on-chain</span> + full-stack products that go live.
         </motion.h1>
 
         <motion.p

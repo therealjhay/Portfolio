@@ -87,8 +87,8 @@ export const resumeData: ResumeData = {
       description:
         "ARES is a modular treasury management protocol designed to manage high-value assets for autonomous organizations.",
       tech: ["Solidity", "Foundry", "Merkle Trees", "OpenZeppelin"],
-      github: "https://github.com/therealjhay/ARES-TREASURY",
-      live: "https://substack.com/@therealjhay/note/p-190595895?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
+      github: "github.com/therealjhay/ARES-TREASURY",
+      live: "substack.com/@therealjhay/note/p-190595895?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
     },
     {
       name: "Soul",
