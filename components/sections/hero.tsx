@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { ButtonLink } from "@/components/ui/button";
+import { SocialLinks } from "@/components/ui/social-links";
 import { siteConfig } from "@/config/site-content";
 
 const stagger = [0, 0.08, 0.16, 0.24];
@@ -61,6 +62,15 @@ export function HeroSection() {
           <ButtonLink href="/resume.pdf" variant="secondary" download>
             Download Resume
           </ButtonLink>
+        </motion.div>
+
+        <motion.div
+          className="mt-8"
+          initial={shouldReduceMotion ? undefined : { opacity: 0, y: 12 }}
+          animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: stagger[3] + 0.08, ease: "easeOut" }}
+        >
+          <SocialLinks />
         </motion.div>
       </div>
     </section>

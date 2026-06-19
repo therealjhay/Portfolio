@@ -1,6 +1,7 @@
 import { AboutSection } from "@/components/sections/about-section";
 import { HeroSection } from "@/components/sections/hero";
 import { ProjectGrid } from "@/components/sections/project-grid";
+import { ArticleGrid } from "@/components/sections/article-grid";
 import { siteConfig } from "@/config/site-content";
 import { createMetadata } from "@/lib/metadata";
 
@@ -16,6 +17,7 @@ export default function HomePage() {
       <HeroSection />
       <AboutSection />
       <ProjectGrid />
+      <ArticleGrid />
     </main>
   );
 }
