@@ -60,9 +60,6 @@ export default function ServicesPage() {
             </Card>
           ))}
         </div>
-        <div className="mt-8 border border-border p-4 text-sm text-muted-foreground">
-          Social proof strip: Add partner/client logos or project names here.
-        </div>
       </section>
     </main>
   );
