@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { SocialLinks } from "@/components/ui/social-links";
 import { siteConfig } from "@/config/site-content";
@@ -12,6 +12,15 @@ export function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
   const titles = useMemo(() => siteConfig.rotatingTitles, []);
   const [titleIndex, setTitleIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Background drifts up at 40% of scroll speed — subtle depth effect
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -21,8 +30,12 @@ export function HeroSection() {
   }, [titles]);
 
   return (
-    <section className="relative overflow-hidden border-b border-border py-20 md:py-28">
-      <div className="noise-bg code-rain absolute inset-0 opacity-70" aria-hidden="true" />
+    <section ref={sectionRef} className="relative overflow-hidden border-b border-border py-20 md:py-28">
+      <motion.div
+        className="noise-bg code-rain absolute inset-0 opacity-70"
+        aria-hidden="true"
+        style={shouldReduceMotion ? undefined : { y: bgY }}
+      />
       <div className="relative mx-auto w-full max-w-7xl px-4 md:px-6">
         <motion.p
           className="scanline font-mono text-base text-primary"
