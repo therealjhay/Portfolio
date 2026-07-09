@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { AppThemeProvider } from "@/components/layout/theme-provider";
 import { PageTransition } from "@/components/layout/page-transition";
+import { CursorGlow } from "@/components/ui/cursor-glow";
 import { siteConfig } from "@/config/site-content";
 import { createMetadata } from "@/lib/metadata";
 import "@/styles/globals.css";
@@ -47,6 +48,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <CursorGlow />
         <AppThemeProvider>
           <Navbar />
           <PageTransition>{children}</PageTransition>
