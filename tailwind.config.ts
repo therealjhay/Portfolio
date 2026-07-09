@@ -24,6 +24,8 @@ const config: Config = {
         "secondary-foreground": "hsl(var(--secondary-foreground))",
         accent: "hsl(var(--accent))",
         "accent-foreground": "hsl(var(--accent-foreground))",
+        destructive: "hsl(var(--destructive))",
+        "destructive-foreground": "hsl(var(--destructive-foreground))",
       },
       boxShadow: {
         glow: "0 0 0 1px hsl(var(--primary) / 0.35), 0 0 22px hsl(var(--primary) / 0.15)",

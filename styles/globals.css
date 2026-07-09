@@ -17,6 +17,8 @@
   --accent: 190 100% 50%;
   --accent-foreground: 0 0% 10%;
   --ring: 170 100% 50%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
   --font-sans: var(--font-dm-sans);
   --font-mono: var(--font-space-mono);
   --font-resume: var(--font-ibm-plex-sans);
@@ -37,6 +39,8 @@
   --accent: 190 100% 50%;
   --accent-foreground: 0 0% 4%;
   --ring: 170 100% 50%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
 }
 
 * {
@@ -105,7 +109,13 @@ body {
 }
 
 .mdx-content blockquote {
-  @apply my-6 border-l-2 border-primary pl-4 text-muted-foreground;
+  @apply relative my-6 pl-8 text-muted-foreground;
+}
+
+.mdx-content blockquote::before {
+  content: "“";
+  @apply absolute left-0 top-0 text-4xl leading-none text-primary;
+  font-family: var(--font-mono);
 }
 
 .mdx-content img {
@@ -113,28 +123,53 @@ body {
 }
 
 .resume-area {
-  background: #fafafa;
-  color: #111;
+  --resume-bg: #fafafa;
+  --resume-fg: #111;
+  --resume-border: #e0e0e0;
+  --resume-muted: #5c5c5c;
+  --resume-meta: #4f4f4f;
+  --resume-body: #202020;
+  --resume-date: #646464;
+  --resume-rail-inactive: #7a7a7a;
+  --resume-rail-active: #0b6e4f;
+  --resume-rail-hover: #9c9c9c;
+  --resume-link: #0b6e4f;
+  background: var(--resume-bg);
+  color: var(--resume-fg);
   font-family: var(--font-resume), system-ui, sans-serif;
 }
 
+.dark .resume-area {
+  --resume-bg: hsl(0, 0%, 6%);
+  --resume-fg: hsl(40, 21%, 93%);
+  --resume-border: hsl(0, 0%, 17%);
+  --resume-muted: hsl(40, 8%, 68%);
+  --resume-meta: hsl(40, 8%, 60%);
+  --resume-body: hsl(40, 21%, 88%);
+  --resume-date: hsl(40, 8%, 55%);
+  --resume-rail-inactive: hsl(40, 8%, 45%);
+  --resume-rail-active: hsl(170, 100%, 50%);
+  --resume-rail-hover: hsl(40, 8%, 55%);
+  --resume-link: hsl(170, 100%, 50%);
+}
+
 .resume-area a {
-  color: #0b6e4f;
+  color: var(--resume-link);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .resume-section {
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--resume-border);
   padding-top: 24px;
   margin-top: 24px;
 }
 
 .resume-label {
-  font-size: 13px;
+  font-size: 0.8125rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #5c5c5c;
+  color: var(--resume-muted);
   font-weight: 600;
 }
 

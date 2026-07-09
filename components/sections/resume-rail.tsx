@@ -36,8 +36,8 @@ export function ResumeRail() {
               <a
                 href={`#${id}`}
                 className={cn(
-                  "block border-l pl-3 text-[11px] uppercase tracking-[0.15em] text-[#7a7a7a] transition-colors",
-                  active === id ? "border-[#0b6e4f] text-[#0b6e4f]" : "border-transparent hover:border-[#9c9c9c]",
+                  "block border-l pl-3 text-[0.6875rem] uppercase tracking-[0.15em] transition-colors",
+                  active === id ? "border-[color:var(--resume-rail-active)] text-[color:var(--resume-rail-active)]" : "border-transparent text-[color:var(--resume-rail-inactive)] hover:border-[color:var(--resume-rail-hover)]",
                 )}
               >
                 {id}
