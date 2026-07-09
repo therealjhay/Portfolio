@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import FocusTrap from "focus-trap-react";
 import { siteConfig } from "@/config/site-content";
 import { cn } from "@/lib/utils";
 
@@ -30,40 +31,46 @@ export function MobileMenu() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
           >
-            <div className="flex h-16 items-center justify-end px-4 md:px-6">
-              <button
-                type="button"
-                className="inline-flex h-11 w-11 items-center justify-center border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                aria-label="Close menu"
-                onClick={() => setOpen(false)}
-              >
-                <X className="h-5 w-5" aria-hidden="true" />
-              </button>
-            </div>
-            <nav className="flex flex-1 flex-col justify-center px-6">
-              <ul className="space-y-5">
-                {siteConfig.nav.map((item, index) => (
-                  <motion.li
-                    key={item.href}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.06, duration: 0.2, ease: "easeOut" }}
+            <FocusTrap>
+              <div className="flex h-full w-full flex-col">
+                <div className="flex h-16 items-center justify-end px-4 md:px-6">
+                  <button
+                    type="button"
+                    className="inline-flex h-11 w-11 items-center justify-center border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    aria-label="Close menu"
+                    onClick={() => setOpen(false)}
                   >
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "text-2xl font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                        pathname === item.href && "text-primary",
-                      )}
-                      onClick={() => setOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-            </nav>
+                    <X className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                </div>
+                <nav className="flex flex-1 flex-col justify-center px-6">
+                  <ul className="space-y-5">
+                    {siteConfig.nav.map((item, index) => (
+                      <motion.li
+                        key={item.href}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.06, duration: 0.2, ease: "easeOut" }}
+                      >
+                        <Link
+                          href={item.href}
+                          className={cn(
+                            "text-2xl font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                            pathname === item.href && "text-primary",
+                          )}
+                          onClick={() => setOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
+            </FocusTrap>
           </motion.div>
         )}
       </AnimatePresence>
