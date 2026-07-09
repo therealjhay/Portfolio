@@ -30,7 +30,7 @@ export default function ContactPage({
           <div className="mt-8">
             <ContactStatus status={searchParams.status} />
             {searchParams.status === "error" ? (
-              <p className="mb-4 border border-[#b42318]/30 bg-[#b42318]/10 p-3 text-sm text-[#d92d20]">
+              <p className="mb-4 border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
                 Couldn&apos;t send your message. Check your details and try again.
               </p>
             ) : null}
