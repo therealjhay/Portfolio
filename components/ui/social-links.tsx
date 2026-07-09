@@ -19,7 +19,7 @@ export function SocialLinks() {
             href={link.url}
             target="_blank"
             rel="noreferrer"
-            className="text-muted-foreground transition-colors hover:text-primary"
+            className="inline-flex items-center justify-center p-2 text-muted-foreground transition-colors hover:text-primary"
             title={link.name}
             aria-label={link.name}
           >
