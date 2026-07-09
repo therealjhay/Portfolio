@@ -18,7 +18,7 @@ export default function ContactPage({
   };
 }) {
   return (
-    <main className="py-16 md:py-20">
+    <main id="main-content" className="py-16 md:py-20">
       <section className="mx-auto grid w-full max-w-7xl gap-10 px-4 md:grid-cols-[2fr_1fr] md:px-6">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">Contact</p>

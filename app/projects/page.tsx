@@ -10,7 +10,7 @@ export const metadata = createMetadata({
 
 export default function ProjectsPage() {
   return (
-    <main>
+    <main id="main-content">
       <ProjectGrid />
     </main>
   );

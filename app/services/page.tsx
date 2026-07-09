@@ -43,7 +43,7 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <main className="py-16 md:py-20">
+    <main id="main-content" className="py-16 md:py-20">
       <section className="mx-auto w-full max-w-7xl px-4 md:px-6">
         <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">Services</p>
         <h1 className="mt-2 text-4xl md:text-5xl">What I build</h1>

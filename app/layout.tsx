@@ -40,6 +40,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${spaceMono.variable} ${ibmPlexSans.variable}`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:inline-flex focus:min-h-11 focus:items-center focus:border focus:border-primary focus:bg-background focus:px-4 focus:text-foreground"
+        >
+          Skip to content
+        </a>
         <AppThemeProvider>
           <Navbar />
           {children}

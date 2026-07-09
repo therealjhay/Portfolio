@@ -10,7 +10,7 @@ export const metadata = createMetadata({
 
 export default function AboutPage() {
   return (
-    <main>
+    <main id="main-content">
       <AboutSection />
     </main>
   );
