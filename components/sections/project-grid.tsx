@@ -29,6 +29,7 @@ export function ProjectGrid() {
             <button
               key={category}
               type="button"
+              aria-pressed={active === category}
               className={cn(
                 "min-h-11 border px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 active === category ? "border-primary text-primary" : "border-border text-muted-foreground",
