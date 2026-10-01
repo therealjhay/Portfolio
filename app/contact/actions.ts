@@ -6,6 +6,18 @@ import { redirect } from "next/navigation";
 
 const EMAIL_REGEX = /\S+@\S+\.\S+/;
 
+/**
+ * Escape HTML special characters to prevent XSS in email bodies.
+ */
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function submitContactForm(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
@@ -21,45 +33,54 @@ export async function submitContactForm(formData: FormData) {
     redirect("/contact?status=error");
   }
 
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safeProjectType = escapeHtml(projectType);
+  const safeMessage = escapeHtml(message);
+
   const subject = `[Portfolio] ${projectType || "New enquiry"} from ${name}`;
   const html = `
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Project type:</strong> ${projectType}</p>
+    <p><strong>Name:</strong> ${safeName}</p>
+    <p><strong>Email:</strong> ${safeEmail}</p>
+    <p><strong>Project type:</strong> ${safeProjectType}</p>
     <p><strong>Message:</strong></p>
-    <p>${message.replace(/\n/g, "<br/>")}</p>
+    <p>${safeMessage.replace(/\n/g, "<br/>")}</p>
   `;
 
-  if (process.env.RESEND_API_KEY) {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
-      from: process.env.CONTACT_FROM_EMAIL || "Portfolio Contact <onboarding@resend.dev>",
-      to,
-      subject,
-      html,
-      replyTo: email,
-    });
-    redirect("/contact?status=sent");
+  try {
+    if (process.env.RESEND_API_KEY) {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      await resend.emails.send({
+        from: process.env.CONTACT_FROM_EMAIL || "Portfolio Contact <onboarding@resend.dev>",
+        to,
+        subject,
+        html,
+        replyTo: email,
+      });
+    } else {
+      const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: Number(process.env.SMTP_PORT || 587),
+        secure: process.env.SMTP_SECURE === "true",
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+      });
+
+      await transporter.sendMail({
+        from: process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER,
+        to,
+        replyTo: email,
+        subject,
+        html,
+        text: `${name} (${email})\nProject type: ${projectType}\n\n${message}`,
+      });
+    }
+  } catch (err) {
+    console.error("Contact form send failed:", err);
+    redirect("/contact?status=error");
   }
-
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT || 587),
-    secure: process.env.SMTP_SECURE === "true",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
-
-  await transporter.sendMail({
-    from: process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER,
-    to,
-    replyTo: email,
-    subject,
-    html,
-    text: `${name} (${email})\nProject type: ${projectType}\n\n${message}`,
-  });
 
   redirect("/contact?status=sent");
 }
