@@ -153,6 +153,7 @@ export const siteContent: SiteContent = {
       liveUrl: "https://blue-scribe.vercel.app",
       techStack: ["Next.js", "TypeScript", "Gemini AI", "Tailwind CSS"],
       accentColor: "#3B82F6",
+      image: "/projects/scribe.webp",
     },
     {
       id: "invincible-token",
