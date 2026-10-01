@@ -82,13 +82,18 @@ export const resumeData: ResumeData = {
     },
   ],
   projects: siteContent.projects
-    .filter((p) => ["ARES", "soul-srpg", "blue-scribe"].includes(p.id))
+    .filter((p) =>
+      ["betta-pay", "preflight", "ARES", "blue-scribe"].includes(p.id),
+    )
     .map((p) => ({
       name: p.title,
       description: p.description,
       tech: p.techStack,
       github: p.githubUrl?.replace(/^https?:\/\//, "") ?? "",
-      live: p.liveUrl?.replace(/^https?:\/\//, "") ?? undefined,
+      live:
+        p.liveUrl && p.liveUrl.length > 0
+          ? p.liveUrl.replace(/^https?:\/\//, "")
+          : undefined,
     })),
   skills: {
     languages: ["TypeScript", "Python", "Solidity", "Rust"],
