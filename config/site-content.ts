@@ -150,6 +150,7 @@ export const siteContent: SiteContent = {
       liveUrl: "https://aegis-ai-gamma.vercel.app",
       techStack: ["Python", "FastAPI", "TypeScript", "Next.js", "Geospatial AI"],
       accentColor: "#EF4444",
+      image: "/projects/aegis-ai.webp",
     },
     {
       id: "blue-scribe",
