@@ -10,13 +10,15 @@ export const metadata = createMetadata({
   path: "/contact",
 });
 
-export default function ContactPage({
+export default async function ContactPage({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     status?: string;
-  };
+  }>;
 }) {
+  const { status } = await searchParams;
+
   return (
     <main id="main-content" className="py-16 md:py-20">
       <section className="mx-auto grid w-full max-w-7xl gap-10 px-4 md:grid-cols-[2fr_1fr] md:px-6">
@@ -28,8 +30,8 @@ export default function ContactPage({
           </p>
 
           <div className="mt-8">
-            <ContactStatus status={searchParams.status} />
-            {searchParams.status === "error" ? (
+            <ContactStatus status={status} />
+            {status === "error" ? (
               <p className="mb-4 border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
                 Couldn&apos;t send your message. Check your details and try again.
               </p>
