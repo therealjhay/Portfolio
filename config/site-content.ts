@@ -113,6 +113,7 @@ export const siteContent: SiteContent = {
       liveUrl: "https://soul-protocol-self.vercel.app",
       techStack: ["Rust (Anchor)", "Circom", "TypeScript", "Next.js", "Docker"],
       accentColor: "#6366F1",
+      image: "/projects/soul.webp",
     },
     {
       id: "ARES",
