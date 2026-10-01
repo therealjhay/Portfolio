@@ -138,6 +138,7 @@ export const siteContent: SiteContent = {
       liveUrl: "",
       techStack: ["React", "TypeScript", "Stellar SDK", "Soroban", "Tailwind CSS"],
       accentColor: "#06B6D4",
+      image: "/projects/relaypay.webp",
     },
     {
       id: "aegis-ai",
