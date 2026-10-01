@@ -10,13 +10,13 @@
   --card: 40 25% 98%;
   --card-foreground: 0 0% 8%;
   --border: 0 0% 83%;
-  --primary: 170 100% 50%;
-  --primary-foreground: 0 0% 8%;
+  --primary: 170 85% 32%;
+  --primary-foreground: 0 0% 100%;
   --secondary: 0 0% 92%;
   --secondary-foreground: 0 0% 12%;
   --accent: 190 100% 50%;
   --accent-foreground: 0 0% 10%;
-  --ring: 170 100% 50%;
+  --ring: 170 85% 32%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 100%;
   --font-sans: var(--font-dm-sans);
