@@ -50,23 +50,36 @@ export function ProjectGrid() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
             >
-              <Card className="flex h-full flex-col gap-4 border-border p-5 transition-transform duration-100 ease-out hover:-translate-y-1 hover:border-primary/65 hover:shadow-glow">
-                <h3 className="font-mono text-xl">{project.name}</h3>
-                <p className="text-sm text-muted-foreground">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag} variant="tag">{tag}</Badge>
-                  ))}
-                </div>
-                <div className="mt-auto flex gap-2">
-                  <ButtonLink href={project.githubUrl} variant="secondary" target="_blank" rel="noreferrer" className="w-full">
-                    GitHub
-                  </ButtonLink>
-                  {project.liveUrl ? (
-                    <ButtonLink href={project.liveUrl} target="_blank" rel="noreferrer" className="w-full">
-                      Live
+              <Card className="group flex h-full flex-col overflow-hidden border-border transition-transform duration-100 ease-out hover:-translate-y-1 hover:border-primary/65 hover:shadow-glow">
+                {project.image ? (
+                  <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border/70 bg-muted/40">
+                    <img
+                      src={project.image}
+                      alt={`${project.name} preview`}
+                      className="h-full w-full object-cover object-top transition-transform duration-300 ease-out group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                  </div>
+                ) : null}
+                <div className="flex flex-1 flex-col gap-4 p-5">
+                  <h3 className="font-mono text-xl">{project.name}</h3>
+                  <p className="text-sm text-muted-foreground">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <Badge key={tag} variant="tag">{tag}</Badge>
+                    ))}
+                  </div>
+                  <div className="mt-auto flex gap-2 pt-2">
+                    <ButtonLink href={project.githubUrl} variant="secondary" target="_blank" rel="noreferrer" className="w-full">
+                      GitHub
                     </ButtonLink>
-                  ) : null}
+                    {project.liveUrl ? (
+                      <ButtonLink href={project.liveUrl} target="_blank" rel="noreferrer" className="w-full">
+                        Live
+                      </ButtonLink>
+                    ) : null}
+                  </div>
                 </div>
               </Card>
             </motion.article>

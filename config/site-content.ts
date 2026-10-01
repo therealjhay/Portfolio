@@ -258,6 +258,7 @@ export const ProjectSchema = z.object({
   liveUrl: z.union([z.string().url(), z.literal("")]).optional(),
   techStack: z.array(z.string()),
   accentColor: z.string(),
+  image: z.string().optional(),
 });
 
 export const ArticleSchema = z.object({
@@ -344,6 +345,7 @@ export type Project = {
   category: Exclude<ProjectCategory, "All">;
   githubUrl: string;
   liveUrl?: string;
+  image?: string;
 };
 
 export const projects: Project[] = siteContent.projects.map((project) => ({
@@ -353,4 +355,5 @@ export const projects: Project[] = siteContent.projects.map((project) => ({
   category: project.category === "web3" ? "Smart Contracts" : "Full-Stack",
   githubUrl: project.githubUrl ?? "#",
   liveUrl: project.liveUrl,
+  image: project.image,
 }));
