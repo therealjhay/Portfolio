@@ -53,6 +53,7 @@ export const siteContent: SiteContent = {
       liveUrl: "",
       techStack: ["Solidity", "Python", "TypeScript", "Ethers.js"],
       accentColor: "#00FFA6",
+      image: "/projects/preflight.webp",
     },
     {
       id: "betta-pay",
