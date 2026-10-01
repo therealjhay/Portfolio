@@ -89,6 +89,7 @@ export const siteContent: SiteContent = {
       liveUrl: "",
       techStack: ["0G Network", "Solidity", "TypeScript", "AI Agents", "React"],
       accentColor: "#8B5CF6",
+      image: "/projects/anima.webp",
     },
     {
       id: "starsight",
