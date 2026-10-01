@@ -165,6 +165,7 @@ export const siteContent: SiteContent = {
       liveUrl: "https://invincible-flax.vercel.app",
       techStack: ["Solidity", "Foundry", "TypeScript", "React", "Viem"],
       accentColor: "#10B981",
+      image: "/projects/invincible.webp",
     },
     {
       id: "foundry-diamonds",
