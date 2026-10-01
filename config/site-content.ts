@@ -198,6 +198,7 @@ export const siteContent: SiteContent = {
       liveUrl: "",
       techStack: ["Solidity", "Circom ZK", "TypeScript", "Rust", "Monad"],
       accentColor: "#8B5CF6",
+      image: "/projects/monadrpg.webp",
     },
     {
       id: "jdc-watches",
