@@ -77,6 +77,7 @@ export const siteContent: SiteContent = {
       liveUrl: "",
       techStack: ["Rust", "Soroban", "Noir ZK", "Protocol 25", "TypeScript"],
       accentColor: "#10B981",
+      image: "/projects/verivault.webp",
     },
     {
       id: "anima",
