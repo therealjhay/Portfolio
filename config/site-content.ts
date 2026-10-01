@@ -126,6 +126,7 @@ export const siteContent: SiteContent = {
         "https://substack.com/@therealjhay/note/p-190595895?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
       techStack: ["Solidity", "Foundry", "Merkle Trees", "OpenZeppelin"],
       accentColor: "#00E5FF",
+      image: "/projects/ares.webp",
     },
     {
       id: "relaypay-stellar",
