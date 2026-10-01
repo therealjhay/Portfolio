@@ -266,6 +266,7 @@ export const siteConfig = {
   },
   socialLinks: siteContent.socialLinks,
   nav: [
+    { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
     { label: "Resume", href: "/resume" },
     { label: "Services", href: "/services" },
