@@ -19,7 +19,7 @@ export function CursorGlow() {
     const onMove = (e: MouseEvent) => {
       rawX.set(e.clientX);
       rawY.set(e.clientY);
-      if (!visible) setVisible(true);
+      setVisible(true);
     };
     const onLeave = () => setVisible(false);
     const onEnter = () => setVisible(true);
@@ -32,7 +32,7 @@ export function CursorGlow() {
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
     };
-  }, [rawX, rawY, visible]);
+  }, [rawX, rawY]);
 
   return (
     <motion.div
