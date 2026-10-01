@@ -101,6 +101,7 @@ export const siteContent: SiteContent = {
       liveUrl: "",
       techStack: ["Rust (Soroban + WASM)", "TypeScript", "Shell", "Docker"],
       accentColor: "#F59E0B",
+      image: "/projects/starsight.webp",
     },
     {
       id: "soul-srpg",
