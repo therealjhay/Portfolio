@@ -1,17 +1,12 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { siteContent } from "@/config/site-content";
 
 const stack = [
-  "Solidity",
-  "Python",
-  "Next.js",
-  "Django",
-  "TypeScript",
-  "PostgreSQL",
-  "Web3.py",
-  "ethers.js",
-  "Docker",
+  ...siteContent.skills.web3,
+  ...siteContent.skills.frontend,
+  ...siteContent.skills.backend,
 ];
 
 export function StackList() {
