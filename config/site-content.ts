@@ -201,8 +201,8 @@ export const ProjectSchema = z.object({
   title: z.string(),
   description: z.string(),
   category: z.enum(["web3", "fullstack"]),
-  githubUrl: z.string().url().optional(),
-  liveUrl: z.string().url().optional(),
+  githubUrl: z.union([z.string().url(), z.literal("")]).optional(),
+  liveUrl: z.union([z.string().url(), z.literal("")]).optional(),
   techStack: z.array(z.string()),
   accentColor: z.string(),
 });
