@@ -186,6 +186,7 @@ export const siteContent: SiteContent = {
       liveUrl: "",
       techStack: ["Solidity", "Foundry", "EIP-2535", "Solidity FFI"],
       accentColor: "#EC4899",
+      image: "/projects/foundry-diamonds.webp",
     },
     {
       id: "monadrpg",
