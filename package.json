@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"next dev\" \"chokidar 'content/resume.ts' 'app/resume/page.tsx' --initial -c 'node scripts/generate-pdf.mjs'\"",
+    "dev": "next dev",
+    "dev:resume": "concurrently -k \"next dev\" \"chokidar 'content/resume.ts' 'app/resume/page.tsx' --initial -c 'node scripts/generate-pdf.mjs'\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",

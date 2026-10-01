@@ -1,10 +1,17 @@
 import puppeteer from 'puppeteer';
 import http from 'http';
 
-// Simple wait for the Next.js server to be up
-const waitForServer = (url) => new Promise((resolve) => {
+// Wait for the Next.js server to be up with a 30s timeout
+const waitForServer = (url, timeoutMs = 30000) => new Promise((resolve, reject) => {
   console.log(`Waiting for ${url} to be ready...`);
+  const startTime = Date.now();
   const interval = setInterval(() => {
+    if (Date.now() - startTime > timeoutMs) {
+      clearInterval(interval);
+      reject(new Error(`Timed out waiting for server at ${url} after ${timeoutMs / 1000}s`));
+      return;
+    }
+
     http.get(url, (res) => {
       if (res.statusCode === 200) {
         clearInterval(interval);
@@ -12,13 +19,14 @@ const waitForServer = (url) => new Promise((resolve) => {
         resolve();
       }
     }).on('error', () => {
-      // Ignore errors and keep trying
+      // Ignore connection errors and keep retrying until timeout
     });
   }, 1000);
 });
 
 async function generatePDF() {
-  const targetUrl = 'http://localhost:3000/resume';
+  const port = process.env.PORT || 3000;
+  const targetUrl = `http://localhost:${port}/resume`;
   await waitForServer(targetUrl);
 
   console.log('Generating PDF...');
