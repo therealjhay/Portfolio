@@ -65,6 +65,7 @@ export const siteContent: SiteContent = {
       liveUrl: "https://betta-pay-frontend.vercel.app/",
       techStack: ["Rust", "Soroban", "Stellar RPC", "TypeScript", "Node.js"],
       accentColor: "#B7FF00",
+      image: "/projects/betta-pay.webp",
     },
     {
       id: "verivault",
