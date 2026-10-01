@@ -1,5 +1,5 @@
 import { ContactStatus } from "@/components/sections/contact-status";
-import { Button } from "@/components/ui/button";
+import { SubmitButton } from "@/components/ui/submit-button";
 import { siteConfig } from "@/config/site-content";
 import { createMetadata } from "@/lib/metadata";
 import { submitContactForm } from "./actions";
@@ -92,7 +92,7 @@ export default async function ContactPage({
                   className="w-full border border-border bg-card px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 />
               </div>
-              <Button type="submit">Send message</Button>
+              <SubmitButton />
             </form>
           </div>
         </div>
