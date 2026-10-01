@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { ButtonLink } from "@/components/ui/button";
@@ -53,11 +54,12 @@ export function ProjectGrid() {
               <Card className="group flex h-full flex-col overflow-hidden border-border transition-transform duration-100 ease-out hover:-translate-y-1 hover:border-primary/65 hover:shadow-glow">
                 {project.image ? (
                   <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border/70 bg-muted/40">
-                    <img
+                    <Image
                       src={project.image}
                       alt={`${project.name} preview`}
-                      className="h-full w-full object-cover object-top transition-transform duration-300 ease-out group-hover:scale-105"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-top transition-transform duration-300 ease-out group-hover:scale-105"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                   </div>
