@@ -199,6 +199,7 @@ export const siteContent: SiteContent = {
       liveUrl: "https://jdcwatches.vercel.app",
       techStack: ["Next.js", "TypeScript", "Tailwind CSS", "React Query", "Python"],
       accentColor: "#D97706",
+      image: "/projects/jdc.webp",
     },
   ],
   articles: [
