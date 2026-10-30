@@ -1,8 +1,10 @@
-import { ContactStatus } from "@/components/sections/contact-status";
-import { SubmitButton } from "@/components/ui/submit-button";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ButtonLink } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { CopyEmailButton } from "@/components/ui/copy-email-button";
 import { siteConfig } from "@/config/site-content";
 import { createMetadata } from "@/lib/metadata";
-import { submitContactForm } from "./actions";
 
 export const metadata = createMetadata({
   title: `Contact · ${siteConfig.name}`,
@@ -10,106 +12,95 @@ export const metadata = createMetadata({
   path: "/contact",
 });
 
-export default async function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<{
-    status?: string;
-  }>;
-}) {
-  const { status } = await searchParams;
-
+export default function ContactPage() {
   return (
-    <main id="main-content" className="py-16 md:py-20">
-      <section className="mx-auto grid w-full max-w-7xl gap-10 px-4 md:grid-cols-[2fr_1fr] md:px-6">
-        <div>
-          <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">Contact</p>
-          <h1 className="mt-2 text-4xl md:text-5xl">Let&apos;s build your next system</h1>
-          <p className="mt-3 max-w-2xl text-muted-foreground">
-            Share your objective, timeline, and where you are in the build cycle. I&apos;ll respond with a concrete execution path.
-          </p>
-
-          <div className="mt-8">
-            <ContactStatus status={status} />
-            {status === "error" ? (
-              <p className="mb-4 border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
-                Couldn&apos;t send your message. Check your details and try again.
-              </p>
-            ) : null}
-            <form action={submitContactForm} className="space-y-4">
-              <div className="space-y-1">
-                <label htmlFor="name" className="text-sm">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  autoComplete="name"
-                  className="h-11 w-full border border-border bg-card px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                />
-              </div>
-              <div className="space-y-1">
-                <label htmlFor="email" className="text-sm">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  spellCheck={false}
-                  className="h-11 w-full border border-border bg-card px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                />
-              </div>
-              <div className="space-y-1">
-                <label htmlFor="projectType" className="text-sm">
-                  Project Type
-                </label>
-                <select
-                  id="projectType"
-                  name="projectType"
-                  required
-                  className="h-11 w-full border border-border bg-card px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
-                  <option value="Smart Contract">Smart Contract</option>
-                  <option value="Full-Stack">Full-Stack</option>
-                  <option value="Consulting">Consulting</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-              <div className="space-y-1">
-                <label htmlFor="message" className="text-sm">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={7}
-                  className="w-full border border-border bg-card px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                />
-              </div>
-              <SubmitButton />
-            </form>
+    <main id="main-content" className="py-16 md:py-24">
+      <section className="mx-auto w-full max-w-5xl px-4 md:px-6">
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
+              Contact
+            </p>
+            <Badge
+              className={
+                siteConfig.availabilityOpen
+                  ? "border-primary/40 text-primary"
+                  : "text-muted-foreground"
+              }
+            >
+              <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-current" />
+              {siteConfig.availabilityOpen
+                ? "Open to contracts & collaborations"
+                : "Currently unavailable"}
+            </Badge>
           </div>
+
+          <h1 className="font-mono text-4xl md:text-5xl">
+            Let&apos;s build your next system
+          </h1>
+          <p className="max-w-2xl text-muted-foreground">
+            Reach out directly via email or connect on any of the channels below.
+            Share your objective, timeline, and where you are in the build cycle —
+            I typically respond within 24 hours.
+          </p>
         </div>
 
-        <aside className="space-y-3 border border-border bg-card p-5 text-sm text-muted-foreground">
-          <h2 className="text-base text-foreground">Direct links</h2>
-          {siteConfig.socialLinks.map((social) => (
-            <a key={social.name} href={social.url} className="block underline-offset-4 hover:underline">
-              {social.name}
+        <Card className="mt-8 flex flex-col justify-between gap-6 border-border p-6 sm:flex-row sm:items-center md:p-8">
+          <div className="space-y-1">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
+              Direct Email
+            </p>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="font-mono text-xl text-foreground underline-offset-4 hover:text-primary hover:underline md:text-2xl"
+            >
+              {siteConfig.email}
             </a>
-          ))}
-          {siteConfig.social.calendly ? (
-            <a href={siteConfig.social.calendly} className="block underline-offset-4 hover:underline">
-              Book a call on Calendly
-            </a>
-          ) : null}
-        </aside>
+            <p className="text-sm text-muted-foreground">
+              Best for contract inquiries, protocol engineering, and full-stack builds.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <ButtonLink href={`mailto:${siteConfig.email}`}>
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              Send an email
+            </ButtonLink>
+            <CopyEmailButton email={siteConfig.email} />
+          </div>
+        </Card>
+
+        <div className="mt-10">
+          <h2 className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
+            Social &amp; On-Chain Profiles
+          </h2>
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {siteConfig.socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group block focus-visible:outline-none"
+              >
+                <Card className="flex items-center justify-between p-5 transition-transform duration-100 ease-out group-hover:-translate-y-0.5 group-hover:border-primary/65 group-hover:shadow-glow group-focus-visible:border-primary group-focus-visible:ring-2 group-focus-visible:ring-primary">
+                  <div>
+                    <p className="font-mono text-base text-foreground group-hover:text-primary">
+                      {social.name}
+                    </p>
+                    <p className="mt-0.5 font-mono text-xs text-muted-foreground">
+                      {social.handle}
+                    </p>
+                  </div>
+                  <ArrowUpRight
+                    className="h-5 w-5 text-muted-foreground transition-transform duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+                    aria-hidden="true"
+                  />
+                </Card>
+              </a>
+            ))}
+          </div>
+        </div>
       </section>
     </main>
   );

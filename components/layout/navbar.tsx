@@ -4,8 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site-content";
 import { cn } from "@/lib/utils";
-import { FileDown } from "lucide-react";
-import { ButtonLink } from "@/components/ui/button";
 import { MobileMenu } from "./mobile-menu";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -13,8 +11,11 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="print:hidden sticky top-0 z-40 border-b border-border/70 bg-background/80 backdrop-blur">
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 md:px-6">
+    <header className="print:hidden sticky top-0 z-40 border-b border-border/70 bg-background/90">
+      <nav
+        aria-label="Primary"
+        className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 md:px-6"
+      >
         <Link href="/" className="font-mono text-sm text-foreground">
           {siteConfig.name}
         </Link>
@@ -38,17 +39,6 @@ export function Navbar() {
               />
             </Link>
           ))}
-          {pathname === "/resume" && (
-            <ButtonLink
-              href="/resume.pdf"
-              download
-              variant="secondary"
-              className="no-print"
-            >
-              <FileDown className="h-4 w-4" />
-              PDF
-            </ButtonLink>
-          )}
           <ThemeToggle />
         </div>
 
@@ -56,7 +46,7 @@ export function Navbar() {
           <ThemeToggle />
           <MobileMenu />
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }

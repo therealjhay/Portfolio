@@ -29,6 +29,20 @@ export function Button({ variant = "primary", className, ...props }: ButtonProps
 }
 
 export function ButtonLink({ variant = "primary", className, href, children, ...props }: ButtonLinkProps) {
+  const isExternalOrDownload =
+    Boolean(props.download) ||
+    href.startsWith("http://") ||
+    href.startsWith("https://") ||
+    href.startsWith("mailto:");
+
+  if (isExternalOrDownload) {
+    return (
+      <a href={href} className={cn(baseStyles, variants[variant], className)} {...props}>
+        {children}
+      </a>
+    );
+  }
+
   return (
     <Link href={href} className={cn(baseStyles, variants[variant], className)} {...props}>
       {children}

@@ -25,10 +25,9 @@ export type ResumeData = {
     live?: string;
   }>;
   skills: {
-    languages: string[];
-    frameworks: string[];
-    blockchain: string[];
-    tools: string[];
+    web3: string[];
+    frontend: string[];
+    backend: string[];
   };
   education: Array<{
     institution: string;
@@ -46,12 +45,12 @@ export const resumeData: ResumeData = {
   header: {
     fullName: siteContent.personalInfo.name,
     title: siteContent.personalInfo.role,
-    location: "Remote",
+    location: siteContent.personalInfo.location,
     email: siteContent.personalInfo.email,
     github: siteContent.personalInfo.githubUrl.replace(/^https?:\/\//, ""),
     linkedin:
       siteContent.socialLinks
-        .find((link) => link.name.toLowerCase().includes("linkedin"))
+        .find((link) => link.icon === "linkedin")
         ?.url.replace(/^https?:\/\//, "") ?? "",
   },
   summary:
@@ -89,18 +88,13 @@ export const resumeData: ResumeData = {
       name: p.title,
       description: p.description,
       tech: p.techStack,
-      github: p.githubUrl?.replace(/^https?:\/\//, "") ?? "",
+      github: p.githubUrl.replace(/^https?:\/\//, ""),
       live:
         p.liveUrl && p.liveUrl.length > 0
           ? p.liveUrl.replace(/^https?:\/\//, "")
           : undefined,
     })),
-  skills: {
-    languages: ["TypeScript", "Python", "Solidity", "Rust"],
-    frameworks: ["Next.js", "FastAPI", "Django"],
-    blockchain: ["Foundry", "ethers.js", "Viem"],
-    tools: ["PostgreSQL", "Redis", "Docker", "GitHub Actions"],
-  },
+  skills: siteContent.skills,
   education: [
     {
       institution: "National Open University",

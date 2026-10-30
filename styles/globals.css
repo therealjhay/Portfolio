@@ -100,28 +100,6 @@ body {
   pointer-events: none;
 }
 
-.mdx-content pre {
-  @apply my-6 overflow-x-auto rounded-none border border-border bg-card p-4;
-}
-
-.mdx-content code:not(pre code) {
-  @apply rounded-none border border-border bg-muted px-1.5 py-0.5 text-sm;
-}
-
-.mdx-content blockquote {
-  @apply relative my-6 pl-8 text-muted-foreground;
-}
-
-.mdx-content blockquote::before {
-  content: "“";
-  @apply absolute left-0 top-0 text-4xl leading-none text-primary;
-  font-family: var(--font-mono);
-}
-
-.mdx-content img {
-  @apply my-8 h-auto w-full border border-border;
-}
-
 .resume-area {
   --resume-bg: #fafafa;
   --resume-fg: #111;
@@ -153,7 +131,7 @@ body {
   --resume-link: hsl(170, 100%, 50%);
 }
 
-.resume-area a {
+.resume-area a:not(.no-underline) {
   color: var(--resume-link);
   text-decoration: underline;
   text-underline-offset: 2px;

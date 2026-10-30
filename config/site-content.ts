@@ -1,30 +1,97 @@
-import { z } from "zod";
+export type SocialLink = {
+  name: string;
+  url: string;
+  icon: "github" | "twitter" | "linkedin" | "etherscan";
+  handle: string;
+};
 
-// Easily edit everything below without touching the component code.
+export type ProjectItem = {
+  id: string;
+  title: string;
+  description: string;
+  category: "web3" | "fullstack";
+  githubUrl: string;
+  liveUrl?: string;
+  techStack: string[];
+  accentColor: string;
+  image?: string;
+};
+
+export type ArticleItem = {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  platform: string;
+  tags: string[];
+  accentColor: string;
+};
+
+export type SkillGroups = {
+  web3: string[];
+  frontend: string[];
+  backend: string[];
+};
+
+export type SiteContent = {
+  personalInfo: {
+    name: string;
+    handle: string;
+    role: string;
+    headline: string;
+    bio: string;
+    location: string;
+    email: string;
+    githubUrl: string;
+    about: string[];
+  };
+  socialLinks: SocialLink[];
+  skills: SkillGroups;
+  projects: ProjectItem[];
+  articles: ArticleItem[];
+};
+
+// Single source of truth for portfolio content.
 export const siteContent: SiteContent = {
   personalInfo: {
     name: "Johnson Oyemade",
+    handle: "0xJhay",
     role: "Web3 + Fullstack Developer",
-    headline:
-      "Hi I'm 0xJhay, I build decentralized protocols and scalable fullstack applications.",
-    bio: "Hybrid Web3 and fullstack engineer bridging Django/React systems with Ethereum smart contracts.",
-    about:
-      "I translate product ideas into secure smart contracts and production-grade web apps. My sweet spot is designing Web2 architectures that plug cleanly into Web3 infrastructure without compromising UX or security.",
+    headline: "I design and ship on-chain + full-stack products that go live.",
+    bio: "Hybrid Web3 and full-stack engineer bridging scalable backend and React systems with production smart contracts.",
+    location: "Remote",
     email: "johnsonoca@gmail.com",
     githubUrl: "https://github.com/therealjhay",
+    about: [
+      "I’m a builder focused on one thing: shipping systems that hold up in production.",
+      "My work sits at the intersection of smart contract architecture and full-stack product delivery. I design and implement on-chain logic, then wire it into practical backend and frontend systems that users can actually operate day-to-day.",
+      "I care about deterministic testing, observability, and clean execution pipelines. If the brief is “we have an idea but need it live,” that’s where I do my best work.",
+    ],
   },
   socialLinks: [
-    { name: "GitHub", url: "https://github.com/therealjhay", icon: "github" },
-    { name: "Twitter/X", url: "https://x.com/0xjhay", icon: "twitter" },
+    {
+      name: "GitHub",
+      url: "https://github.com/therealjhay",
+      icon: "github",
+      handle: "@therealjhay",
+    },
+    {
+      name: "Twitter / X",
+      url: "https://x.com/0xjhay",
+      icon: "twitter",
+      handle: "@0xjhay",
+    },
     {
       name: "LinkedIn",
       url: "https://linkedin.com/in/oyemade-johnson",
       icon: "linkedin",
+      handle: "oyemade-johnson",
     },
     {
       name: "Etherscan",
       url: "https://etherscan.io/address/0x611885e1907E469cCb2E3AA154c2076A1458a33B",
       icon: "etherscan",
+      handle: "0x6118…a33B",
     },
   ],
   skills: {
@@ -50,7 +117,6 @@ export const siteContent: SiteContent = {
         "Transaction intelligence and safety layer for Web3. Analyzes blockchain transactions before signing, explaining outcomes in human-readable terms to prevent irreversible on-chain mistakes.",
       category: "web3",
       githubUrl: "https://github.com/therealjhay/PreFlight",
-      liveUrl: "",
       techStack: ["Solidity", "Python", "TypeScript", "Ethers.js"],
       accentColor: "#00FFA6",
       image: "/projects/preflight.webp",
@@ -74,7 +140,6 @@ export const siteContent: SiteContent = {
         "A Rust-native, Soroban-based protocol enabling private transactions with selective regulatory disclosure, powered by Protocol 25 BN254 and Poseidon ZK primitives.",
       category: "web3",
       githubUrl: "https://github.com/therealjhay/VeriVault",
-      liveUrl: "",
       techStack: ["Rust", "Soroban", "Noir ZK", "Protocol 25", "TypeScript"],
       accentColor: "#10B981",
       image: "/projects/verivault.webp",
@@ -86,7 +151,6 @@ export const siteContent: SiteContent = {
         "Decentralized AI companion with cryptographic, user-owned memory built on 0G Storage, Compute, and Chain — ensuring persistent, tamper-proof agent memory.",
       category: "web3",
       githubUrl: "https://github.com/therealjhay/ANIMA",
-      liveUrl: "",
       techStack: ["0G Network", "Solidity", "TypeScript", "AI Agents", "React"],
       accentColor: "#8B5CF6",
       image: "/projects/anima.webp",
@@ -98,7 +162,6 @@ export const siteContent: SiteContent = {
         "Decision support and risk analytics platform for tokenized real-world assets (RWAs) built on Stellar.",
       category: "web3",
       githubUrl: "https://github.com/therealjhay/StarSight",
-      liveUrl: "",
       techStack: ["Rust (Soroban + WASM)", "TypeScript", "Shell", "Docker"],
       accentColor: "#F59E0B",
       image: "/projects/starsight.webp",
@@ -122,8 +185,6 @@ export const siteContent: SiteContent = {
         "Modular treasury management protocol designed to manage high-value vault assets and yield allocation strategies for autonomous organizations.",
       category: "web3",
       githubUrl: "https://github.com/therealjhay/ARES-TREASURY",
-      liveUrl:
-        "https://substack.com/@therealjhay/note/p-190595895?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
       techStack: ["Solidity", "Foundry", "Merkle Trees", "OpenZeppelin"],
       accentColor: "#00E5FF",
       image: "/projects/ares.webp",
@@ -135,7 +196,6 @@ export const siteContent: SiteContent = {
         "A full-stack Stellar checkout starter and reusable React payment component with built-in wallet connection, transaction handling, and auto-settlement.",
       category: "web3",
       githubUrl: "https://github.com/therealjhay/RelayPay-Stellar",
-      liveUrl: "",
       techStack: ["React", "TypeScript", "Stellar SDK", "Soroban", "Tailwind CSS"],
       accentColor: "#06B6D4",
       image: "/projects/relaypay.webp",
@@ -183,7 +243,6 @@ export const siteContent: SiteContent = {
         "Production-ready EIP-2535 Diamonds framework for Foundry, featuring on-the-fly dynamic facet selector generation and Diamond Loupe test suites.",
       category: "web3",
       githubUrl: "https://github.com/therealjhay/Foundry-Diamonds",
-      liveUrl: "",
       techStack: ["Solidity", "Foundry", "EIP-2535", "Solidity FFI"],
       accentColor: "#EC4899",
       image: "/projects/foundry-diamonds.webp",
@@ -195,7 +254,6 @@ export const siteContent: SiteContent = {
         "Production-grade, privacy-preserving reputation and identity system built on Monad with zero-knowledge proofs (Circom) and on-chain state.",
       category: "web3",
       githubUrl: "https://github.com/therealjhay/MonadRPG",
-      liveUrl: "",
       techStack: ["Solidity", "Circom ZK", "TypeScript", "Rust", "Monad"],
       accentColor: "#8B5CF6",
       image: "/projects/monadrpg.webp",
@@ -257,93 +315,28 @@ export const siteContent: SiteContent = {
   ],
 };
 
-export const SocialLinkSchema = z.object({
-  name: z.string(),
-  url: z.string().url(),
-  icon: z.string(),
-});
-
-export const ProjectSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  description: z.string(),
-  category: z.enum(["web3", "fullstack"]),
-  githubUrl: z.union([z.string().url(), z.literal("")]).optional(),
-  liveUrl: z.union([z.string().url(), z.literal("")]).optional(),
-  techStack: z.array(z.string()),
-  accentColor: z.string(),
-  image: z.string().optional(),
-});
-
-export const ArticleSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  description: z.string(),
-  url: z.string().url(),
-  platform: z.string(),
-  tags: z.array(z.string()),
-  accentColor: z.string(),
-});
-
-export const SkillGroupsSchema = z.object({
-  web3: z.array(z.string()),
-  frontend: z.array(z.string()),
-  backend: z.array(z.string()),
-});
-
-export const SiteContentSchema = z.object({
-  personalInfo: z.object({
-    name: z.string(),
-    role: z.string(),
-    headline: z.string(),
-    bio: z.string(),
-    about: z.string(),
-    email: z.string().email(),
-    githubUrl: z.string().url(),
-  }),
-  socialLinks: z.array(SocialLinkSchema),
-  skills: SkillGroupsSchema,
-  projects: z.array(ProjectSchema),
-  articles: z.array(ArticleSchema),
-});
-
-export type SiteContent = z.infer<typeof SiteContentSchema>;
-
-// --- Consolidated Configuration & Mappings ---
-
-const byName = (name: string) =>
-  siteContent.socialLinks.find((link) =>
-    link.name.toLowerCase().includes(name.toLowerCase()),
-  )?.url;
-
 export const siteConfig = {
   name: siteContent.personalInfo.name,
+  handle: siteContent.personalInfo.handle,
   role: siteContent.personalInfo.role,
+  headline: siteContent.personalInfo.headline,
   tagline: siteContent.personalInfo.bio,
+  email: siteContent.personalInfo.email,
+  location: siteContent.personalInfo.location,
   siteUrl: "https://therealjhay.tech",
   availabilityOpen: true,
   latestPinnedProject: siteContent.projects[0]?.title ?? "Featured Project",
-  social: {
-    github: siteContent.personalInfo.githubUrl,
-    linkedin: byName("linkedin") ?? "",
-    twitter: byName("twitter") ?? "",
-    etherscan: byName("etherscan") ?? "",
-    calendly: "",
-    email: siteContent.personalInfo.email,
-    location: "Remote",
-  },
   socialLinks: siteContent.socialLinks,
   nav: [
     { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
     { label: "Resume", href: "/resume" },
-    { label: "Services", href: "/services" },
     { label: "Contact", href: "/contact" },
   ],
   rotatingTitles: [
     siteContent.personalInfo.role,
-    "Blockchain Developer",
-    "Full-Stack Engineer",
+    "Smart Contract Engineer",
+    "Full-Stack Builder",
   ],
 } as const;
 
@@ -351,23 +344,3 @@ export type SiteConfig = typeof siteConfig;
 
 export const projectCategories = ["All", "Smart Contracts", "Full-Stack"] as const;
 export type ProjectCategory = (typeof projectCategories)[number];
-
-export type Project = {
-  name: string;
-  description: string;
-  tags: string[];
-  category: Exclude<ProjectCategory, "All">;
-  githubUrl: string;
-  liveUrl?: string;
-  image?: string;
-};
-
-export const projects: Project[] = siteContent.projects.map((project) => ({
-  name: project.title,
-  description: project.description,
-  tags: project.techStack,
-  category: project.category === "web3" ? "Smart Contracts" : "Full-Stack",
-  githubUrl: project.githubUrl ?? "#",
-  liveUrl: project.liveUrl,
-  image: project.image,
-}));

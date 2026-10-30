@@ -1,6 +1,6 @@
 # Johnson Oyemade · Portfolio
 
-> Web3 + Fullstack Developer · Bridging scalable full-stack applications with Ethereum smart contracts.
+> Web3 + Fullstack Developer · Bridging scalable full-stack applications with production smart contracts.
 
 Live site: [therealjhay.tech](https://therealjhay.tech)
 
@@ -8,13 +8,12 @@ Live site: [therealjhay.tech](https://therealjhay.tech)
 
 ## Tech Stack
 
-- **Framework:** [Next.js 16](https://nextjs.org/) (App Router, Server Actions)
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
 - **UI Library:** [React 19](https://react.dev/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/) with Vanilla CSS custom properties & Dark/Light mode (`next-themes`)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) with CSS custom properties & Dark/Light mode (`next-themes`)
 - **Animation:** [Framer Motion](https://www.framer.com/motion/)
-- **Type Safety:** TypeScript & [Zod](https://zod.dev/) schemas
+- **Type Safety:** TypeScript
 - **Icons:** [Lucide React](https://lucide.dev/)
-- **Email:** [Resend](https://resend.com/) & [Nodemailer](https://nodemailer.com/) fallback
 - **Linting:** ESLint 9 (Flat Config)
 
 ---
@@ -22,23 +21,23 @@ Live site: [therealjhay.tech](https://therealjhay.tech)
 ## Project Structure
 
 ```text
-├── app/                  # Next.js App Router pages and server actions
-│   ├── about/            # Standalone About page
-│   ├── contact/          # Contact page and server actions
-│   ├── projects/         # Projects gallery
-│   ├── resume/           # Interactive resume view
-│   ├── services/         # Services offered
-│   └── layout.tsx        # Root layout, theme provider, and global metadata
+├── app/                  # Next.js App Router pages
+│   ├── about/            # Standalone About & categorized stack page
+│   ├── contact/          # Direct contact & social channels page
+│   ├── projects/         # Categorized Projects gallery
+│   ├── resume/           # Interactive & print-ready resume view
+│   ├── layout.tsx        # Root layout, theme provider, and global metadata
+│   └── page.tsx          # Homepage (Hero & technical writing)
 ├── components/           # Reusable UI and section components
 │   ├── layout/           # Navbar, Mobile Menu, Footer, Theme Toggle
-│   ├── sections/         # Hero, About, Projects, Stack, Articles, Contact
-│   └── ui/               # Buttons, badges, cards, cursor glow
+│   ├── sections/         # Hero, About, Projects, Stack, Articles, Resume Rail
+│   └── ui/               # Buttons, badges, cards, copy-email, cursor glow
 ├── config/
 │   └── site-content.ts   # Single source of truth for all content and metadata
 ├── content/
-│   └── resume.ts         # Structured data for resume generation
-├── lib/                  # Metadata helpers, validation, and utilities
-├── public/               # Static assets and generated resume PDF
+│   └── resume.ts         # Structured data for resume view and PDF generation
+├── lib/                  # Metadata helpers and utilities
+├── public/               # Static project previews and generated resume PDF
 ├── scripts/
 │   └── generate-pdf.mjs  # Headless Puppeteer script to generate public/resume.pdf
 └── styles/
@@ -67,13 +66,7 @@ Live site: [therealjhay.tech](https://therealjhay.tech)
    npm install
    ```
 
-3. Configure environment variables:
-   ```bash
-   cp .env.example .env.local
-   ```
-   Edit `.env.local` with your configuration (see [Environment Variables](#environment-variables)).
-
-4. Start the development server:
+3. Start the development server:
    ```bash
    npm run dev
    ```
@@ -94,42 +87,10 @@ Live site: [therealjhay.tech](https://therealjhay.tech)
 
 ---
 
-## Environment Variables
-
-Copy `.env.example` to `.env.local`:
-
-```bash
-# Site URL
-NEXT_PUBLIC_SITE_URL=https://therealjhay.tech
-
-# Contact Form Delivery
-CONTACT_TO_EMAIL=your-email@example.com
-CONTACT_FROM_EMAIL=Portfolio Contact <onboarding@resend.dev>
-
-# Option 1: Resend (Recommended)
-RESEND_API_KEY=re_your_api_key_here
-
-# Option 2: SMTP Fallback
-SMTP_HOST=smtp.example.com
-SMTP_PORT=587
-SMTP_SECURE=false
-SMTP_USER=your_smtp_username
-SMTP_PASS=your_smtp_password
-```
-
----
-
 ## Updating Portfolio Content
 
-All personal info, skills, projects, and articles are centrally managed in:
+All personal info, bio, skills, projects, and articles are centrally managed in:
 [`config/site-content.ts`](config/site-content.ts)
-
-Editing values in this file automatically updates:
-- Homepage hero, bio, and badge metrics
-- Stack list and categorized skills
-- Projects gallery
-- Articles list
-- Navigation links and footer
 
 ---
 

@@ -17,10 +17,10 @@ export function ArticleGrid() {
       <div className="mx-auto w-full max-w-7xl px-4 md:px-6">
         <div className="mb-7">
           <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">Writing</p>
-          <h2 className="mt-2 text-3xl md:text-4xl">Technical notes and articles</h2>
+          <h2 className="mt-2 font-mono text-3xl md:text-4xl">Technical notes and articles</h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {articles.map((article) => (
             <motion.a
               key={article.id}
@@ -33,16 +33,23 @@ export function ArticleGrid() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
             >
-              <Card className="flex h-full flex-col gap-4 border-border p-5 transition-transform duration-100 ease-out group-hover:-translate-y-1 group-hover:border-primary/65 group-hover:shadow-glow group-focus-visible:-translate-y-1 group-focus-visible:ring-2 group-focus-visible:ring-primary group-focus-visible:border-primary">
+              <Card
+                className="flex h-full flex-col gap-4 border-border border-t-2 p-5 transition-transform duration-100 ease-out group-hover:-translate-y-1 group-hover:border-primary/65 group-hover:shadow-glow group-focus-visible:-translate-y-1 group-focus-visible:border-primary group-focus-visible:ring-2 group-focus-visible:ring-primary"
+                style={{ borderTopColor: article.accentColor }}
+              >
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="font-mono text-xl">{article.title}</h3>
                   <ExternalLink className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
                 </div>
                 <p className="text-sm text-muted-foreground">{article.description}</p>
                 <div className="mt-auto flex flex-wrap items-center gap-2 pt-2">
-                  <Badge variant="tag" className="border-primary/30 text-primary">{article.platform}</Badge>
+                  <Badge variant="tag" className="border-primary/30 text-primary">
+                    {article.platform}
+                  </Badge>
                   {article.tags.map((tag) => (
-                    <Badge key={tag} variant="tag">{tag}</Badge>
+                    <Badge key={tag} variant="tag">
+                      {tag}
+                    </Badge>
                   ))}
                 </div>
               </Card>

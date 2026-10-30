@@ -4,8 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
-import FocusTrap from "focus-trap-react";
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site-content";
 import { cn } from "@/lib/utils";
 
@@ -13,67 +12,62 @@ export function MobileMenu() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    if (open) {
+      window.addEventListener("keydown", onKeyDown);
+    }
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   return (
-    <>
+    <div className="md:hidden">
       <button
         type="button"
-        className="inline-flex h-11 w-11 items-center justify-center border border-border md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="inline-flex h-11 w-11 items-center justify-center border border-border bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         aria-label={open ? "Close menu" : "Open menu"}
+        aria-expanded={open}
         onClick={() => setOpen((prev) => !prev)}
       >
-        {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+        {open ? (
+          <X className="h-5 w-5" aria-hidden="true" />
+        ) : (
+          <Menu className="h-5 w-5" aria-hidden="true" />
+        )}
       </button>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-50 flex flex-col bg-background/80 backdrop-blur-md md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            className="fixed inset-x-0 top-16 z-50 border-b border-border bg-background px-4 py-6 shadow-lg"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
             role="dialog"
-            aria-modal="true"
+            aria-label="Mobile navigation"
           >
-            <FocusTrap>
-              <div className="flex h-full w-full flex-col">
-                <div className="flex h-16 items-center justify-end px-4 md:px-6">
-                  <button
-                    type="button"
-                    className="inline-flex h-11 w-11 items-center justify-center border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                    aria-label="Close menu"
+            <ul className="mx-auto max-w-7xl space-y-3">
+              {siteConfig.nav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "block py-1.5 font-mono text-lg text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                      pathname === item.href && "text-primary",
+                    )}
                     onClick={() => setOpen(false)}
                   >
-                    <X className="h-5 w-5" aria-hidden="true" />
-                  </button>
-                </div>
-                <nav className="flex flex-1 flex-col justify-center px-6">
-                  <ul className="space-y-5">
-                    {siteConfig.nav.map((item, index) => (
-                      <motion.li
-                        key={item.href}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.06, duration: 0.2, ease: "easeOut" }}
-                      >
-                        <Link
-                          href={item.href}
-                          className={cn(
-                            "text-2xl font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                            pathname === item.href && "text-primary",
-                          )}
-                          onClick={() => setOpen(false)}
-                        >
-                          {item.label}
-                        </Link>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </nav>
-              </div>
-            </FocusTrap>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
