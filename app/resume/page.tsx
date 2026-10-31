@@ -13,7 +13,7 @@ export const metadata = createMetadata({
 
 export default function ResumePage() {
   return (
-    <main id="main-content" className="resume-area min-h-screen py-8 md:py-12 print:min-h-0 print:py-0">
+    <main id="main-content" className="resume-area min-h-screen pt-24 pb-16 md:pt-28 print:min-h-0 print:py-0">
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-4 md:grid-cols-[140px_1fr] md:px-6 print:block print:px-0">
         <ResumeRail />
         <article className="resume-area mx-auto w-full max-w-3xl px-0 text-sm leading-relaxed print:max-w-none">

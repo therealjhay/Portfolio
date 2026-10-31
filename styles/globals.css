@@ -3,43 +3,43 @@
 @tailwind utilities;
 
 :root {
-  --background: 40 33% 96%;
-  --foreground: 0 0% 8%;
-  --muted: 40 12% 91%;
-  --muted-foreground: 0 0% 35%;
+  --background: 42 28% 95%;
+  --foreground: 0 0% 7%;
+  --muted: 40 14% 89%;
+  --muted-foreground: 0 0% 34%;
   --card: 40 25% 98%;
-  --card-foreground: 0 0% 8%;
-  --border: 0 0% 83%;
-  --primary: 170 85% 32%;
+  --card-foreground: 0 0% 7%;
+  --border: 0 0% 80%;
+  --primary: 78 92% 32%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 92%;
-  --secondary-foreground: 0 0% 12%;
-  --accent: 190 100% 50%;
-  --accent-foreground: 0 0% 10%;
-  --ring: 170 85% 32%;
+  --secondary: 0 0% 91%;
+  --secondary-foreground: 0 0% 10%;
+  --accent: 190 95% 42%;
+  --accent-foreground: 0 0% 8%;
+  --ring: 78 92% 32%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 100%;
-  --font-sans: var(--font-dm-sans);
-  --font-mono: var(--font-space-mono);
-  --font-resume: var(--font-ibm-plex-sans);
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Space Mono", "SF Mono", Menlo, Monaco, Consolas, monospace;
+  --font-resume: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .dark {
-  --background: 0 0% 4%;
-  --foreground: 40 21% 93%;
-  --muted: 0 0% 9%;
-  --muted-foreground: 40 8% 68%;
-  --card: 0 0% 6%;
-  --card-foreground: 40 21% 93%;
-  --border: 0 0% 17%;
-  --primary: 170 100% 50%;
-  --primary-foreground: 0 0% 4%;
-  --secondary: 0 0% 10%;
-  --secondary-foreground: 40 21% 93%;
-  --accent: 190 100% 50%;
-  --accent-foreground: 0 0% 4%;
-  --ring: 170 100% 50%;
-  --destructive: 0 72% 51%;
+  --background: 220 15% 4%;
+  --foreground: 42 24% 92%;
+  --muted: 220 12% 9%;
+  --muted-foreground: 40 10% 64%;
+  --card: 220 14% 6%;
+  --card-foreground: 42 24% 92%;
+  --border: 220 10% 16%;
+  --primary: 76 100% 59%;
+  --primary-foreground: 220 18% 5%;
+  --secondary: 220 12% 11%;
+  --secondary-foreground: 42 24% 92%;
+  --accent: 199 95% 74%;
+  --accent-foreground: 220 18% 5%;
+  --ring: 76 100% 59%;
+  --destructive: 0 78% 58%;
   --destructive-foreground: 0 0% 100%;
 }
 
@@ -52,52 +52,24 @@ html {
 }
 
 body {
-  @apply bg-background text-foreground antialiased;
+  @apply bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground;
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-.scanline {
-  position: relative;
-  overflow: hidden;
+.playground-grid {
+  background-image:
+    linear-gradient(to right, hsl(var(--foreground) / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--foreground) / 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
-.scanline::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    hsl(var(--foreground) / 0.08) 45%,
-    transparent 100%
+.playground-vignette {
+  background: radial-gradient(
+    circle at 65% 42%,
+    hsl(var(--primary) / 0.07) 0%,
+    transparent 48%,
+    hsl(var(--background) / 0.78) 100%
   );
-  transform: translateX(-100%);
-  animation: scan 850ms ease-out forwards;
-}
-
-@keyframes scan {
-  to {
-    transform: translateX(100%);
-  }
-}
-
-.noise-bg {
-  background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.04) 1px, transparent 0);
-  background-size: 22px 22px;
-}
-
-.code-rain::before {
-  content: "function executeSwap() { if (slippage > max) revert(); }\A const tx = await signer.sendTransaction(payload)\A for (const block of chain) settle(block)\A emit StrategyRebalanced(vault, delta)";
-  white-space: pre;
-  font-family: var(--font-mono), monospace;
-  color: hsl(var(--foreground) / 0.09);
-  position: absolute;
-  inset: 8% auto auto -12%;
-  width: 130%;
-  transform: rotate(-5deg);
-  font-size: clamp(0.68rem, 1vw, 0.92rem);
-  line-height: 1.9;
-  pointer-events: none;
 }
 
 .resume-area {
@@ -118,17 +90,17 @@ body {
 }
 
 .dark .resume-area {
-  --resume-bg: hsl(0, 0%, 6%);
-  --resume-fg: hsl(40, 21%, 93%);
-  --resume-border: hsl(0, 0%, 17%);
+  --resume-bg: hsl(220, 14%, 6%);
+  --resume-fg: hsl(42, 24%, 92%);
+  --resume-border: hsl(220, 10%, 17%);
   --resume-muted: hsl(40, 8%, 68%);
   --resume-meta: hsl(40, 8%, 60%);
   --resume-body: hsl(40, 21%, 88%);
   --resume-date: hsl(40, 8%, 55%);
   --resume-rail-inactive: hsl(40, 8%, 45%);
-  --resume-rail-active: hsl(170, 100%, 50%);
+  --resume-rail-active: hsl(76, 100%, 59%);
   --resume-rail-hover: hsl(40, 8%, 55%);
-  --resume-link: hsl(170, 100%, 50%);
+  --resume-link: hsl(76, 100%, 59%);
 }
 
 .resume-area a:not(.no-underline) {
@@ -183,6 +155,7 @@ body {
   }
 
   .no-print,
+  header,
   nav,
   footer,
   .resume-rail {

@@ -11,6 +11,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)"],
+        mono: ["var(--font-mono)"],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -29,7 +33,7 @@ const config: Config = {
         "destructive-foreground": "hsl(var(--destructive-foreground))",
       },
       boxShadow: {
-        glow: "0 0 0 1px hsl(var(--primary) / 0.35), 0 0 22px hsl(var(--primary) / 0.15)",
+        glow: "0 0 0 1px hsl(var(--primary) / 0.35), 0 0 24px hsl(var(--primary) / 0.14)",
       },
       backgroundImage: {
         noise: "radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.06) 1px, transparent 0)",
