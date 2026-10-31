@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowLeft,
@@ -11,8 +10,10 @@ import {
   Cpu,
   ExternalLink,
   Github,
+  Globe,
   Layers,
   Shield,
+  Terminal,
   X,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -117,9 +118,9 @@ export function ProjectGrid() {
             </h2>
           </div>
           <p className="max-w-md font-mono text-xs leading-relaxed text-muted-foreground">
-            Click any spatial module below to open its full technical dossier:
-            problem, architectural solution, engineering contribution, and live
-            repositories.
+            Live deployed UIs are rendered directly in-viewport alongside
+            on-chain architecture telemetry. Click any module to open its full
+            system dossier.
           </p>
         </div>
 
@@ -181,7 +182,7 @@ export function ProjectGrid() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {filtered.map((project) => (
               <ProjectMatrixNode
                 key={project.id}
@@ -206,6 +207,96 @@ export function ProjectGrid() {
         )}
       </AnimatePresence>
     </section>
+  );
+}
+
+/**
+ * Displays the live deployed UI directly in a scaled viewport when `project.liveUrl`
+ * is present, or a live protocol/architecture blueprint terminal for on-chain/CLI repos.
+ */
+function ProjectDisplayViewport({
+  project,
+  interactive = false,
+}: {
+  project: ProjectItem;
+  interactive?: boolean;
+}) {
+  const repoSlug = project.githubUrl.replace(/^https?:\/\/github\.com\//, "");
+  const cleanHost = project.liveUrl?.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+  if (project.liveUrl) {
+    return (
+      <div className="relative flex aspect-[16/10] w-full flex-col overflow-hidden bg-background">
+        {/* Browser Chrome Header */}
+        <div className="flex h-7 shrink-0 items-center justify-between border-b border-border/80 bg-card px-3 font-mono text-[10px]">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full bg-primary" />
+            <span className="uppercase tracking-wider text-primary font-bold">
+              LIVE UI
+            </span>
+          </div>
+          <span className="truncate px-2 text-muted-foreground">
+            {cleanHost}
+          </span>
+          <Globe className="h-3 w-3 shrink-0 text-primary" aria-hidden="true" />
+        </div>
+
+        {/* Scaled Live Deployed UI Iframe */}
+        <div className="relative flex-1 w-full overflow-hidden bg-background">
+          <iframe
+            src={project.liveUrl}
+            title={`${project.title} live deployed UI`}
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin"
+            className={cn(
+              "h-[250%] w-[250%] origin-top-left scale-[0.4] border-0 bg-background",
+              !interactive && "pointer-events-none select-none",
+            )}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative flex aspect-[16/10] w-full flex-col justify-between overflow-hidden bg-background/95 p-4 font-mono text-xs">
+      <div className="playground-grid pointer-events-none absolute inset-0 opacity-35" />
+
+      {/* Top Protocol Telemetry Bar */}
+      <div className="relative z-10 flex items-center justify-between border-b border-border/70 pb-2 text-[10px]">
+        <span className="inline-flex items-center gap-1.5 text-primary font-bold">
+          <Terminal className="h-3 w-3" aria-hidden="true" />
+          <span>PROTOCOL ARCHITECTURE // {project.index}</span>
+        </span>
+        <span className="truncate text-muted-foreground">{repoSlug}</span>
+      </div>
+
+      {/* Real Architecture Modules */}
+      <div className="relative z-10 my-auto space-y-1.5 py-2">
+        {project.caseStudy.contribution.slice(0, 3).map((line, i) => (
+          <div
+            key={line}
+            className="flex items-start gap-2 border border-border/60 bg-card/85 px-2.5 py-1.5 text-[11px] leading-snug text-foreground/90"
+          >
+            <span
+              className="shrink-0 font-bold"
+              style={{ color: project.accentColor }}
+            >
+              0{i + 1}
+            </span>
+            <span className="line-clamp-1">{line}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Bottom Stack Telemetry */}
+      <div className="relative z-10 flex items-center justify-between border-t border-border/70 pt-2 text-[10px] text-muted-foreground">
+        <span className="truncate">
+          {project.techStack.slice(0, 4).join(" · ")}
+        </span>
+        <span style={{ color: project.accentColor }}>ON-CHAIN / SOURCE</span>
+      </div>
+    </div>
   );
 }
 
@@ -268,38 +359,18 @@ function FeaturedModuleCard({
         </span>
       </div>
 
-      {/* Interactive Image + Spatial Overlay */}
-      {project.image && (
-        <button
-          type="button"
-          onClick={onOpen}
-          className="relative aspect-[16/10] w-full overflow-hidden border-b border-border/70 bg-muted/40 text-left focus-visible:outline-none"
-        >
-          <Image
-            src={project.image}
-            alt={`${project.title} interface preview`}
-            fill
-            sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-          <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
-            <span
-              className="border px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest backdrop-blur-md"
-              style={{
-                borderColor: project.accentColor,
-                color: project.accentColor,
-                backgroundColor: "rgba(10,10,10,0.75)",
-              }}
-            >
-              Inspect 3D Case File
-            </span>
-            <span className="inline-flex h-8 w-8 items-center justify-center border border-border bg-background/80 text-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:border-primary group-hover:text-primary">
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </span>
-          </div>
-        </button>
-      )}
+      {/* Live Deployed UI / Architecture Display */}
+      <button
+        type="button"
+        onClick={onOpen}
+        className="relative block w-full border-b border-border/70 text-left focus-visible:outline-none"
+      >
+        <ProjectDisplayViewport project={project} />
+        <div className="pointer-events-none absolute bottom-3 right-3 flex items-center gap-1.5 border border-border bg-background/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-foreground backdrop-blur-md transition-colors group-hover:border-primary group-hover:text-primary">
+          <span>{project.liveUrl ? "Inspect Live UI" : "Inspect System"}</span>
+          <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+        </div>
+      </button>
 
       {/* Body */}
       <div className="flex flex-1 flex-col justify-between p-5">
@@ -387,24 +458,13 @@ function ProjectMatrixNode({
       style={{ borderTopWidth: "2px", borderTopColor: project.accentColor }}
     >
       <div>
-        {project.image && (
-          <button
-            type="button"
-            onClick={onOpen}
-            className="relative block aspect-[16/10] w-full overflow-hidden border-b border-border/70 bg-muted/40 text-left"
-          >
-            <Image
-              src={project.image}
-              alt={`${project.title} preview`}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-cover object-top transition-transform duration-300 ease-out group-hover:scale-105"
-            />
-            <span className="absolute top-2.5 left-2.5 border border-border/80 bg-background/85 px-2 py-0.5 font-mono text-[10px] tracking-widest text-primary backdrop-blur-sm">
-              NODE // {project.index}
-            </span>
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={onOpen}
+          className="relative block w-full border-b border-border/70 text-left focus-visible:outline-none"
+        >
+          <ProjectDisplayViewport project={project} />
+        </button>
 
         <div className="p-5">
           <div className="flex items-start justify-between gap-2">
@@ -445,7 +505,7 @@ function ProjectMatrixNode({
           onClick={onOpen}
           className="inline-flex min-h-9 flex-1 items-center justify-between border border-border bg-background/70 px-3 font-mono text-xs text-foreground transition-colors hover:border-primary hover:text-primary"
         >
-          <span>Inspect System</span>
+          <span>{project.liveUrl ? "Inspect Live UI" : "Inspect System"}</span>
           <span>→</span>
         </button>
 
@@ -537,7 +597,7 @@ function ProjectDetailModal({
 
         {/* Scrollable Content */}
         <div className="overflow-y-auto p-5 sm:p-8 space-y-6">
-          <div className="grid gap-6 md:grid-cols-[1.15fr_1fr] md:items-center">
+          <div className="grid gap-6 md:grid-cols-[1.05fr_1.15fr] md:items-center">
             <div className="space-y-3">
               <h2
                 id="project-modal-title"
@@ -571,23 +631,15 @@ function ProjectDetailModal({
                     className="inline-flex min-h-10 items-center gap-2 border border-border bg-background px-4 py-2 font-mono text-xs text-foreground transition-colors hover:border-primary hover:text-primary"
                   >
                     <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                    <span>Launch Live Application</span>
+                    <span>Launch Deployed UI</span>
                   </a>
                 )}
               </div>
             </div>
 
-            {project.image && (
-              <div className="relative aspect-[16/10] w-full overflow-hidden border border-border bg-muted/40">
-                <Image
-                  src={project.image}
-                  alt={`${project.title} screenshot`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 420px"
-                  className="object-cover object-top"
-                />
-              </div>
-            )}
+            <div className="overflow-hidden border border-border">
+              <ProjectDisplayViewport project={project} interactive />
+            </div>
           </div>
 
           {/* Problem & Solution Grid */}

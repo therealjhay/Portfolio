@@ -23,7 +23,6 @@ export type ProjectItem = {
   liveUrl?: string;
   techStack: string[];
   accentColor: string;
-  image?: string;
   caseStudy: ProjectCaseStudy;
 };
 
@@ -245,7 +244,6 @@ export const siteContent: SiteContent = {
       githubUrl: "https://github.com/therealjhay/PreFlight",
       techStack: ["Solidity", "Foundry", "TypeScript", "React", "Fastify", "Ethers.js", "Monad"],
       accentColor: "#00FFA6",
-      image: "/projects/preflight.webp",
       caseStudy: {
         problem:
           "Users sign opaque hexadecimal blockchain transactions without visibility into state changes or counterparty risk, leading to irreversible on-chain mistakes.",
@@ -271,7 +269,6 @@ export const siteContent: SiteContent = {
       liveUrl: "https://betta-pay-frontend.vercel.app/",
       techStack: ["Rust", "Soroban", "Stellar", "WebAssembly", "TypeScript", "Node.js"],
       accentColor: "#c8ff2e",
-      image: "/projects/betta-pay.webp",
       caseStudy: {
         problem:
           "Cross-border and enterprise merchant settlement across Africa requires programmable fee splits, transparent payment references, and non-custodial on-chain guarantees.",
@@ -296,7 +293,6 @@ export const siteContent: SiteContent = {
       githubUrl: "https://github.com/therealjhay/VeriVault",
       techStack: ["Rust", "Soroban", "Stellar", "Noir", "BN254", "Poseidon2", "WASM"],
       accentColor: "#10B981",
-      image: "/projects/verivault.webp",
       caseStudy: {
         problem:
           "Users and institutions need private on-chain transactions on Stellar while still provably satisfying compliance policies without exposing underlying identity data.",
@@ -320,7 +316,6 @@ export const siteContent: SiteContent = {
       githubUrl: "https://github.com/therealjhay/ANIMA",
       techStack: ["0G Storage", "0G Compute", "0G Chain", "Solidity", "TypeScript", "React"],
       accentColor: "#8B5CF6",
-      image: "/projects/anima.webp",
       caseStudy: {
         problem:
           "Conventional AI companions store user conversations and long-term memory in centralized silos that users neither own nor cryptographically verify.",
@@ -344,7 +339,6 @@ export const siteContent: SiteContent = {
       githubUrl: "https://github.com/therealjhay/StarSight",
       techStack: ["Rust", "Soroban", "Stellar", "Next.js", "PostgreSQL", "Gemini", "Docker"],
       accentColor: "#F59E0B",
-      image: "/projects/starsight.webp",
       caseStudy: {
         problem:
           "Evaluating performance and risk across tokenized real-world assets (RWAs) on Stellar requires combining on-chain market signals with automated analytical models.",
@@ -369,7 +363,6 @@ export const siteContent: SiteContent = {
       liveUrl: "https://soul-protocol-self.vercel.app",
       techStack: ["Rust", "Solana", "Circom", "TypeScript", "NestJS", "PostgreSQL", "Next.js"],
       accentColor: "#6366F1",
-      image: "/projects/soul.webp",
       caseStudy: {
         problem:
           "On-chain activity, credentials, and attestations are fragmented across addresses, making portable reputation and sybil-resistant verification difficult.",
@@ -393,7 +386,6 @@ export const siteContent: SiteContent = {
       githubUrl: "https://github.com/therealjhay/ARES-TREASURY",
       techStack: ["Solidity", "Foundry", "OpenZeppelin", "EIP-712", "Merkle Trees"],
       accentColor: "#00E5FF",
-      image: "/projects/ares.webp",
       caseStudy: {
         problem:
           "Decentralized governance treasuries face systemic risks from monolithic execution paths, replay attacks, and unbounded capital outflows.",
@@ -417,7 +409,6 @@ export const siteContent: SiteContent = {
       githubUrl: "https://github.com/therealjhay/RelayPay-Stellar",
       techStack: ["React", "TypeScript", "Express", "Stellar Horizon", "Soroban", "Rust"],
       accentColor: "#06B6D4",
-      image: "/projects/relaypay.webp",
       caseStudy: {
         problem:
           "Integrating Stellar wallet connections, payment intents, and on-chain confirmation into web checkouts requires repetitive boilerplate across frontend and backend.",
@@ -439,10 +430,9 @@ export const siteContent: SiteContent = {
         "A real-time, event-driven geospatial AI platform for NGO disaster triage, damage assessment, and emergency humanitarian response.",
       category: "fullstack",
       githubUrl: "https://github.com/therealjhay/AegisAI",
-      liveUrl: "https://aegis-ai-gamma.vercel.app",
+      liveUrl: "https://aegiswarm.vercel.app",
       techStack: ["Python", "FastAPI", "TypeScript", "Next.js", "Mapbox GL", "PostGIS"],
       accentColor: "#EF4444",
-      image: "/projects/aegis-ai.webp",
       caseStudy: {
         problem:
           "Emergency disaster response suffers from slow funding coordination, noisy or duplicate field reports, and opaque disbursement trails.",
@@ -467,7 +457,6 @@ export const siteContent: SiteContent = {
       liveUrl: "https://blue-scribe.vercel.app",
       techStack: ["Next.js", "TypeScript", "Gemini AI", "Tailwind CSS"],
       accentColor: "#3B82F6",
-      image: "/projects/scribe.webp",
       caseStudy: {
         problem:
           "Turning multi-speaker recordings across diverse audio formats into structured, searchable transcripts requires fast inference and clean editing workflows.",
@@ -492,7 +481,6 @@ export const siteContent: SiteContent = {
       liveUrl: "https://invincible-flax.vercel.app",
       techStack: ["Solidity", "OpenZeppelin", "Hardhat", "React", "TypeScript", "Lisk Sepolia"],
       accentColor: "#10B981",
-      image: "/projects/invincible.webp",
       caseStudy: {
         problem:
           "Testnet ecosystems need an ERC-20 token with realistic supply caps and rate-limited distribution that developers and testers can claim through a clean UI.",
@@ -516,7 +504,6 @@ export const siteContent: SiteContent = {
       githubUrl: "https://github.com/therealjhay/Foundry-Diamonds",
       techStack: ["Solidity", "Foundry", "Hardhat", "EIP-2535", "Solidity FFI"],
       accentColor: "#EC4899",
-      image: "/projects/foundry-diamonds.webp",
       caseStudy: {
         problem:
           "Testing and scripting EIP-2535 Diamond upgrades typically requires manually maintaining brittle function-selector arrays across facets.",
@@ -540,7 +527,6 @@ export const siteContent: SiteContent = {
       githubUrl: "https://github.com/therealjhay/MonadRPG",
       techStack: ["Solidity", "Circom ZK", "TypeScript", "Rust", "Monad"],
       accentColor: "#8B5CF6",
-      image: "/projects/monadrpg.webp",
       caseStudy: {
         problem:
           "On-chain games and reputation systems expose player progression and identity state publicly, enabling targeted front-running and sybil gaming.",
@@ -565,7 +551,6 @@ export const siteContent: SiteContent = {
       liveUrl: "https://jdcwatches.vercel.app",
       techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Django REST", "PostgreSQL", "Cloudinary"],
       accentColor: "#D97706",
-      image: "/projects/jdc.webp",
       caseStudy: {
         problem:
           "High-touch retail catalogs require fast browsing and variant management while routing checkout directly into personalized WhatsApp concierge threads.",
