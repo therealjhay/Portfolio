@@ -244,10 +244,9 @@ function ProjectDisplayViewport({
         {/* Scaled Live Deployed UI Iframe */}
         <div className="relative flex-1 w-full overflow-hidden bg-background">
           <iframe
-            src={project.liveUrl}
+            src={project.frameUrl ?? project.liveUrl}
             title={`${project.title} live deployed UI`}
             loading="lazy"
-            sandbox="allow-scripts allow-same-origin"
             className={cn(
               "h-[250%] w-[250%] origin-top-left scale-[0.4] border-0 bg-background",
               !interactive && "pointer-events-none select-none",

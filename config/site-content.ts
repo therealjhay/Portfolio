@@ -21,6 +21,7 @@ export type ProjectItem = {
   featured?: boolean;
   githubUrl: string;
   liveUrl?: string;
+  frameUrl?: string;
   techStack: string[];
   accentColor: string;
   caseStudy: ProjectCaseStudy;
@@ -232,33 +233,10 @@ export const siteContent: SiteContent = {
     backend: ["Python", "FastAPI", "Django", "PostgreSQL", "Node.js", "Docker"],
   },
   projects: [
-    {
-      id: "preflight",
-      index: "01",
-      title: "PreFlight",
-      tagline: "Web3 transaction intelligence and safety.",
-      description:
-        "Transaction intelligence and safety layer for Web3. Analyzes blockchain transactions before signing, explaining outcomes in human-readable terms to prevent irreversible on-chain mistakes.",
-      category: "web3",
-      featured: true,
-      githubUrl: "https://github.com/therealjhay/PreFlight",
-      techStack: ["Solidity", "Foundry", "TypeScript", "React", "Fastify", "Ethers.js", "Monad"],
-      accentColor: "#00FFA6",
-      caseStudy: {
-        problem:
-          "Users sign opaque hexadecimal blockchain transactions without visibility into state changes or counterparty risk, leading to irreversible on-chain mistakes.",
-        solution:
-          "A pre-signing transaction safety layer that decodes calldata, simulates execution outcomes, checks contract reputation against an on-chain registry, and explains risk scores in plain language.",
-        contribution: [
-          "Backend analysis engine for decoding, simulation, reputation lookup, and risk scoring",
-          "PreflightRegistry smart contract on Monad testnet for flagging risky addresses",
-          "Chrome Manifest V3 browser extension, developer SDK (@preflight/sdk), and web dashboard",
-        ],
-      },
-    },
+    // --- 01 to 06: Projects with Live Deployed UIs ---
     {
       id: "betta-pay",
-      index: "02",
+      index: "01",
       title: "BettaPay",
       tagline: "Stellar/Soroban merchant payments and settlement.",
       description:
@@ -267,6 +245,7 @@ export const siteContent: SiteContent = {
       featured: true,
       githubUrl: "https://github.com/Betta-Pay/BettaPay-Contract",
       liveUrl: "https://bettapay-tech.vercel.app/",
+      frameUrl: "/api/preview?url=https://bettapay-tech.vercel.app/",
       techStack: ["Rust", "Soroban", "Stellar", "WebAssembly", "TypeScript", "Node.js"],
       accentColor: "#c8ff2e",
       caseStudy: {
@@ -282,83 +261,14 @@ export const siteContent: SiteContent = {
       },
     },
     {
-      id: "verivault",
-      index: "03",
-      title: "VeriVault",
-      tagline: "Privacy-preserving transactions and selective disclosure.",
-      description:
-        "A Rust-native, Soroban-based protocol enabling private transactions with selective regulatory disclosure, powered by Protocol 25 BN254 and Poseidon ZK primitives.",
-      category: "web3",
-      featured: true,
-      githubUrl: "https://github.com/therealjhay/VeriVault",
-      techStack: ["Rust", "Soroban", "Stellar", "Noir", "BN254", "Poseidon2", "WASM"],
-      accentColor: "#10B981",
-      caseStudy: {
-        problem:
-          "Users and institutions need private on-chain transactions on Stellar while still provably satisfying compliance policies without exposing underlying identity data.",
-        solution:
-          "A Soroban privacy protocol using Noir zero-knowledge circuits, Poseidon2 commitments, and on-chain BN254 pairing verification to prove compliance attributes privately.",
-        contribution: [
-          "Poseidon2 commitment storage in an incremental Merkle tree (depth 20) on Soroban",
-          "Groth16 proof verification on-chain using Stellar Protocol 25 BN254 host functions",
-          "On-chain compliance policy registry and time-locked guardian recovery modules",
-        ],
-      },
-    },
-    {
-      id: "anima",
-      index: "04",
-      title: "ANIMA",
-      tagline: "Decentralized AI companion and user-owned memory.",
-      description:
-        "Decentralized AI companion with cryptographic, user-owned memory built on 0G Storage, Compute, and Chain — ensuring persistent, tamper-proof agent memory.",
-      category: "web3",
-      githubUrl: "https://github.com/therealjhay/ANIMA",
-      techStack: ["0G Storage", "0G Compute", "0G Chain", "Solidity", "TypeScript", "React"],
-      accentColor: "#8B5CF6",
-      caseStudy: {
-        problem:
-          "Conventional AI companions store user conversations and long-term memory in centralized silos that users neither own nor cryptographically verify.",
-        solution:
-          "An AI companion architecture anchored on 0G Storage, Compute, and Chain so agent memories remain cryptographically owned by the user's wallet.",
-        contribution: [
-          "Application scaffold and wallet-authenticated session architecture on 0G Network",
-          "Decentralized storage and compute integration design for persistent agent memory",
-          "React and TypeScript client interface with on-chain ownership primitives",
-        ],
-      },
-    },
-    {
-      id: "starsight",
-      index: "05",
-      title: "StarSight",
-      tagline: "RWA decision support and risk analytics.",
-      description:
-        "Decision support and risk analytics platform for tokenized real-world assets (RWAs) built on Stellar.",
-      category: "web3",
-      githubUrl: "https://github.com/therealjhay/StarSight",
-      techStack: ["Rust", "Soroban", "Stellar", "Next.js", "PostgreSQL", "Gemini", "Docker"],
-      accentColor: "#F59E0B",
-      caseStudy: {
-        problem:
-          "Evaluating performance and risk across tokenized real-world assets (RWAs) on Stellar requires combining on-chain market signals with automated analytical models.",
-        solution:
-          "A Stellar/Soroban RWA prediction and analytics platform pairing four Soroban contracts with a Rust event indexer and AI assessment daemon.",
-        contribution: [
-          "Four Soroban contracts: asset-registry, prediction-market, reputation, and rewards",
-          "Rust AI agent daemon integrating Google Gemini to evaluate RWA market predictions",
-          "Rust backend service providing an on-chain event indexer plus REST and WebSocket APIs",
-        ],
-      },
-    },
-    {
       id: "soul-srpg",
-      index: "06",
+      index: "02",
       title: "SOUL Protocol",
       tagline: "On-chain identity and reputation.",
       description:
         "Devnet-ready reputation and identity protocol turning credentials, identity registrations, and attestations into an indexed, portable on-chain passport.",
       category: "web3",
+      featured: true,
       githubUrl: "https://github.com/therealjhay/Soul",
       liveUrl: "https://soul-srgp.vercel.app",
       techStack: ["Rust", "Solana", "Circom", "TypeScript", "NestJS", "PostgreSQL", "Next.js"],
@@ -376,59 +286,14 @@ export const siteContent: SiteContent = {
       },
     },
     {
-      id: "ARES",
-      index: "07",
-      title: "Ares Protocol",
-      tagline: "Modular treasury management.",
-      description:
-        "Modular treasury management protocol designed to manage high-value vault assets and yield allocation strategies for autonomous organizations.",
-      category: "web3",
-      githubUrl: "https://github.com/therealjhay/ARES-TREASURY",
-      techStack: ["Solidity", "Foundry", "OpenZeppelin", "EIP-712", "Merkle Trees"],
-      accentColor: "#00E5FF",
-      caseStudy: {
-        problem:
-          "Decentralized governance treasuries face systemic risks from monolithic execution paths, replay attacks, and unbounded capital outflows.",
-        solution:
-          "A modular execution vault enforcing strict lifecycle transitions (Created → Queued → Executable → Executed), cryptographic isolation, and epoch rate limits.",
-        contribution: [
-          "EIP-712 signed proposal validation with nonce tracking against signature replay",
-          "AresTimelock queue deleting operation IDs prior to external calls to prevent reentrancy",
-          "Rolling 7-day epoch outflow rate limit and proposal bond slash/refund mechanics",
-        ],
-      },
-    },
-    {
-      id: "relaypay-stellar",
-      index: "08",
-      title: "RelayPay",
-      tagline: "Stellar checkout infrastructure.",
-      description:
-        "A full-stack Stellar checkout starter and reusable React payment component with built-in wallet connection, transaction handling, and auto-settlement.",
-      category: "web3",
-      githubUrl: "https://github.com/therealjhay/RelayPay-Stellar",
-      techStack: ["React", "TypeScript", "Express", "Stellar Horizon", "Soroban", "Rust"],
-      accentColor: "#06B6D4",
-      caseStudy: {
-        problem:
-          "Integrating Stellar wallet connections, payment intents, and on-chain confirmation into web checkouts requires repetitive boilerplate across frontend and backend.",
-        solution:
-          "A drop-in React checkout component (`RelayPayButton`) paired with an Express payment-intent API and a Soroban intent-tracking contract.",
-        contribution: [
-          "Reusable RelayPayButton React component with Stellar wallet connection and signing",
-          "Payment intent REST API for creating, fetching, and confirming Stellar transactions",
-          "Soroban contract scaffold implementing create_intent, mark_paid, and get_intent",
-        ],
-      },
-    },
-    {
       id: "aegis-ai",
-      index: "09",
+      index: "03",
       title: "Aegis AI",
       tagline: "Geospatial AI for disaster response.",
       description:
         "A real-time, event-driven geospatial AI platform for NGO disaster triage, damage assessment, and emergency humanitarian response.",
       category: "fullstack",
+      featured: true,
       githubUrl: "https://github.com/therealjhay/AegisAI",
       liveUrl: "https://aegiswarm.vercel.app",
       techStack: ["Python", "FastAPI", "TypeScript", "Next.js", "Mapbox GL", "PostGIS"],
@@ -447,7 +312,7 @@ export const siteContent: SiteContent = {
     },
     {
       id: "blue-scribe",
-      index: "10",
+      index: "04",
       title: "Scribe",
       tagline: "AI-powered transcription.",
       description:
@@ -471,7 +336,7 @@ export const siteContent: SiteContent = {
     },
     {
       id: "invincible-token",
-      index: "11",
+      index: "05",
       title: "Invincible Token & Faucet",
       tagline: "ERC-20 token ecosystem.",
       description:
@@ -494,8 +359,172 @@ export const siteContent: SiteContent = {
       },
     },
     {
-      id: "foundry-diamonds",
+      id: "jdc-watches",
+      index: "06",
+      title: "JDC Luxury Watches",
+      tagline: "E-commerce platform.",
+      description:
+        "E-commerce platform for curated luxury timepieces featuring WhatsApp concierge ordering, catalog filtering, and high-performance product browsing.",
+      category: "fullstack",
+      githubUrl: "https://github.com/therealjhay/JDC",
+      liveUrl: "https://jdcwatches.vercel.app",
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Django REST", "PostgreSQL", "Cloudinary"],
+      accentColor: "#D97706",
+      caseStudy: {
+        problem:
+          "High-touch retail catalogs require fast browsing and variant management while routing checkout directly into personalized WhatsApp concierge threads.",
+        solution:
+          "A full-stack luxury watch storefront built with Next.js and Django REST Framework featuring multi-variant catalog management and pre-filled WhatsApp checkout.",
+        contribution: [
+          "Next.js storefront with brand/category filtering, variant selection, and WhatsApp order builder",
+          "Django REST Framework and PostgreSQL backend powering products, variants, and order tracking",
+          "Admin operations dashboard with Cloudinary multi-image upload",
+        ],
+      },
+    },
+
+    // --- 07 to 14: Smart Contract & Protocol Architecture Repositories ---
+    {
+      id: "preflight",
+      index: "07",
+      title: "PreFlight",
+      tagline: "Web3 transaction intelligence and safety.",
+      description:
+        "Transaction intelligence and safety layer for Web3. Analyzes blockchain transactions before signing, explaining outcomes in human-readable terms to prevent irreversible on-chain mistakes.",
+      category: "web3",
+      githubUrl: "https://github.com/therealjhay/PreFlight",
+      techStack: ["Solidity", "Foundry", "TypeScript", "React", "Fastify", "Ethers.js", "Monad"],
+      accentColor: "#00FFA6",
+      caseStudy: {
+        problem:
+          "Users sign opaque hexadecimal blockchain transactions without visibility into state changes or counterparty risk, leading to irreversible on-chain mistakes.",
+        solution:
+          "A pre-signing transaction safety layer that decodes calldata, simulates execution outcomes, checks contract reputation against an on-chain registry, and explains risk scores in plain language.",
+        contribution: [
+          "Backend analysis engine for decoding, simulation, reputation lookup, and risk scoring",
+          "PreflightRegistry smart contract on Monad testnet for flagging risky addresses",
+          "Chrome Manifest V3 browser extension, developer SDK (@preflight/sdk), and web dashboard",
+        ],
+      },
+    },
+    {
+      id: "verivault",
+      index: "08",
+      title: "VeriVault",
+      tagline: "Privacy-preserving transactions and selective disclosure.",
+      description:
+        "A Rust-native, Soroban-based protocol enabling private transactions with selective regulatory disclosure, powered by Protocol 25 BN254 and Poseidon ZK primitives.",
+      category: "web3",
+      githubUrl: "https://github.com/therealjhay/VeriVault",
+      techStack: ["Rust", "Soroban", "Stellar", "Noir", "BN254", "Poseidon2", "WASM"],
+      accentColor: "#10B981",
+      caseStudy: {
+        problem:
+          "Users and institutions need private on-chain transactions on Stellar while still provably satisfying compliance policies without exposing underlying identity data.",
+        solution:
+          "A Soroban privacy protocol using Noir zero-knowledge circuits, Poseidon2 commitments, and on-chain BN254 pairing verification to prove compliance attributes privately.",
+        contribution: [
+          "Poseidon2 commitment storage in an incremental Merkle tree (depth 20) on Soroban",
+          "Groth16 proof verification on-chain using Stellar Protocol 25 BN254 host functions",
+          "On-chain compliance policy registry and time-locked guardian recovery modules",
+        ],
+      },
+    },
+    {
+      id: "anima",
+      index: "09",
+      title: "ANIMA",
+      tagline: "Decentralized AI companion and user-owned memory.",
+      description:
+        "Decentralized AI companion with cryptographic, user-owned memory built on 0G Storage, Compute, and Chain — ensuring persistent, tamper-proof agent memory.",
+      category: "web3",
+      githubUrl: "https://github.com/therealjhay/ANIMA",
+      techStack: ["0G Storage", "0G Compute", "0G Chain", "Solidity", "TypeScript", "React"],
+      accentColor: "#8B5CF6",
+      caseStudy: {
+        problem:
+          "Conventional AI companions store user conversations and long-term memory in centralized silos that users neither own nor cryptographically verify.",
+        solution:
+          "An AI companion architecture anchored on 0G Storage, Compute, and Chain so agent memories remain cryptographically owned by the user's wallet.",
+        contribution: [
+          "Application scaffold and wallet-authenticated session architecture on 0G Network",
+          "Decentralized storage and compute integration design for persistent agent memory",
+          "React and TypeScript client interface with on-chain ownership primitives",
+        ],
+      },
+    },
+    {
+      id: "starsight",
+      index: "10",
+      title: "StarSight",
+      tagline: "RWA decision support and risk analytics.",
+      description:
+        "Decision support and risk analytics platform for tokenized real-world assets (RWAs) built on Stellar.",
+      category: "web3",
+      githubUrl: "https://github.com/therealjhay/StarSight",
+      techStack: ["Rust", "Soroban", "Stellar", "Next.js", "PostgreSQL", "Gemini", "Docker"],
+      accentColor: "#F59E0B",
+      caseStudy: {
+        problem:
+          "Evaluating performance and risk across tokenized real-world assets (RWAs) on Stellar requires combining on-chain market signals with automated analytical models.",
+        solution:
+          "A Stellar/Soroban RWA prediction and analytics platform pairing four Soroban contracts with a Rust event indexer and AI assessment daemon.",
+        contribution: [
+          "Four Soroban contracts: asset-registry, prediction-market, reputation, and rewards",
+          "Rust AI agent daemon integrating Google Gemini to evaluate RWA market predictions",
+          "Rust backend service providing an on-chain event indexer plus REST and WebSocket APIs",
+        ],
+      },
+    },
+    {
+      id: "ARES",
+      index: "11",
+      title: "Ares Protocol",
+      tagline: "Modular treasury management.",
+      description:
+        "Modular treasury management protocol designed to manage high-value vault assets and yield allocation strategies for autonomous organizations.",
+      category: "web3",
+      githubUrl: "https://github.com/therealjhay/ARES-TREASURY",
+      techStack: ["Solidity", "Foundry", "OpenZeppelin", "EIP-712", "Merkle Trees"],
+      accentColor: "#00E5FF",
+      caseStudy: {
+        problem:
+          "Decentralized governance treasuries face systemic risks from monolithic execution paths, replay attacks, and unbounded capital outflows.",
+        solution:
+          "A modular execution vault enforcing strict lifecycle transitions (Created → Queued → Executable → Executed), cryptographic isolation, and epoch rate limits.",
+        contribution: [
+          "EIP-712 signed proposal validation with nonce tracking against signature replay",
+          "AresTimelock queue deleting operation IDs prior to external calls to prevent reentrancy",
+          "Rolling 7-day epoch outflow rate limit and proposal bond slash/refund mechanics",
+        ],
+      },
+    },
+    {
+      id: "relaypay-stellar",
       index: "12",
+      title: "RelayPay",
+      tagline: "Stellar checkout infrastructure.",
+      description:
+        "A full-stack Stellar checkout starter and reusable React payment component with built-in wallet connection, transaction handling, and auto-settlement.",
+      category: "web3",
+      githubUrl: "https://github.com/therealjhay/RelayPay-Stellar",
+      techStack: ["React", "TypeScript", "Express", "Stellar Horizon", "Soroban", "Rust"],
+      accentColor: "#06B6D4",
+      caseStudy: {
+        problem:
+          "Integrating Stellar wallet connections, payment intents, and on-chain confirmation into web checkouts requires repetitive boilerplate across frontend and backend.",
+        solution:
+          "A drop-in React checkout component (`RelayPayButton`) paired with an Express payment-intent API and a Soroban intent-tracking contract.",
+        contribution: [
+          "Reusable RelayPayButton React component with Stellar wallet connection and signing",
+          "Payment intent REST API for creating, fetching, and confirming Stellar transactions",
+          "Soroban contract scaffold implementing create_intent, mark_paid, and get_intent",
+        ],
+      },
+    },
+    {
+      id: "foundry-diamonds",
+      index: "13",
       title: "Foundry Diamonds",
       tagline: "EIP-2535 Diamonds framework.",
       description:
@@ -518,7 +547,7 @@ export const siteContent: SiteContent = {
     },
     {
       id: "monadrpg",
-      index: "13",
+      index: "14",
       title: "MonadRPG",
       tagline: "Privacy-preserving reputation and identity.",
       description:
@@ -536,30 +565,6 @@ export const siteContent: SiteContent = {
           "Solidity verifier and state commitment contracts deployed for the Monad execution environment",
           "Circom zero-knowledge circuits proving reputation thresholds without leaking raw attributes",
           "TypeScript and Rust client tooling for proof generation and on-chain submission",
-        ],
-      },
-    },
-    {
-      id: "jdc-watches",
-      index: "14",
-      title: "JDC Luxury Watches",
-      tagline: "E-commerce platform.",
-      description:
-        "E-commerce platform for curated luxury timepieces featuring WhatsApp concierge ordering, catalog filtering, and high-performance product browsing.",
-      category: "fullstack",
-      githubUrl: "https://github.com/therealjhay/JDC",
-      liveUrl: "https://jdcwatches.vercel.app",
-      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Django REST", "PostgreSQL", "Cloudinary"],
-      accentColor: "#D97706",
-      caseStudy: {
-        problem:
-          "High-touch retail catalogs require fast browsing and variant management while routing checkout directly into personalized WhatsApp concierge threads.",
-        solution:
-          "A full-stack luxury watch storefront built with Next.js and Django REST Framework featuring multi-variant catalog management and pre-filled WhatsApp checkout.",
-        contribution: [
-          "Next.js storefront with brand/category filtering, variant selection, and WhatsApp order builder",
-          "Django REST Framework and PostgreSQL backend powering products, variants, and order tracking",
-          "Admin operations dashboard with Cloudinary multi-image upload",
         ],
       },
     },
@@ -621,7 +626,7 @@ export const siteConfig = {
   location: siteContent.personalInfo.location,
   siteUrl: "https://therealjhay.tech",
   availabilityOpen: true,
-  latestPinnedProject: siteContent.projects[0]?.title ?? "PreFlight",
+  latestPinnedProject: siteContent.projects[0]?.title ?? "BettaPay",
   socialLinks: siteContent.socialLinks,
   nav: [
     { label: "About", href: "/#about", stageId: "about" },
