@@ -266,7 +266,7 @@ export const siteContent: SiteContent = {
       category: "web3",
       featured: true,
       githubUrl: "https://github.com/Betta-Pay/BettaPay-Contract",
-      liveUrl: "https://betta-pay-frontend.vercel.app/",
+      liveUrl: "https://bettapay-tech.vercel.app/",
       techStack: ["Rust", "Soroban", "Stellar", "WebAssembly", "TypeScript", "Node.js"],
       accentColor: "#c8ff2e",
       caseStudy: {
@@ -360,7 +360,7 @@ export const siteContent: SiteContent = {
         "Devnet-ready reputation and identity protocol turning credentials, identity registrations, and attestations into an indexed, portable on-chain passport.",
       category: "web3",
       githubUrl: "https://github.com/therealjhay/Soul",
-      liveUrl: "https://soul-protocol-self.vercel.app",
+      liveUrl: "https://soul-srgp.vercel.app",
       techStack: ["Rust", "Solana", "Circom", "TypeScript", "NestJS", "PostgreSQL", "Next.js"],
       accentColor: "#6366F1",
       caseStudy: {
