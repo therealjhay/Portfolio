@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
 import { AppThemeProvider } from "@/components/layout/theme-provider";
 import { PageTransition } from "@/components/layout/page-transition";
-import { CursorGlow } from "@/components/ui/cursor-glow";
 import { siteConfig } from "@/config/site-content";
 import { createMetadata } from "@/lib/metadata";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = createMetadata({
-  title: `${siteConfig.name} (${siteConfig.handle}) · ${siteConfig.role}`,
+  title: `${siteConfig.name} — Product & Software Engineer`,
   description: siteConfig.supportingText,
 });
 
@@ -30,21 +27,18 @@ export default function RootLayout({
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap"
         />
       </head>
       <body>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:inline-flex focus:min-h-11 focus:items-center focus:border focus:border-primary focus:bg-background focus:px-4 focus:text-foreground"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:inline-flex focus:min-h-11 focus:items-center focus:rounded-md focus:border focus:border-foreground focus:bg-background focus:px-4 focus:text-foreground"
         >
           Skip to content
         </a>
-        <CursorGlow />
         <AppThemeProvider>
-          <Navbar />
           <PageTransition>{children}</PageTransition>
-          <Footer />
         </AppThemeProvider>
       </body>
     </html>

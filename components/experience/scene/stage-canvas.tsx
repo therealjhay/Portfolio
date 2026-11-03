@@ -1,13 +1,15 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useSyncExternalStore } from "react";
-import { pulseScene, setPointer, STAGES, useStage } from "../store";
-import { Dust, Structure } from "./structure";
+import { Canvas } from "@react-three/fiber";
+import { ContactShadows } from "@react-three/drei";
+import { useTheme } from "next-themes";
+import { EngineeringStructure } from "@/components/experience/scene/structure";
+import { sceneState } from "@/components/experience/store";
 
 const emptySubscribe = () => () => {};
 
-function checkWebGL(): boolean {
+function checkWebGLSupport(): boolean {
   if (typeof window === "undefined") return true;
   try {
     const canvas = document.createElement("canvas");
@@ -34,121 +36,83 @@ function useMediaQuery(query: string): boolean {
   );
 }
 
-export function StageCanvas() {
+export function WorkstationCanvas({ className = "" }: { className?: string }) {
+  const { resolvedTheme } = useTheme();
   const mounted = useSyncExternalStore(
     emptySubscribe,
     () => true,
     () => false,
   );
-  const webglOk = useSyncExternalStore(
+  const webglAvailable = useSyncExternalStore(
     emptySubscribe,
-    () => checkWebGL(),
+    () => checkWebGLSupport(),
     () => true,
   );
-  const compact = useMediaQuery("(max-width: 768px)");
-  const reduced = useMediaQuery("(prefers-reduced-motion: reduce)");
-
-  const stageIndex = useStage();
-  const currentStage = STAGES[stageIndex] ?? STAGES[0];
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
-    let dragging = false;
-    let lastX = 0;
-
-    const onPointerMove = (e: PointerEvent) => {
+    const onMove = (e: PointerEvent) => {
       const nx = (e.clientX / Math.max(window.innerWidth, 1)) * 2 - 1;
       const ny = -((e.clientY / Math.max(window.innerHeight, 1)) * 2 - 1);
-      setPointer(nx, ny);
-      if (dragging) {
-        const dx = e.clientX - lastX;
-        lastX = e.clientX;
-        pulseScene(dx * 0.03);
-      }
+      sceneState.pointerX = nx;
+      sceneState.pointerY = ny;
     };
-
-    const onPointerDown = (e: PointerEvent) => {
-      dragging = true;
-      lastX = e.clientX;
-    };
-
-    const onPointerUp = () => {
-      dragging = false;
-    };
-
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-    window.addEventListener("pointerdown", onPointerDown, { passive: true });
-    window.addEventListener("pointerup", onPointerUp, { passive: true });
-
-    return () => {
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("pointerup", onPointerUp);
-    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onMove);
   }, []);
 
+  if (!mounted || !webglAvailable) {
+    return null;
+  }
+
+  const isDark = resolvedTheme === "dark";
+
+  return (
+    <div
+      className={`relative h-full w-full cursor-grab select-none active:cursor-grabbing ${className}`}
+    >
+      <Canvas
+        shadows={!isMobile}
+        dpr={isMobile ? [1, 1.35] : [1, 2]}
+        camera={{ position: [0, 0.3, 4.6], fov: 40, near: 0.1, far: 30 }}
+        gl={{
+          antialias: !isMobile,
+          alpha: true,
+          powerPreference: "high-performance",
+        }}
+      >
+        <ambientLight intensity={isDark ? 0.8 : 1.1} />
+        <directionalLight
+          position={[4, 6, 4]}
+          intensity={isDark ? 1.5 : 1.8}
+          color="#FFFDF9"
+        />
+        <directionalLight position={[-4, -2, -3]} intensity={0.4} />
+
+        <Suspense fallback={null}>
+          <EngineeringStructure isMobile={isMobile} isDark={isDark} />
+          {!isMobile ? (
+            <ContactShadows
+              position={[0, -2.05, 0]}
+              opacity={isDark ? 0.45 : 0.2}
+              scale={7}
+              blur={2.4}
+              far={3.5}
+            />
+          ) : null}
+        </Suspense>
+      </Canvas>
+    </div>
+  );
+}
+
+export function StageCanvas() {
   return (
     <div
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none"
     >
-      {/* Atmospheric radial depth & engineering grid */}
-      <div className="playground-grid absolute inset-0 opacity-45" />
-      <div className="playground-vignette absolute inset-0" />
-
-      {mounted && webglOk ? (
-        <Canvas
-          dpr={compact ? [1, 1.4] : [1, 2]}
-          camera={{
-            position: [0, 0, compact ? 8.2 : 7.1],
-            fov: 42,
-            near: 0.1,
-            far: 60,
-          }}
-          gl={{
-            antialias: !compact,
-            alpha: true,
-            powerPreference: "high-performance",
-          }}
-        >
-          <Suspense fallback={null}>
-            <Structure
-              count={compact ? 42 : 72}
-              compact={compact}
-              reduced={reduced}
-            />
-            <Dust count={compact ? 55 : 120} reduced={reduced} />
-          </Suspense>
-        </Canvas>
-      ) : (
-        <WebGLFallback stateLabel={currentStage.state} />
-      )}
-
-      {/* Subtle corner HUD telemetry */}
-      <div className="fixed bottom-6 left-6 z-20 hidden items-center gap-3 border border-border/60 bg-background/70 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground backdrop-blur-md lg:flex">
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-        <span>
-          {"FORMATION // "}
-          {currentStage.state}
-        </span>
-        <span className="text-border">|</span>
-        <span>
-          STAGE 0{stageIndex + 1} / 0{STAGES.length}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-function WebGLFallback({ stateLabel }: { stateLabel: string }) {
-  return (
-    <div className="absolute inset-0 flex items-center justify-end pr-12 opacity-40">
-      <div className="relative h-96 w-96 rounded-full border border-primary/30 p-8">
-        <div className="h-full w-full rotate-45 border border-foreground/20 p-8">
-          <div className="flex h-full w-full items-center justify-center border border-primary/40 font-mono text-xs uppercase tracking-[0.2em] text-primary">
-            {stateLabel}
-          </div>
-        </div>
-      </div>
+      <div className="subtle-grid absolute inset-0" />
     </div>
   );
 }

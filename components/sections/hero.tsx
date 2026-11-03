@@ -1,152 +1,206 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDownRight, Download, Github, Linkedin, Orbit } from "lucide-react";
-import { ButtonLink } from "@/components/ui/button";
-import { siteConfig } from "@/config/site-content";
-import { pulseScene, scrollToTarget } from "@/components/experience/store";
-
-const stagger = [0, 0.08, 0.16, 0.24, 0.32];
+import Link from "next/link";
+import { useState } from "react";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Check,
+  CheckCircle2,
+  Copy,
+  FileText,
+} from "lucide-react";
+import { type RoleLens, siteContent } from "@/config/site-content";
 
 export function HeroSection() {
-  const shouldReduceMotion = useReducedMotion();
+  const { personalInfo, pillars, projects } = siteContent;
+  const [activeLens, setActiveLens] = useState<RoleLens>("product");
+  const [copied, setCopied] = useState(false);
 
-  const handlePulseScene = () => {
-    pulseScene(1.65);
+  const currentPillar =
+    pillars.find((p) => p.id === activeLens) ?? pillars[0];
+
+  const proofProjects = projects.filter((p) =>
+    currentPillar.featuredProjectIds.includes(p.id),
+  );
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(personalInfo.email);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Ignore
+    }
   };
 
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center border-b border-border/50 pt-24 pb-24 md:pt-28 md:pb-28"
+      className="relative border-b border-border py-14 sm:py-20 lg:py-24"
     >
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-6">
-        <div className="max-w-3xl">
-          {/* Availability & Environment Telemetry Row */}
-          <motion.div
-            className="mb-6 flex flex-wrap items-center gap-3"
-            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 14 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: stagger[0], ease: "easeOut" }}
-          >
-            <span className="inline-flex items-center gap-2 border border-primary/50 bg-primary/10 px-3 py-1 font-mono text-xs uppercase tracking-[0.16em] text-primary backdrop-blur-sm">
-              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-              {siteConfig.availabilityOpen
-                ? "Available for select engineering roles & contracts"
-                : "Unavailable"}
-            </span>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid items-start gap-12 lg:grid-cols-12">
+          {/* Left Column: Clean, Direct Product & Engineering Intro */}
+          <div className="lg:col-span-7">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
+              <span className="h-2 w-2 rounded-full bg-primary" />
+              <span>Available for new projects &amp; roles</span>
+            </div>
 
-            <button
-              type="button"
-              onClick={handlePulseScene}
-              className="inline-flex items-center gap-1.5 border border-border/80 bg-background/70 px-3 py-1 font-mono text-xs text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary/60 hover:text-primary"
-              title="Send an angular impulse to the 3D lattice"
-            >
-              <Orbit className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              <span>Pulse 3D Lattice</span>
-            </button>
-          </motion.div>
+            <h1 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              {personalInfo.headline}
+            </h1>
 
-          {/* Identity Kicker */}
-          <motion.p
-            className="font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground md:text-sm"
-            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 14 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: stagger[1], ease: "easeOut" }}
-          >
-            [JHAY // THE ENGINEERING PLAYGROUND · 0x6118…a33B]
-          </motion.p>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Hi, I’m{" "}
+              <strong className="font-semibold text-foreground">
+                {personalInfo.name}
+              </strong>
+              . {personalInfo.supportingText}
+            </p>
 
-          {/* Main Oversized Editorial Headline */}
-          <motion.h1
-            className="mt-4 font-mono text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
-            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: stagger[2], ease: "easeOut" }}
-          >
-            I build the systems behind{" "}
-            <span className="text-primary">ambitious products.</span>
-          </motion.h1>
+            {/* Primary Actions */}
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-opacity hover:opacity-90"
+              >
+                <span>Explore Selected Work</span>
+                <ArrowDown className="h-4 w-4" />
+              </a>
 
-          {/* Supporting Text */}
-          <motion.p
-            className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl"
-            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 14 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: stagger[3], ease: "easeOut" }}
-          >
-            {siteConfig.supportingText}
-          </motion.p>
+              <Link
+                href="/resume"
+                className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-primary"
+              >
+                <FileText className="h-4 w-4 text-primary" />
+                <span>Resume</span>
+              </Link>
 
-          {/* Primary Actions & Direct Profiles */}
-          <motion.div
-            className="mt-8 flex flex-wrap items-center gap-3"
-            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 14 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: stagger[4], ease: "easeOut" }}
-          >
-            <button
-              type="button"
-              onClick={() => scrollToTarget("#projects")}
-              className="inline-flex min-h-11 items-center justify-center gap-2 bg-primary px-5 py-2.5 font-mono text-sm font-bold text-primary-foreground transition-transform duration-150 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            >
-              <span>Explore my work</span>
-              <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
-            </button>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-4 w-4 text-primary" />
+                    <span className="text-foreground">Copied email</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-4 w-4" />
+                    <span>{personalInfo.email}</span>
+                  </>
+                )}
+              </button>
+            </div>
 
-            <ButtonLink
-              href="/resume.pdf"
-              variant="secondary"
-              download
-              className="backdrop-blur-md"
-            >
-              <Download className="h-4 w-4" aria-hidden="true" />
-              <span>Download resume</span>
-            </ButtonLink>
+            {/* Social Links */}
+            <div className="mt-8 flex flex-wrap items-center gap-6 border-t border-border pt-6 text-sm">
+              <a
+                href={personalInfo.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 font-medium text-foreground hover:text-primary"
+              >
+                <span>GitHub</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href={personalInfo.linkedinUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 font-medium text-foreground hover:text-primary"
+              >
+                <span>LinkedIn</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href="https://x.com/0xjhay"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 font-medium text-foreground hover:text-primary"
+              >
+                <span>X / Twitter</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
 
-            <a
-              href={siteConfig.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-11 items-center gap-2 border border-border bg-card/80 px-4 py-2 font-mono text-xs text-foreground backdrop-blur-md transition-colors hover:border-primary/60 hover:text-primary"
-            >
-              <Github className="h-4 w-4" aria-hidden="true" />
-              <span>GitHub</span>
-            </a>
+          {/* Right Column: Interactive How I Work Card */}
+          <div className="lg:col-span-5">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-7">
+              <div className="grid grid-cols-3 gap-1.5 rounded-xl bg-muted p-1">
+                {pillars.map((pillar) => {
+                  const active = pillar.id === activeLens;
+                  return (
+                    <button
+                      key={pillar.id}
+                      type="button"
+                      onClick={() => setActiveLens(pillar.id)}
+                      className={`rounded-lg px-3 py-2 text-left text-xs font-semibold transition-all ${
+                        active
+                          ? "bg-card text-primary shadow-sm"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {pillar.id === "product"
+                        ? "Product"
+                        : pillar.id === "engineering"
+                          ? "Engineering"
+                          : "Growth"}
+                    </button>
+                  );
+                })}
+              </div>
 
-            <a
-              href={siteConfig.linkedinUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-11 items-center gap-2 border border-border bg-card/80 px-4 py-2 font-mono text-xs text-foreground backdrop-blur-md transition-colors hover:border-primary/60 hover:text-primary"
-            >
-              <Linkedin className="h-4 w-4" aria-hidden="true" />
-              <span>LinkedIn</span>
-            </a>
-          </motion.div>
+              <div className="mt-6">
+                <p className="font-mono text-xs font-medium text-primary">
+                  {currentPillar.title}
+                </p>
+                <h2 className="mt-1 font-display text-2xl font-bold text-foreground">
+                  {currentPillar.headline}
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {currentPillar.summary}
+                </p>
 
-          {/* Interactive Environment Prompt */}
-          <motion.div
-            className="mt-12 flex flex-wrap items-center gap-4 border-t border-border/60 pt-5 font-mono text-xs text-muted-foreground"
-            initial={shouldReduceMotion ? undefined : { opacity: 0 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.42 }}
-          >
-            <button
-              type="button"
-              onClick={() => scrollToTarget("#about")}
-              className="group inline-flex items-center gap-2 uppercase tracking-[0.18em] text-primary transition-colors hover:text-foreground"
-            >
-              <span>Scroll to enter</span>
-              <span className="inline-block transition-transform group-hover:translate-y-0.5">
-                ↓
-              </span>
-            </button>
-            <span className="text-border">·</span>
-            <span className="uppercase tracking-[0.15em]">
-              Explore the environment: move cursor or drag to rotate nodes
-            </span>
-          </motion.div>
+                <ul className="mt-5 space-y-2 border-t border-border pt-4">
+                  {currentPillar.deliverables.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-xs leading-relaxed text-foreground sm:text-sm"
+                    >
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-5 border-t border-border pt-4">
+                  <p className="font-mono text-[11px] text-muted-foreground">
+                    Featured builds:
+                  </p>
+                  <div className="mt-2.5 flex flex-wrap gap-1.5">
+                    {proofProjects.map((proj) => (
+                      <a
+                        key={proj.id}
+                        href={proj.liveUrl ?? proj.githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 rounded-lg border border-border bg-background px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+                      >
+                        <span>{proj.title}</span>
+                        <ArrowUpRight className="h-3 w-3" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

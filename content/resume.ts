@@ -54,7 +54,7 @@ export const resumeData: ResumeData = {
         ?.url.replace(/^https?:\/\//, "") ?? "",
   },
   summary:
-    "Blockchain and full-stack engineer with a builder-first mindset, focused on shipping production systems end-to-end. I architect smart contract stacks, data pipelines, and operational tooling that survive real traffic and real users. I move projects from concept to deployment with clear technical ownership across product, backend, and on-chain infrastructure.",
+    "Software engineer and product builder focused on turning complex market needs into shipped products and commercial traction. Experienced across product strategy, AI-powered full-stack web applications (Next.js, TypeScript, Python, Gemini AI), smart contract settlement infrastructure (Stellar/Soroban, Solidity), and B2B merchant workflows.",
   experience: [
     {
       company: "Web3bridge Africa",

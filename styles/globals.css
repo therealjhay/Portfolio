@@ -3,43 +3,47 @@
 @tailwind utilities;
 
 :root {
-  --background: 42 28% 95%;
-  --foreground: 0 0% 7%;
-  --muted: 40 14% 89%;
-  --muted-foreground: 0 0% 34%;
-  --card: 40 25% 98%;
-  --card-foreground: 0 0% 7%;
-  --border: 0 0% 80%;
-  --primary: 78 92% 32%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 91%;
-  --secondary-foreground: 0 0% 10%;
-  --accent: 190 95% 42%;
-  --accent-foreground: 0 0% 8%;
-  --ring: 78 92% 32%;
+  /* Refined Zinc / Alabaster Neutrals (rauno.me / emilkowal.ski inspired) */
+  --background: 0 0% 98.5%;
+  --foreground: 240 10% 9%;
+  --muted: 240 5% 94%;
+  --muted-foreground: 240 4% 44%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 9%;
+  --border: 240 6% 90%;
+  --primary: 240 10% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 5% 94%;
+  --secondary-foreground: 240 10% 9%;
+  --accent: 240 5% 92%;
+  --accent-foreground: 240 10% 9%;
+  --ring: 240 10% 9%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 100%;
-  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: "Space Mono", "SF Mono", Menlo, Monaco, Consolas, monospace;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
   --font-resume: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .dark {
-  --background: 220 15% 4%;
-  --foreground: 42 24% 92%;
-  --muted: 220 12% 9%;
-  --muted-foreground: 40 10% 64%;
-  --card: 220 14% 6%;
-  --card-foreground: 42 24% 92%;
-  --border: 220 10% 16%;
-  --primary: 76 100% 59%;
-  --primary-foreground: 220 18% 5%;
-  --secondary: 220 12% 11%;
-  --secondary-foreground: 42 24% 92%;
-  --accent: 199 95% 74%;
-  --accent-foreground: 220 18% 5%;
-  --ring: 76 100% 59%;
-  --destructive: 0 78% 58%;
+  /* Deep Zinc Carbon (#0A0A0C) & Soft Zinc Ink (#F4F4F5) */
+  --background: 240 10% 4%;
+  --foreground: 240 5% 96%;
+  --muted: 240 6% 10%;
+  --muted-foreground: 240 5% 60%;
+  --card: 240 8% 7%;
+  --card-foreground: 240 5% 96%;
+  --border: 240 5% 15%;
+  --primary: 240 5% 96%;
+  --primary-foreground: 240 10% 5%;
+  --secondary: 240 6% 11%;
+  --secondary-foreground: 240 5% 96%;
+  --accent: 240 6% 13%;
+  --accent-foreground: 240 5% 96%;
+  --ring: 240 5% 96%;
+  --destructive: 0 72% 55%;
   --destructive-foreground: 0 0% 100%;
 }
 
@@ -52,55 +56,40 @@ html {
 }
 
 body {
-  @apply bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground;
+  @apply bg-background text-foreground antialiased selection:bg-foreground selection:text-background;
   font-family: var(--font-sans), system-ui, sans-serif;
-}
-
-.playground-grid {
-  background-image:
-    linear-gradient(to right, hsl(var(--foreground) / 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--foreground) / 0.035) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
-
-.playground-vignette {
-  background: radial-gradient(
-    circle at 65% 42%,
-    hsl(var(--primary) / 0.07) 0%,
-    transparent 48%,
-    hsl(var(--background) / 0.78) 100%
-  );
+  letter-spacing: -0.011em;
 }
 
 .resume-area {
   --resume-bg: #fafafa;
-  --resume-fg: #111;
-  --resume-border: #e0e0e0;
-  --resume-muted: #5c5c5c;
-  --resume-meta: #4f4f4f;
-  --resume-body: #202020;
-  --resume-date: #646464;
-  --resume-rail-inactive: #5c5c5c;
-  --resume-rail-active: #0b6e4f;
-  --resume-rail-hover: #9c9c9c;
-  --resume-link: #0b6e4f;
+  --resume-fg: #18181b;
+  --resume-border: #e4e4e7;
+  --resume-muted: #71717a;
+  --resume-meta: #52525b;
+  --resume-body: #27272a;
+  --resume-date: #71717a;
+  --resume-rail-inactive: #71717a;
+  --resume-rail-active: #18181b;
+  --resume-rail-hover: #3f3f46;
+  --resume-link: #18181b;
   background: var(--resume-bg);
   color: var(--resume-fg);
   font-family: var(--font-resume), system-ui, sans-serif;
 }
 
 .dark .resume-area {
-  --resume-bg: hsl(220, 14%, 6%);
-  --resume-fg: hsl(42, 24%, 92%);
-  --resume-border: hsl(220, 10%, 17%);
-  --resume-muted: hsl(40, 8%, 68%);
-  --resume-meta: hsl(40, 8%, 60%);
-  --resume-body: hsl(40, 21%, 88%);
-  --resume-date: hsl(40, 8%, 55%);
-  --resume-rail-inactive: hsl(40, 8%, 45%);
-  --resume-rail-active: hsl(76, 100%, 59%);
-  --resume-rail-hover: hsl(40, 8%, 55%);
-  --resume-link: hsl(76, 100%, 59%);
+  --resume-bg: #09090b;
+  --resume-fg: #f4f4f5;
+  --resume-border: #27272a;
+  --resume-muted: #a1a1aa;
+  --resume-meta: #d4d4d8;
+  --resume-body: #e4e4e7;
+  --resume-date: #a1a1aa;
+  --resume-rail-inactive: #71717a;
+  --resume-rail-active: #f4f4f5;
+  --resume-rail-hover: #d4d4d8;
+  --resume-link: #f4f4f5;
 }
 
 .resume-area a:not(.no-underline) {
@@ -149,7 +138,8 @@ body {
     margin: 0.75in;
   }
 
-  html, body {
+  html,
+  body {
     background: #fff !important;
     color: #111 !important;
   }

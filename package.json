@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "dev:resume": "concurrently -k \"next dev\" \"chokidar 'content/resume.ts' 'app/resume/page.tsx' --initial -c 'node scripts/generate-pdf.mjs'\"",
     "build": "next build",
     "start": "next start",

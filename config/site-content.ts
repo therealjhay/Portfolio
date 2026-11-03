@@ -5,10 +5,16 @@ export type SocialLink = {
   handle: string;
 };
 
-export type ProjectCaseStudy = {
-  problem: string;
-  solution: string;
-  contribution: string[];
+export type RoleLens = "product" | "engineering" | "business";
+
+export type PillarItem = {
+  id: RoleLens;
+  number: string;
+  title: string;
+  headline: string;
+  summary: string;
+  deliverables: string[];
+  featuredProjectIds: string[];
 };
 
 export type ProjectItem = {
@@ -17,14 +23,19 @@ export type ProjectItem = {
   title: string;
   tagline: string;
   description: string;
-  category: "web3" | "fullstack";
+  category: "ai-web" | "fintech-web3" | "commerce";
+  lenses: RoleLens[];
   featured?: boolean;
   githubUrl: string;
   liveUrl?: string;
   frameUrl?: string;
   techStack: string[];
-  accentColor: string;
-  caseStudy: ProjectCaseStudy;
+  productImpact: {
+    opportunity: string;
+    execution: string;
+    businessValue: string;
+    highlights: string[];
+  };
 };
 
 export type ArticleItem = {
@@ -34,108 +45,158 @@ export type ArticleItem = {
   url: string;
   platform: string;
   tags: string[];
-  accentColor: string;
 };
 
-export type SkillCluster = {
-  id: string;
-  code: string;
+export type CapabilityGroup = {
+  id: RoleLens;
   title: string;
-  summary: string;
-  accentColor: string;
-  skills: string[];
-};
-
-export type StoryPillar = {
-  code: string;
-  title: string;
-  body: string;
-  signal: string;
-};
-
-export type SiteContent = {
-  personalInfo: {
+  subtitle: string;
+  skills: Array<{
     name: string;
-    handle: string;
-    role: string;
-    headline: string;
-    supportingText: string;
-    bio: string;
-    location: string;
-    email: string;
-    githubUrl: string;
-    linkedinUrl: string;
-    about: string[];
-    pillars: StoryPillar[];
-  };
-  socialLinks: SocialLink[];
-  skillClusters: SkillCluster[];
-  skills: {
-    web3: string[];
-    frontend: string[];
-    backend: string[];
-  };
-  projects: ProjectItem[];
-  articles: ArticleItem[];
+    detail: string;
+  }>;
 };
 
-export const siteContent: SiteContent = {
+export const siteContent = {
   personalInfo: {
     name: "Johnson Oyemade",
     handle: "JHAY",
-    role: "Web3 & Full-Stack Developer",
-    headline: "I build the systems behind ambitious products.",
+    role: "Software Engineer & Product Builder",
+    headline:
+      "I design, build, and ship products that solve real problems.",
     supportingText:
-      "I'm Johnson Oyemade — a Web3 and Full-Stack Developer building smart contracts, blockchain infrastructure and production-ready applications.",
-    bio: "Hybrid Web3 and full-stack engineer bridging scalable backend and React systems with production smart contracts.",
+      "From shaping product direction and user workflows to engineering AI-powered web applications and on-chain settlement systems—I take ideas from zero to live production.",
+    bio: "Software engineer and product builder creating AI-powered web applications, payment infrastructure, and scalable backend systems.",
     location: "Remote",
     email: "johnsonoca@gmail.com",
     githubUrl: "https://github.com/therealjhay",
     linkedinUrl: "https://linkedin.com/in/oyemade-johnson",
     about: [
-      "I’m an engineer drawn to how complex systems hold together under pressure — from deterministic state machines on-chain to the backend pipelines and interfaces that make them usable in the real world.",
-      "Rather than treating smart contracts and web applications as separate worlds, I architect them as one continuous execution pipeline: protocol primitives, indexing and API services, and responsive client interfaces.",
-      "Whether designing zero-knowledge circuits, modular treasury vaults, or high-throughput settlement engines, my focus stays the same: turn ambitious technical ideas into reliable, working products.",
-    ],
-    pillars: [
-      {
-        code: "SYS // 01",
-        title: "Building From the Ground Up",
-        body: "Taking systems from blank-slate architecture to deployed contracts, backend services, and live user interfaces with end-to-end technical ownership.",
-        signal: "Zero-to-one execution",
-      },
-      {
-        code: "SYS // 02",
-        title: "Protocol Engineering",
-        body: "Designing settlement engines, modular diamond proxies, and zero-knowledge circuits across EVM (Solidity/Foundry) and Stellar (Rust/Soroban).",
-        signal: "EVM · Soroban · ZK",
-      },
-      {
-        code: "SYS // 03",
-        title: "Smart Contract Development",
-        body: "Writing upgrade-safe, deterministic contracts backed by invariant testing, simulation harnesses, and strict access and rate-limit boundaries.",
-        signal: "Foundry · OpenZeppelin · EIP-2535",
-      },
-      {
-        code: "SYS // 04",
-        title: "Backend Architecture",
-        body: "Engineering event indexers, transaction simulation pipelines, and multi-tenant APIs in Python (FastAPI, Django), Rust, and TypeScript.",
-        signal: "FastAPI · Django · PostgreSQL",
-      },
-      {
-        code: "SYS // 05",
-        title: "Product Thinking",
-        body: "Abstracting cryptographic and on-chain complexity behind clear human-readable workflows so real users can operate protocols safely.",
-        signal: "UX-first Web3",
-      },
-      {
-        code: "SYS // 06",
-        title: "Continuous Experimentation",
-        body: "Prototyping at the frontier of transaction intelligence, verifiable AI memory, and privacy-preserving compliance primitives.",
-        signal: "R&D → Production",
-      },
+      "I care as much about why a product exists and how people adopt it as I do about how the code is architected. A technically sound system only succeeds when the user experience is effortless and the business model makes sense.",
+      "I work end-to-end across product discovery, full-stack & AI engineering, and go-to-market execution—turning complex problems in fintech, AI, and commerce into simple, reliable software.",
     ],
   },
+
+  pillars: [
+    {
+      id: "product",
+      number: "01",
+      title: "Product & UX Strategy",
+      headline: "Clarity from zero to one.",
+      summary:
+        "Translating market problems into clear product specs, intuitive user flows, and focused roadmaps so complex systems feel simple to use.",
+      deliverables: [
+        "Product discovery & scope definition",
+        "UX architecture & conversion-focused flows",
+        "Rapid MVP shipping & iteration",
+        "End-to-end product ownership",
+      ],
+      featuredProjectIds: ["betta-pay", "blue-scribe", "jdc-watches", "preflight"],
+    },
+    {
+      id: "engineering",
+      number: "02",
+      title: "AI & Full-Stack Engineering",
+      headline: "Fast, production-grade software.",
+      summary:
+        "Shipping modern web platforms, AI workflows, and smart contracts using Next.js, TypeScript, Python, Gemini AI, Rust, and Solidity.",
+      deliverables: [
+        "AI web apps & multi-agent workflows",
+        "Next.js, TypeScript, Python & PostgreSQL",
+        "Payment & settlement smart contracts",
+        "Clean, responsive client interfaces",
+      ],
+      featuredProjectIds: ["aegis-ai", "blue-scribe", "soul-srpg", "verivault"],
+    },
+    {
+      id: "business",
+      number: "03",
+      title: "Commercial & Growth Execution",
+      headline: "Built for adoption and revenue.",
+      summary:
+        "Structuring merchant onboarding, B2B payment rails, conversational checkout channels, and developer tools that drive real traction.",
+      deliverables: [
+        "B2B & merchant payment workflows",
+        "Checkout conversion & concierge sales",
+        "Partner & ecosystem integration",
+        "Clear product positioning & demos",
+      ],
+      featuredProjectIds: ["betta-pay", "jdc-watches", "relaypay-stellar", "starsight"],
+    },
+  ] satisfies PillarItem[],
+
+  capabilityGroups: [
+    {
+      id: "product",
+      title: "Product Management",
+      subtitle: "Strategy, UX & Execution",
+      skills: [
+        {
+          name: "Product Strategy & Roadmapping",
+          detail: "Defining clear MVPs, user stories, and measurable milestones that align engineering with business goals.",
+        },
+        {
+          name: "User Experience & Workflow Design",
+          detail: "Simplifying complex AI, payment, and crypto interactions into intuitive consumer and B2B experiences.",
+        },
+        {
+          name: "AI Product Design",
+          detail: "Designing human-in-the-loop AI workflows, transcription studios, and multi-agent decision dashboards.",
+        },
+        {
+          name: "Technical Product Specs",
+          detail: "Writing actionable PRDs, API contracts, and system architectures that eliminate guesswork.",
+        },
+      ],
+    },
+    {
+      id: "engineering",
+      title: "AI-Native & Web Engineering",
+      subtitle: "Full-Stack, AI & Smart Contracts",
+      skills: [
+        {
+          name: "Next.js, React & TypeScript",
+          detail: "Building fast, accessible, SEO-ready web applications and interactive client dashboards.",
+        },
+        {
+          name: "AI & LLM Integration",
+          detail: "Shipping applications powered by Google Gemini, multi-agent triage pipelines, and verifiable AI memory.",
+        },
+        {
+          name: "Python, FastAPI, Django & PostgreSQL",
+          detail: "Engineering reliable REST APIs, spatial databases (PostGIS), event indexers, and commerce backends.",
+        },
+        {
+          name: "Smart Contracts (Rust / Soroban & Solidity)",
+          detail: "Developing non-custodial payment settlement, treasury vaults, and zero-knowledge verification systems.",
+        },
+      ],
+    },
+    {
+      id: "business",
+      title: "Business Development & Growth",
+      subtitle: "Distribution, Partnerships & Revenue",
+      skills: [
+        {
+          name: "Merchant & B2B Solutions",
+          detail: "Structuring cross-border payment rails, programmable fee splits, and enterprise settlement workflows.",
+        },
+        {
+          name: "Go-To-Market & Product Storytelling",
+          detail: "Crafting clear positioning, technical breakdowns, and live product demonstrations that convert stakeholders.",
+        },
+        {
+          name: "Conversion & Concierge Commerce",
+          detail: "Designing high-touch WhatsApp concierge checkouts and drop-in payment widgets that reduce drop-off.",
+        },
+        {
+          name: "Ecosystem & Partner Relations",
+          detail: "Collaborating across developer ecosystems, payment anchors, and startup teams to expand product reach.",
+        },
+      ],
+    },
+  ] satisfies CapabilityGroup[],
+
   socialLinks: [
     {
       name: "GitHub",
@@ -144,16 +205,16 @@ export const siteContent: SiteContent = {
       handle: "@therealjhay",
     },
     {
-      name: "Twitter / X",
-      url: "https://x.com/0xjhay",
-      icon: "twitter",
-      handle: "@0xjhay",
-    },
-    {
       name: "LinkedIn",
       url: "https://linkedin.com/in/oyemade-johnson",
       icon: "linkedin",
       handle: "oyemade-johnson",
+    },
+    {
+      name: "X / Twitter",
+      url: "https://x.com/0xjhay",
+      icon: "twitter",
+      handle: "@0xjhay",
     },
     {
       name: "Etherscan",
@@ -161,364 +222,347 @@ export const siteContent: SiteContent = {
       icon: "etherscan",
       handle: "0x6118…a33B",
     },
-  ],
-  skillClusters: [
-    {
-      id: "protocol",
-      code: "CLUSTER // 01",
-      title: "Blockchain & Protocol Engineering",
-      summary:
-        "Core languages, virtual machines, and toolchains for designing and deploying decentralized protocols across EVM and WASM chains.",
-      accentColor: "#c8ff2e",
-      skills: ["Solidity", "Rust", "Soroban", "Ethereum", "Stellar", "Foundry"],
-    },
-    {
-      id: "contracts",
-      code: "CLUSTER // 02",
-      title: "Smart Contract Engineering",
-      summary:
-        "Modular contract standards, diamond upgradeability, deterministic test harnesses, and defense-in-depth vault architectures.",
-      accentColor: "#00FFA6",
-      skills: [
-        "OpenZeppelin",
-        "ERC Standards",
-        "EIP-2535 Diamonds",
-        "EIP-712",
-        "Foundry Testing",
-        "Protocol Architecture",
-      ],
-    },
-    {
-      id: "zk",
-      code: "CLUSTER // 03",
-      title: "Zero-Knowledge",
-      summary:
-        "Arithmetic circuits, pairing-friendly curves, and ZK hash primitives for privacy-preserving state and selective disclosure.",
-      accentColor: "#7dd3fc",
-      skills: ["Circom", "Noir", "BN254", "Poseidon"],
-    },
-    {
-      id: "backend",
-      code: "CLUSTER // 04",
-      title: "Backend & Infrastructure",
-      summary:
-        "High-reliability API services, on-chain event indexers, geospatial/relational data stores, and containerized deployments.",
-      accentColor: "#F59E0B",
-      skills: ["Python", "FastAPI", "Django", "Node.js", "PostgreSQL", "Docker"],
-    },
-    {
-      id: "frontend",
-      code: "CLUSTER // 05",
-      title: "Frontend",
-      summary:
-        "Type-safe web applications, interactive 3D/WebGL interfaces, and wallet-connected dApp experiences.",
-      accentColor: "#A78BFA",
-      skills: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"],
-    },
-  ],
+  ] satisfies SocialLink[],
+
   skills: {
     web3: [
-      "Solidity",
-      "Rust",
-      "Soroban",
-      "Foundry",
-      "Ethereum",
-      "Stellar",
-      "Ethers.js",
-      "Viem",
-      "Circom",
-      "Noir",
+      "Product Strategy & Roadmapping",
+      "B2B & Merchant Onboarding",
+      "Stellar / Soroban",
+      "Solidity & Foundry",
+      "Zero-Knowledge (Noir, Circom)",
     ],
-    frontend: ["Next.js", "React", "TypeScript", "JavaScript", "Tailwind CSS"],
-    backend: ["Python", "FastAPI", "Django", "PostgreSQL", "Node.js", "Docker"],
+    frontend: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "AI / Gemini Integration",
+      "Tailwind CSS",
+    ],
+    backend: [
+      "Python",
+      "FastAPI",
+      "Django REST",
+      "Node.js",
+      "PostgreSQL / PostGIS",
+      "Docker",
+    ],
   },
+
   projects: [
-    // --- 01 to 06: Projects with Live Deployed UIs ---
+    // --- 6 LIVE DEPLOYED PRODUCTS ---
     {
       id: "betta-pay",
       index: "01",
       title: "BettaPay",
-      tagline: "Stellar/Soroban merchant payments and settlement.",
+      tagline: "Cross-border merchant payment & settlement platform",
       description:
-        "A non-custodial merchant payment and settlement protocol built on Stellar and Soroban, optimized for high-throughput enterprise settlement across Africa.",
-      category: "web3",
+        "Enterprise payment infrastructure built on Stellar to help African merchants accept payments and automate multi-party revenue splits without custodial lock-in.",
+      category: "fintech-web3",
+      lenses: ["product", "engineering", "business"],
       featured: true,
       githubUrl: "https://github.com/Betta-Pay/BettaPay-Contract",
       liveUrl: "https://bettapay-tech.vercel.app/",
       frameUrl: "/api/preview?url=https://bettapay-tech.vercel.app/",
-      techStack: ["Rust", "Soroban", "Stellar", "WebAssembly", "TypeScript", "Node.js"],
-      accentColor: "#c8ff2e",
-      caseStudy: {
-        problem:
-          "Cross-border and enterprise merchant settlement across Africa requires programmable fee splits, transparent payment references, and non-custodial on-chain guarantees.",
-        solution:
-          "Soroban smart contract infrastructure on Stellar combining a merchant settlement contract with a timelocked governance and configuration registry.",
-        contribution: [
-          "Settlement contract handling merchant registration, fee splits, and payment references",
-          "Governance contract managing fee configs, anchor registry, and system parameters",
-          "Timelocked scheduled operations and 4-tier settlement rule fallback resolution",
-        ],
-      },
-    },
-    {
-      id: "soul-srpg",
-      index: "02",
-      title: "SOUL Protocol",
-      tagline: "On-chain identity and reputation.",
-      description:
-        "Devnet-ready reputation and identity protocol turning credentials, identity registrations, and attestations into an indexed, portable on-chain passport.",
-      category: "web3",
-      featured: true,
-      githubUrl: "https://github.com/therealjhay/Soul",
-      liveUrl: "https://soul-srgp.vercel.app",
-      techStack: ["Rust", "Solana", "Circom", "TypeScript", "NestJS", "PostgreSQL", "Next.js"],
-      accentColor: "#6366F1",
-      caseStudy: {
-        problem:
-          "On-chain activity, credentials, and attestations are fragmented across addresses, making portable reputation and sybil-resistant verification difficult.",
-        solution:
-          "An identity and reputation protocol combining on-chain soulbound credentials with a graph scoring engine and Circom zero-knowledge threshold proofs.",
-        contribution: [
-          "Rust on-chain program for identity registration, soulbound credentials, and attestations",
-          "TypeScript log indexer writing on-chain events into PostgreSQL",
-          "Rust graph engine for reputation scoring plus Circom circuits for threshold proofs",
+      techStack: ["Product Strategy", "Rust", "Stellar / Soroban", "TypeScript", "B2B Payments"],
+      productImpact: {
+        opportunity:
+          "Merchants and payment aggregators across Africa face high cross-border settlement fees, slow payouts, and rigid revenue-split rules.",
+        execution:
+          "Designed and built a non-custodial settlement system with automated fee splitting, payment reference tracking, and a 4-tier fallback rule engine.",
+        businessValue:
+          "Enables instant, transparent B2B merchant settlement with configurable platform fees and anchor interoperability.",
+        highlights: [
+          "Merchant registration and automated basis-point fee splitting",
+          "4-tier settlement rule resolution for custom merchant and asset tiers",
+          "Timelocked governance registry for safe partner and fee updates",
         ],
       },
     },
     {
       id: "aegis-ai",
-      index: "03",
+      index: "02",
       title: "Aegis AI",
-      tagline: "Geospatial AI for disaster response.",
+      tagline: "AI-powered geospatial disaster triage & relief coordination",
       description:
-        "A real-time, event-driven geospatial AI platform for NGO disaster triage, damage assessment, and emergency humanitarian response.",
-      category: "fullstack",
+        "A real-time operations platform that helps humanitarian NGOs verify field reports using a 4-agent AI quorum and coordinate faster emergency relief.",
+      category: "ai-web",
+      lenses: ["product", "engineering"],
       featured: true,
       githubUrl: "https://github.com/therealjhay/AegisAI",
       liveUrl: "https://aegiswarm.vercel.app",
-      techStack: ["Python", "FastAPI", "TypeScript", "Next.js", "Mapbox GL", "PostGIS"],
-      accentColor: "#EF4444",
-      caseStudy: {
-        problem:
-          "Emergency disaster response suffers from slow funding coordination, noisy or duplicate field reports, and opaque disbursement trails.",
-        solution:
-          "A geospatial triage platform that clusters incoming reports in PostGIS, runs a multi-agent verification quorum, and logs signed disbursement decisions.",
-        contribution: [
-          "Spatiotemporal clustering of emergency reports using PostgreSQL and PostGIS",
-          "4-agent verification pipeline: Triangulator, Fact-Checker, Triage Evaluator, Risk Governor",
-          "Parametric disbursement vault with HMAC-signed audit trails and Next.js/Mapbox command UI",
+      techStack: ["AI Agents", "Next.js", "Python / FastAPI", "Mapbox GL", "PostGIS"],
+      productImpact: {
+        opportunity:
+          "During disasters, NGOs are overwhelmed by duplicate or unverified field reports, slowing down life-saving relief funding.",
+        execution:
+          "Built a geospatial command dashboard pairing PostGIS clustering with a 4-agent AI verification pipeline (Triangulator, Fact-Checker, Triage Evaluator, Risk Governor).",
+        businessValue:
+          "Cuts signal-to-noise time for response teams and creates an auditable trail for relief fund disbursement.",
+        highlights: [
+          "Spatiotemporal clustering of incoming emergency reports in PostGIS",
+          "Multi-agent AI verification quorum scoring urgency and credibility",
+          "Interactive Mapbox GL operations dashboard with signed audit trails",
         ],
       },
     },
     {
       id: "blue-scribe",
-      index: "04",
+      index: "03",
       title: "Scribe",
-      tagline: "AI-powered transcription.",
+      tagline: "AI audio transcription studio powered by Gemini 2.5 Flash",
       description:
-        "AI-powered audio transcription platform powered by Google Gemini 2.5 Flash, featuring automatic speaker detection, multi-format audio support, and real-time transcripts.",
-      category: "fullstack",
+        "A clean, fast web application that turns multi-speaker meetings and interviews into structured, searchable transcripts with speaker detection.",
+      category: "ai-web",
+      lenses: ["product", "engineering"],
+      featured: true,
       githubUrl: "https://github.com/therealjhay/Scribe",
       liveUrl: "https://blue-scribe.vercel.app",
-      techStack: ["Next.js", "TypeScript", "Gemini AI", "Tailwind CSS"],
-      accentColor: "#3B82F6",
-      caseStudy: {
-        problem:
-          "Turning multi-speaker recordings across diverse audio formats into structured, searchable transcripts requires fast inference and clean editing workflows.",
-        solution:
-          "A web transcription studio powered by Google Gemini 2.5 Flash with speaker diarization, multi-format upload, and interactive transcript playback.",
-        contribution: [
-          "Next.js and TypeScript audio ingestion pipeline supporting multiple recording formats",
-          "Gemini 2.5 Flash integration for speaker detection and timestamped transcription",
-          "Clean editorial transcript viewer with export and search controls",
-        ],
-      },
-    },
-    {
-      id: "invincible-token",
-      index: "05",
-      title: "Invincible Token & Faucet",
-      tagline: "ERC-20 token ecosystem.",
-      description:
-        "Full-stack ERC-20 token ecosystem with automated 24-hour rate-limited testnet faucet, owner minting controls, and interactive Web3 claiming interface.",
-      category: "web3",
-      githubUrl: "https://github.com/therealjhay/INVINCIBLE",
-      liveUrl: "https://invincible-flax.vercel.app",
-      techStack: ["Solidity", "OpenZeppelin", "Hardhat", "React", "TypeScript", "Lisk Sepolia"],
-      accentColor: "#10B981",
-      caseStudy: {
-        problem:
-          "Testnet ecosystems need an ERC-20 token with realistic supply caps and rate-limited distribution that developers and testers can claim through a clean UI.",
-        solution:
-          "A capped ERC-20 token (Viltrum / VIL) deployed on Lisk Sepolia with an on-chain 24-hour cooldown faucet and a React wallet interface.",
-        contribution: [
-          "ERC-20 contract with 10,000,000 VIL cap, owner minting, and 24-hour faucet cooldown",
-          "React frontend for wallet connection, faucet claiming, transfers, and live token stats",
-          "Automated test suite covering faucet rate limits, cooldowns, and supply invariants",
+      techStack: ["Gemini 2.5 AI", "Next.js", "TypeScript", "Product UX", "Tailwind CSS"],
+      productImpact: {
+        opportunity:
+          "Teams waste hours reviewing raw audio recordings from customer discovery calls, interviews, and meetings.",
+        execution:
+          "Created a zero-friction transcription studio using Google Gemini 2.5 Flash with automatic speaker diarization, multi-format upload, and instant search.",
+        businessValue:
+          "Turns unstructured voice conversations into actionable product notes and shareable documentation in seconds.",
+        highlights: [
+          "Multi-format audio ingestion pipeline in Next.js and TypeScript",
+          "Gemini 2.5 Flash integration for speaker detection and timestamps",
+          "Clean reader interface with keyword search and transcript export",
         ],
       },
     },
     {
       id: "jdc-watches",
-      index: "06",
+      index: "04",
       title: "JDC Luxury Watches",
-      tagline: "E-commerce platform.",
+      tagline: "High-touch luxury e-commerce with WhatsApp concierge checkout",
       description:
-        "E-commerce platform for curated luxury timepieces featuring WhatsApp concierge ordering, catalog filtering, and high-performance product browsing.",
-      category: "fullstack",
+        "A full-stack luxury retail platform designed around how high-ticket buyers actually shop—combining fast catalog discovery with personalized WhatsApp closing.",
+      category: "commerce",
+      lenses: ["product", "engineering", "business"],
+      featured: true,
       githubUrl: "https://github.com/therealjhay/JDC",
       liveUrl: "https://jdcwatches.vercel.app",
-      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Django REST", "PostgreSQL", "Cloudinary"],
-      accentColor: "#D97706",
-      caseStudy: {
-        problem:
-          "High-touch retail catalogs require fast browsing and variant management while routing checkout directly into personalized WhatsApp concierge threads.",
-        solution:
-          "A full-stack luxury watch storefront built with Next.js and Django REST Framework featuring multi-variant catalog management and pre-filled WhatsApp checkout.",
-        contribution: [
-          "Next.js storefront with brand/category filtering, variant selection, and WhatsApp order builder",
-          "Django REST Framework and PostgreSQL backend powering products, variants, and order tracking",
-          "Admin operations dashboard with Cloudinary multi-image upload",
+      techStack: ["Next.js", "Django REST", "PostgreSQL", "Conversion UX", "WhatsApp Commerce"],
+      productImpact: {
+        opportunity:
+          "High-value watch buyers rarely complete cold cart checkouts without speaking to a trusted advisor first.",
+        execution:
+          "Built a Next.js storefront and Django REST inventory backend that routes selected watch variants directly into pre-filled WhatsApp concierge threads.",
+        businessValue:
+          "Bridges self-serve browsing with high-conversion conversational sales and streamlined inventory management.",
+        highlights: [
+          "Fast catalog filtering, variant selection, and automated WhatsApp order builder",
+          "Django REST Framework and PostgreSQL backend for product & order tracking",
+          "Admin operations dashboard with multi-image Cloudinary uploads",
+        ],
+      },
+    },
+    {
+      id: "soul-srpg",
+      index: "05",
+      title: "SOUL Protocol",
+      tagline: "Portable digital identity & reputation passport",
+      description:
+        "A full-stack reputation platform that aggregates user credentials and attestations into a verifiable digital passport.",
+      category: "fintech-web3",
+      lenses: ["product", "engineering"],
+      featured: true,
+      githubUrl: "https://github.com/therealjhay/Soul",
+      liveUrl: "https://soul-srgp.vercel.app",
+      techStack: ["Next.js", "TypeScript", "NestJS", "PostgreSQL", "Rust", "Zero-Knowledge"],
+      productImpact: {
+        opportunity:
+          "Digital communities and platforms struggle to verify user credibility without forcing invasive identity checks.",
+        execution:
+          "Combined on-chain credential anchors, a NestJS/PostgreSQL indexer, and zero-knowledge threshold proofs behind a clean web portal.",
+        businessValue:
+          "Gives platforms sybil-resistant user verification while preserving user privacy.",
+        highlights: [
+          "End-to-end web portal for viewing credentials and reputation scores",
+          "TypeScript event indexer syncing activity into PostgreSQL",
+          "Zero-knowledge threshold proofs for privacy-preserving verification",
+        ],
+      },
+    },
+    {
+      id: "invincible-token",
+      index: "06",
+      title: "Invincible Token & Faucet",
+      tagline: "Self-serve token distribution portal & testnet faucet",
+      description:
+        "An interactive web portal and rate-limited distribution system that lets developers and testers claim tokens seamlessly.",
+      category: "fintech-web3",
+      lenses: ["engineering", "product"],
+      featured: true,
+      githubUrl: "https://github.com/therealjhay/INVINCIBLE",
+      liveUrl: "https://invincible-flax.vercel.app",
+      techStack: ["React", "TypeScript", "Solidity", "OpenZeppelin"],
+      productImpact: {
+        opportunity:
+          "Developer ecosystems need frictionless, abuse-resistant onboarding faucets so builders can test applications immediately.",
+        execution:
+          "Shipped a capped ERC-20 token with an automated 24-hour cooldown faucet and a clean React claiming dashboard.",
+        businessValue:
+          "Improves developer onboarding speed while preventing automated faucet draining.",
+        highlights: [
+          "10M capped token supply with 24-hour per-user cooldown enforcement",
+          "Clean React interface for one-click wallet connection and claiming",
+          "Automated test suite covering rate limits and supply rules",
         ],
       },
     },
 
-    // --- 07 to 14: Smart Contract & Protocol Architecture Repositories ---
+    // --- 8 ADDITIONAL PRODUCT, AI & PROTOCOL SYSTEMS ---
     {
       id: "preflight",
       index: "07",
       title: "PreFlight",
-      tagline: "Web3 transaction intelligence and safety.",
+      tagline: "Human-readable transaction safety & risk intelligence",
       description:
-        "Transaction intelligence and safety layer for Web3. Analyzes blockchain transactions before signing, explaining outcomes in human-readable terms to prevent irreversible on-chain mistakes.",
-      category: "web3",
+        "Simulates blockchain transactions before signing and translates complex hex payloads into plain-English risk warnings.",
+      category: "fintech-web3",
+      lenses: ["product", "engineering"],
       githubUrl: "https://github.com/therealjhay/PreFlight",
-      techStack: ["Solidity", "Foundry", "TypeScript", "React", "Fastify", "Ethers.js", "Monad"],
-      accentColor: "#00FFA6",
-      caseStudy: {
-        problem:
-          "Users sign opaque hexadecimal blockchain transactions without visibility into state changes or counterparty risk, leading to irreversible on-chain mistakes.",
-        solution:
-          "A pre-signing transaction safety layer that decodes calldata, simulates execution outcomes, checks contract reputation against an on-chain registry, and explains risk scores in plain language.",
-        contribution: [
-          "Backend analysis engine for decoding, simulation, reputation lookup, and risk scoring",
-          "PreflightRegistry smart contract on Monad testnet for flagging risky addresses",
-          "Chrome Manifest V3 browser extension, developer SDK (@preflight/sdk), and web dashboard",
-        ],
-      },
-    },
-    {
-      id: "verivault",
-      index: "08",
-      title: "VeriVault",
-      tagline: "Privacy-preserving transactions and selective disclosure.",
-      description:
-        "A Rust-native, Soroban-based protocol enabling private transactions with selective regulatory disclosure, powered by Protocol 25 BN254 and Poseidon ZK primitives.",
-      category: "web3",
-      githubUrl: "https://github.com/therealjhay/VeriVault",
-      techStack: ["Rust", "Soroban", "Stellar", "Noir", "BN254", "Poseidon2", "WASM"],
-      accentColor: "#10B981",
-      caseStudy: {
-        problem:
-          "Users and institutions need private on-chain transactions on Stellar while still provably satisfying compliance policies without exposing underlying identity data.",
-        solution:
-          "A Soroban privacy protocol using Noir zero-knowledge circuits, Poseidon2 commitments, and on-chain BN254 pairing verification to prove compliance attributes privately.",
-        contribution: [
-          "Poseidon2 commitment storage in an incremental Merkle tree (depth 20) on Soroban",
-          "Groth16 proof verification on-chain using Stellar Protocol 25 BN254 host functions",
-          "On-chain compliance policy registry and time-locked guardian recovery modules",
-        ],
-      },
-    },
-    {
-      id: "anima",
-      index: "09",
-      title: "ANIMA",
-      tagline: "Decentralized AI companion and user-owned memory.",
-      description:
-        "Decentralized AI companion with cryptographic, user-owned memory built on 0G Storage, Compute, and Chain — ensuring persistent, tamper-proof agent memory.",
-      category: "web3",
-      githubUrl: "https://github.com/therealjhay/ANIMA",
-      techStack: ["0G Storage", "0G Compute", "0G Chain", "Solidity", "TypeScript", "React"],
-      accentColor: "#8B5CF6",
-      caseStudy: {
-        problem:
-          "Conventional AI companions store user conversations and long-term memory in centralized silos that users neither own nor cryptographically verify.",
-        solution:
-          "An AI companion architecture anchored on 0G Storage, Compute, and Chain so agent memories remain cryptographically owned by the user's wallet.",
-        contribution: [
-          "Application scaffold and wallet-authenticated session architecture on 0G Network",
-          "Decentralized storage and compute integration design for persistent agent memory",
-          "React and TypeScript client interface with on-chain ownership primitives",
-        ],
-      },
-    },
-    {
-      id: "starsight",
-      index: "10",
-      title: "StarSight",
-      tagline: "RWA decision support and risk analytics.",
-      description:
-        "Decision support and risk analytics platform for tokenized real-world assets (RWAs) built on Stellar.",
-      category: "web3",
-      githubUrl: "https://github.com/therealjhay/StarSight",
-      techStack: ["Rust", "Soroban", "Stellar", "Next.js", "PostgreSQL", "Gemini", "Docker"],
-      accentColor: "#F59E0B",
-      caseStudy: {
-        problem:
-          "Evaluating performance and risk across tokenized real-world assets (RWAs) on Stellar requires combining on-chain market signals with automated analytical models.",
-        solution:
-          "A Stellar/Soroban RWA prediction and analytics platform pairing four Soroban contracts with a Rust event indexer and AI assessment daemon.",
-        contribution: [
-          "Four Soroban contracts: asset-registry, prediction-market, reputation, and rewards",
-          "Rust AI agent daemon integrating Google Gemini to evaluate RWA market predictions",
-          "Rust backend service providing an on-chain event indexer plus REST and WebSocket APIs",
-        ],
-      },
-    },
-    {
-      id: "ARES",
-      index: "11",
-      title: "Ares Protocol",
-      tagline: "Modular treasury management.",
-      description:
-        "Modular treasury management protocol designed to manage high-value vault assets and yield allocation strategies for autonomous organizations.",
-      category: "web3",
-      githubUrl: "https://github.com/therealjhay/ARES-TREASURY",
-      techStack: ["Solidity", "Foundry", "OpenZeppelin", "EIP-712", "Merkle Trees"],
-      accentColor: "#00E5FF",
-      caseStudy: {
-        problem:
-          "Decentralized governance treasuries face systemic risks from monolithic execution paths, replay attacks, and unbounded capital outflows.",
-        solution:
-          "A modular execution vault enforcing strict lifecycle transitions (Created → Queued → Executable → Executed), cryptographic isolation, and epoch rate limits.",
-        contribution: [
-          "EIP-712 signed proposal validation with nonce tracking against signature replay",
-          "AresTimelock queue deleting operation IDs prior to external calls to prevent reentrancy",
-          "Rolling 7-day epoch outflow rate limit and proposal bond slash/refund mechanics",
+      techStack: ["Product UX", "TypeScript", "React", "Fastify", "Solidity"],
+      productImpact: {
+        opportunity:
+          "Everyday users lose funds because wallets show unreadable hexadecimal data instead of clear transaction outcomes.",
+        execution:
+          "Built a pre-signing simulation API, browser extension, and SDK that scores transaction risk and explains balance changes in plain language.",
+        businessValue:
+          "Increases user trust and prevents costly signing mistakes across consumer Web3 apps.",
+        highlights: [
+          "Plain-English transaction outcome explanations and 0–100 risk scoring",
+          "Chrome Manifest V3 extension and developer SDK (@preflight/sdk)",
+          "On-chain address reputation registry",
         ],
       },
     },
     {
       id: "relaypay-stellar",
-      index: "12",
+      index: "08",
       title: "RelayPay",
-      tagline: "Stellar checkout infrastructure.",
+      tagline: "Drop-in checkout widget & payment-intent API",
       description:
-        "A full-stack Stellar checkout starter and reusable React payment component with built-in wallet connection, transaction handling, and auto-settlement.",
-      category: "web3",
+        "A plug-and-play React checkout button and Express API that lets businesses accept Stellar payments in minutes.",
+      category: "fintech-web3",
+      lenses: ["product", "engineering", "business"],
       githubUrl: "https://github.com/therealjhay/RelayPay-Stellar",
-      techStack: ["React", "TypeScript", "Express", "Stellar Horizon", "Soroban", "Rust"],
-      accentColor: "#06B6D4",
-      caseStudy: {
-        problem:
-          "Integrating Stellar wallet connections, payment intents, and on-chain confirmation into web checkouts requires repetitive boilerplate across frontend and backend.",
-        solution:
-          "A drop-in React checkout component (`RelayPayButton`) paired with an Express payment-intent API and a Soroban intent-tracking contract.",
-        contribution: [
-          "Reusable RelayPayButton React component with Stellar wallet connection and signing",
-          "Payment intent REST API for creating, fetching, and confirming Stellar transactions",
-          "Soroban contract scaffold implementing create_intent, mark_paid, and get_intent",
+      techStack: ["React SDK", "TypeScript", "Express", "Stellar", "Developer Experience"],
+      productImpact: {
+        opportunity:
+          "Businesses want to accept digital currency payments without spending weeks building custom wallet and settlement flows.",
+        execution:
+          "Packaged wallet connection, payment intent tracking, and settlement confirmation into a single reusable `<RelayPayButton />` component.",
+        businessValue:
+          "Drastically reduces merchant integration time and improves checkout conversion.",
+        highlights: [
+          "Drop-in React checkout component with built-in status feedback",
+          "REST API for creating and verifying payment intents",
+          "Automated on-chain settlement verification",
+        ],
+      },
+    },
+    {
+      id: "starsight",
+      index: "09",
+      title: "StarSight",
+      tagline: "AI risk analytics & decision support for tokenized assets",
+      description:
+        "Combines Google Gemini AI with on-chain market signals to evaluate risk and performance across tokenized real-world assets (RWAs).",
+      category: "ai-web",
+      lenses: ["product", "engineering", "business"],
+      githubUrl: "https://github.com/therealjhay/StarSight",
+      techStack: ["Gemini AI", "Next.js", "Rust", "PostgreSQL", "RWA Analytics"],
+      productImpact: {
+        opportunity:
+          "Investors and asset managers lack clear decision-support tools when evaluating tokenized real-world assets.",
+        execution:
+          "Paired four smart contracts with a Rust event indexer and a Gemini AI evaluation service streaming insights via REST and WebSockets.",
+        businessValue:
+          "Bridges institutional risk analysis with live on-chain asset data.",
+        highlights: [
+          "AI evaluation daemon powered by Google Gemini",
+          "Real-time event indexer backed by PostgreSQL",
+          "Modular asset registry and prediction market contracts",
+        ],
+      },
+    },
+    {
+      id: "anima",
+      index: "10",
+      title: "ANIMA",
+      tagline: "AI companion with user-owned persistent memory",
+      description:
+        "An AI companion application where long-term conversational memory is owned and controlled by the user rather than locked in a central server.",
+      category: "ai-web",
+      lenses: ["product", "engineering"],
+      githubUrl: "https://github.com/therealjhay/ANIMA",
+      techStack: ["AI Memory", "React", "TypeScript", "0G Network", "Solidity"],
+      productImpact: {
+        opportunity:
+          "Users build deep context with AI assistants but have zero ownership or portability over their long-term memory.",
+        execution:
+          "Designed a wallet-authenticated AI companion interface backed by decentralized storage and compute.",
+        businessValue:
+          "Pioneers portable, user-owned context for next-generation AI consumer products.",
+        highlights: [
+          "User-owned persistent memory architecture on 0G Storage & Compute",
+          "Clean React & TypeScript conversational interface",
+          "Cryptographic session and memory ownership controls",
+        ],
+      },
+    },
+    {
+      id: "verivault",
+      index: "11",
+      title: "VeriVault",
+      tagline: "Compliant financial privacy & selective disclosure",
+      description:
+        "Allows businesses and users to keep transaction amounts private while selectively proving regulatory compliance to auditors.",
+      category: "fintech-web3",
+      lenses: ["engineering", "business"],
+      githubUrl: "https://github.com/therealjhay/VeriVault",
+      techStack: ["Rust", "Soroban", "Noir ZK", "Compliance Tech"],
+      productImpact: {
+        opportunity:
+          "Enterprises cannot put payroll or treasury flows on public rails if competitors can see every transaction, yet regulators require auditability.",
+        execution:
+          "Built a zero-knowledge privacy vault using Noir circuits and Stellar Protocol 25 with scoped compliance viewing policies.",
+        businessValue:
+          "Unlocks institutional adoption by combining confidentiality with regulatory compliance.",
+        highlights: [
+          "Selective regulatory disclosure via zero-knowledge proofs",
+          "Incremental Merkle commitment storage in Rust",
+          "Time-locked guardian account recovery for enterprise safety",
+        ],
+      },
+    },
+    {
+      id: "ARES",
+      index: "12",
+      title: "Ares Protocol",
+      tagline: "Institutional-grade treasury management & spending controls",
+      description:
+        "A treasury vault system with multi-stage approval workflows, timelocks, and rolling 7-day spending limits.",
+      category: "fintech-web3",
+      lenses: ["engineering", "business"],
+      githubUrl: "https://github.com/therealjhay/ARES-TREASURY",
+      techStack: ["Solidity", "Foundry", "EIP-712", "Treasury Ops"],
+      productImpact: {
+        opportunity:
+          "Organizations managing shared capital need strict spending limits and approval queues to prevent unauthorized outflows.",
+        execution:
+          "Engineered a 4-stage treasury execution vault with off-chain typed signatures, timelocks, and automated weekly rate caps.",
+        businessValue:
+          "Protects organizational funds with clear governance and operational guardrails.",
+        highlights: [
+          "4-stage proposal lifecycle (Created → Queued → Executable → Executed)",
+          "Rolling 7-day outflow rate limits",
+          "EIP-712 replay-protected signature verification",
         ],
       },
     },
@@ -526,22 +570,24 @@ export const siteContent: SiteContent = {
       id: "foundry-diamonds",
       index: "13",
       title: "Foundry Diamonds",
-      tagline: "EIP-2535 Diamonds framework.",
+      tagline: "Developer framework for modular, upgradeable smart contracts",
       description:
-        "Production-ready EIP-2535 Diamonds framework for Foundry, featuring on-the-fly dynamic facet selector generation and Diamond Loupe test suites.",
-      category: "web3",
+        "An open-source developer toolkit that automates function routing and upgrades for modular EIP-2535 Diamond smart contracts.",
+      category: "fintech-web3",
+      lenses: ["engineering"],
       githubUrl: "https://github.com/therealjhay/Foundry-Diamonds",
-      techStack: ["Solidity", "Foundry", "Hardhat", "EIP-2535", "Solidity FFI"],
-      accentColor: "#EC4899",
-      caseStudy: {
-        problem:
-          "Testing and scripting EIP-2535 Diamond upgrades typically requires manually maintaining brittle function-selector arrays across facets.",
-        solution:
-          "A Foundry-first EIP-2535 Diamonds framework that dynamically generates facet function selectors via `forge inspect` and FFI during tests and upgrades.",
-        contribution: [
-          "DiamondUtils library generating facet selectors dynamically via Foundry FFI",
-          "DiamondUpgradeHelper constructing Add, Replace, and Remove facet cuts automatically",
-          "Environment-driven DiamondUpgrade.s.sol deployment script and custom-error LibDiamond",
+      techStack: ["Solidity", "Foundry", "EIP-2535", "Developer Tooling"],
+      productImpact: {
+        opportunity:
+          "Engineering teams waste time manually maintaining selector arrays when upgrading large modular smart contract systems.",
+        execution:
+          "Created a Foundry library that automatically extracts selectors and builds safe upgrade scripts.",
+        businessValue:
+          "Speeds up engineering release cycles and reduces human error during protocol upgrades.",
+        highlights: [
+          "Automated facet selector generation via Foundry FFI",
+          "One-command Add, Replace, and Remove upgrade helpers",
+          "Comprehensive Loupe & upgrade verification test suite",
         ],
       },
     },
@@ -549,68 +595,67 @@ export const siteContent: SiteContent = {
       id: "monadrpg",
       index: "14",
       title: "MonadRPG",
-      tagline: "Privacy-preserving reputation and identity.",
+      tagline: "Verifiable user progression & privacy-preserving credentials",
       description:
-        "Production-grade, privacy-preserving reputation and identity system built on Monad with zero-knowledge proofs (Circom) and on-chain state.",
-      category: "web3",
+        "A progression and achievement system that lets users prove milestones without exposing underlying private state.",
+      category: "fintech-web3",
+      lenses: ["engineering", "product"],
       githubUrl: "https://github.com/therealjhay/MonadRPG",
-      techStack: ["Solidity", "Circom ZK", "TypeScript", "Rust", "Monad"],
-      accentColor: "#8B5CF6",
-      caseStudy: {
-        problem:
-          "On-chain games and reputation systems expose player progression and identity state publicly, enabling targeted front-running and sybil gaming.",
-        solution:
-          "A privacy-preserving reputation and progression protocol on Monad combining Circom zero-knowledge proofs with verifiable on-chain state commitments.",
-        contribution: [
-          "Solidity verifier and state commitment contracts deployed for the Monad execution environment",
-          "Circom zero-knowledge circuits proving reputation thresholds without leaking raw attributes",
-          "TypeScript and Rust client tooling for proof generation and on-chain submission",
+      techStack: ["TypeScript", "Solidity", "Circom ZK", "Rust", "Monad"],
+      productImpact: {
+        opportunity:
+          "Interactive platforms and games need verifiable user achievements without exposing raw user activity to competitors or bots.",
+        execution:
+          "Built zero-knowledge progression circuits paired with high-throughput state verification on Monad.",
+        businessValue:
+          "Enables fair, bot-resistant loyalty and progression mechanics.",
+        highlights: [
+          "Zero-knowledge milestone verification circuits",
+          "TypeScript & Rust client tooling for proof generation",
+          "High-speed state commitment contracts on Monad",
         ],
       },
     },
-  ],
+  ] satisfies ProjectItem[],
+
   articles: [
     {
       id: "ares-protocol-breakdown",
-      title: "A Technical Breakdown of ARES PROTOCOL",
+      title: "A Technical Breakdown of ARES Protocol",
       description:
-        "Redesigning the Vault system: How ARES Protocol is Solving DeFi’s Problem.",
+        "How modular treasury vaults and spending guardrails solve organizational capital risk.",
       url: "https://substack.com/@therealjhay/note/p-190595895?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
       platform: "Substack",
-      tags: ["DeFi", "Smart Contracts", "Vaults"],
-      accentColor: "#00E5FF",
-    },
-    {
-      id: "solidity-inheritance",
-      title: "Understanding Solidity Inheritance",
-      description: "Building Modular and Secure Smart Contracts.",
-      url: "https://substack.com/@therealjhay/note/p-187978176?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
-      platform: "Substack",
-      tags: ["Solidity", "Security", "Architecture"],
-      accentColor: "#FF8F1F",
+      tags: ["Product Architecture", "Treasury", "Smart Contracts"],
     },
     {
       id: "eip-6963-wallet-war",
       title: "The End of the “Wallet War”: A Deep Dive into EIP-6963",
       description:
-        "How Multi Injected Provider Discovery is finally solving the race condition that has plagued Ethereum UX for nearly a decade.",
+        "How multi-provider discovery fixes one of the biggest onboarding drop-offs in Web3 UX.",
       url: "https://substack.com/@therealjhay/note/p-187071784?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
       platform: "Substack",
-      tags: ["Ethereum", "EIP-6963", "Web3 UX"],
-      accentColor: "#B7FF00",
+      tags: ["Product UX", "Onboarding", "Web3"],
+    },
+    {
+      id: "solidity-inheritance",
+      title: "Understanding Solidity Inheritance",
+      description:
+        "Practical patterns for structuring clean, maintainable, and upgrade-safe contract systems.",
+      url: "https://substack.com/@therealjhay/note/p-187978176?r=6p9kb&utm_source=notes-share-action&utm_medium=web",
+      platform: "Substack",
+      tags: ["Engineering", "Architecture"],
     },
     {
       id: "react-hooks-practical-guide",
-      title:
-        "React Hooks: A Practical Guide to useState, useEffect, and Beyond",
+      title: "React Hooks: A Practical Guide to useState, useEffect, and Beyond",
       description:
-        "A hands-on walkthrough of React hook fundamentals, patterns, and real-world usage.",
+        "A clear, practical walkthrough of state management and side effects in modern React applications.",
       url: "https://0xjhay.hashnode.dev/react-hooks-a-practical-guide-to-usestate-useeffect-and-beyond",
       platform: "Hashnode",
-      tags: ["React", "Hooks", "Frontend"],
-      accentColor: "#FF3B7C",
+      tags: ["Frontend", "React", "Web Development"],
     },
-  ],
+  ] satisfies ArticleItem[],
 };
 
 export const siteConfig = {
@@ -626,23 +671,15 @@ export const siteConfig = {
   location: siteContent.personalInfo.location,
   siteUrl: "https://therealjhay.tech",
   availabilityOpen: true,
-  latestPinnedProject: siteContent.projects[0]?.title ?? "BettaPay",
+  latestPinnedProject: "BettaPay",
   socialLinks: siteContent.socialLinks,
   nav: [
-    { label: "About", href: "/#about", stageId: "about" },
-    { label: "Projects", href: "/#projects", stageId: "projects" },
-    { label: "Stack", href: "/#stack", stageId: "stack" },
+    { label: "Work", href: "/#projects", stageId: "projects" },
+    { label: "How I Work", href: "/#about", stageId: "about" },
+    { label: "Capabilities", href: "/#stack", stageId: "stack" },
     { label: "Writing", href: "/#writing", stageId: "writing" },
     { label: "Contact", href: "/#contact", stageId: "contact" },
-  ],
-  rotatingTitles: [
-    siteContent.personalInfo.role,
-    "Smart Contract Engineer",
-    "Protocol & Full-Stack Builder",
   ],
 } as const;
 
 export type SiteConfig = typeof siteConfig;
-
-export const projectCategories = ["All", "Smart Contracts", "Full-Stack"] as const;
-export type ProjectCategory = (typeof projectCategories)[number];
