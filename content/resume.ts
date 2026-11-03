@@ -106,7 +106,7 @@ export const resumeData: ResumeData = {
     {
       name: "Solidity Developer Bootcamp",
       issuer: "Web3bridge Africa",
-      year: "2026",
+      year: "",
     },
   ],
 };
