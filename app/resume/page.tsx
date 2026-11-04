@@ -17,7 +17,7 @@ export default function ResumePage() {
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-4 md:grid-cols-[140px_1fr] md:px-6 print:block print:px-0">
         <ResumeRail />
         <article className="resume-area mx-auto w-full max-w-3xl px-0 text-sm leading-relaxed print:max-w-none">
-          <header className="flex flex-col justify-between gap-4 border-b border-[color:var(--resume-border)] pb-4 sm:flex-row sm:items-start">
+          <header className="resume-header flex flex-col justify-between gap-4 border-b border-[color:var(--resume-border)] pb-4 sm:flex-row sm:items-start">
             <div>
               <h1 className="text-[1.375rem] leading-none md:text-[1.75rem]">
                 {resumeData.header.fullName}

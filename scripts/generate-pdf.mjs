@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 import http from 'http';
+import fs from 'fs';
 
 // Wait for the Next.js server to be up with a 30s timeout
 const waitForServer = (url, timeoutMs = 30000) => new Promise((resolve, reject) => {
@@ -31,7 +32,22 @@ async function generatePDF() {
 
   console.log('Generating PDF...');
   
+  const possiblePaths = [
+    process.env.PUPPETEER_EXECUTABLE_PATH,
+    '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser',
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  ].filter(Boolean);
+
+  let executablePath;
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      executablePath = p;
+      break;
+    }
+  }
+
   const browser = await puppeteer.launch({
+    ...(executablePath ? { executablePath } : {}),
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
   
@@ -52,11 +68,25 @@ async function generatePDF() {
     document.documentElement.style.setProperty('background', '#fff', 'important');
     document.body.style.setProperty('background', '#fff', 'important');
     
+    // Remove Next.js dev overlays, error toasts, and portals
+    document.querySelectorAll('nextjs-portal, [data-nextjs-toast], [data-nextjs-dialog-overlay], div[data-nextjs-dev-overlay]').forEach((el) => {
+      el.remove();
+    });
+
     const style = document.createElement('style');
     style.innerHTML = `
+      nextjs-portal, [data-nextjs-toast], [data-nextjs-dialog-overlay], div[data-nextjs-dev-overlay] {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+      }
       @media print {
         html, body, main {
           background: #fff !important;
+        }
+        nextjs-portal, [data-nextjs-toast], [data-nextjs-dialog-overlay], div[data-nextjs-dev-overlay] {
+          display: none !important;
+          visibility: hidden !important;
         }
       }
     `;

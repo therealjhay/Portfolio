@@ -145,11 +145,19 @@ body {
   }
 
   .no-print,
-  header,
   nav,
   footer,
-  .resume-rail {
+  .resume-rail,
+  nextjs-portal,
+  [data-nextjs-toast],
+  [data-nextjs-dialog-overlay] {
     display: none !important;
+    visibility: hidden !important;
+  }
+
+  .resume-header {
+    display: flex !important;
+    visibility: visible !important;
   }
 
   .resume-area {
