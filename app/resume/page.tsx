@@ -26,6 +26,14 @@ export default function ResumePage() {
               <p className="mt-2 text-sm text-[color:var(--resume-meta)]">
                 {resumeData.header.location} ·{" "}
                 <a href={`mailto:${resumeData.header.email}`}>{resumeData.header.email}</a>
+                {resumeData.header.phone ? (
+                  <>
+                    {" "}·{" "}
+                    <a href={`tel:${resumeData.header.phone.replace(/\s+/g, "")}`}>
+                      {resumeData.header.phone}
+                    </a>
+                  </>
+                ) : null}
               </p>
               <p className="text-sm text-[color:var(--resume-meta)]">
                 <a
@@ -124,13 +132,27 @@ export default function ResumePage() {
                 {resumeData.skills.web3.join(", ")}
               </p>
               <p>
-                <span className="font-medium">Frontend:</span>{" "}
+                <span className="font-medium">Frontend &amp; AI:</span>{" "}
                 {resumeData.skills.frontend.join(", ")}
               </p>
               <p>
                 <span className="font-medium">Backend &amp; Infrastructure:</span>{" "}
                 {resumeData.skills.backend.join(", ")}
               </p>
+              {resumeData.skills.management ? (
+                <p>
+                  <span className="font-medium">Management &amp; Leadership:</span>{" "}
+                  {resumeData.skills.management.join(", ")}
+                </p>
+              ) : null}
+              {resumeData.languages && resumeData.languages.length > 0 ? (
+                <p>
+                  <span className="font-medium">Languages:</span>{" "}
+                  {resumeData.languages
+                    .map((l) => `${l.language} (${l.proficiency})`)
+                    .join(", ")}
+                </p>
+              ) : null}
             </div>
           </section>
 
@@ -166,9 +188,11 @@ export default function ResumePage() {
                     <span className="font-medium">{certification.name}</span>,{" "}
                     {certification.issuer}
                   </p>
-                  <span className="shrink-0 text-xs text-[color:var(--resume-date)]">
-                    {certification.year}
-                  </span>
+                  {certification.year ? (
+                    <span className="shrink-0 text-xs text-[color:var(--resume-date)]">
+                      {certification.year}
+                    </span>
+                  ) : null}
                 </div>
               ))}
             </div>

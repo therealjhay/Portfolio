@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site-content";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata = createMetadata({
-  title: `${siteConfig.name} — Product & Software Engineer`,
+  title: `${siteConfig.name} — ${siteConfig.role}`,
   description: siteConfig.supportingText,
   path: "/",
 });

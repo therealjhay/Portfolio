@@ -98,13 +98,17 @@ export function StudioPortfolio() {
       <div className="mx-auto max-w-[780px] px-5 py-12 sm:px-8 sm:py-20">
         {/* 1. Minimal Header */}
         <header className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2.5">
             <Link
               href="/"
               className="text-[15px] font-semibold tracking-tight text-foreground"
             >
               {personalInfo.name}
             </Link>
+            <span className="hidden text-muted-foreground/60 sm:inline">·</span>
+            <span className="hidden font-mono text-[11px] text-muted-foreground md:inline">
+              {personalInfo.role}
+            </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-2.5 py-0.5 text-[11px] text-muted-foreground">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               <span>Available</span>
@@ -550,7 +554,7 @@ export function StudioPortfolio() {
           className="mt-20 flex flex-col justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center"
         >
           <p>
-            {personalInfo.name} ·{" "}
+            {personalInfo.name} · {personalInfo.role} ·{" "}
             <a
               href={`mailto:${personalInfo.email}`}
               className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"

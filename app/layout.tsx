@@ -6,7 +6,7 @@ import { createMetadata } from "@/lib/metadata";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = createMetadata({
-  title: `${siteConfig.name} — Product & Software Engineer`,
+  title: `${siteConfig.name} — ${siteConfig.role}`,
   description: siteConfig.supportingText,
 });
 

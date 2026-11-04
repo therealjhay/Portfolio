@@ -61,13 +61,13 @@ export const siteContent = {
   personalInfo: {
     name: "Johnson Oyemade",
     handle: "JHAY",
-    role: "Software Engineer & Product Builder",
+    role: "Builder || AI Native Blockchain Engineer || Project Manager",
     headline:
       "I design, build, and ship products that solve real problems.",
     supportingText:
       "From shaping product direction and user workflows to engineering AI-powered web applications and on-chain settlement systems—I take ideas from zero to live production.",
-    bio: "Software engineer and product builder creating AI-powered web applications, payment infrastructure, and scalable backend systems.",
-    location: "Remote",
+    bio: "Builder, AI-native blockchain engineer, and project manager creating intelligent web applications, decentralized infrastructure, and scalable digital products.",
+    location: "Lagos, Nigeria",
     email: "johnsonoca@gmail.com",
     githubUrl: "https://github.com/therealjhay",
     linkedinUrl: "https://linkedin.com/in/oyemade-johnson",
