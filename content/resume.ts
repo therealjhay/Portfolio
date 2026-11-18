@@ -132,7 +132,7 @@ export const resumeData: ResumeData = {
   ],
   projects: siteContent.projects
     .filter((p) =>
-      ["betta-pay", "capstone", "preflight", "ARES", "blue-scribe"].includes(p.id),
+      ["betta-pay", "capstone", "lifeline", "preflight", "ARES", "blue-scribe"].includes(p.id),
     )
     .map((p) => ({
       name: p.title,
@@ -147,6 +147,7 @@ export const resumeData: ResumeData = {
   skills: {
     web3: [
       "Clarity (Stacks / Bitcoin)",
+      "NEAR Protocol",
       "Solidity",
       "Smart Contract Security",
       "Foundry",

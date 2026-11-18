@@ -106,7 +106,7 @@ export const siteContent = {
         "Bitcoin L2 & payment settlement contracts",
         "Clean, responsive client interfaces",
       ],
-      featuredProjectIds: ["capstone", "aegis-ai", "blue-scribe", "soul-srpg"],
+      featuredProjectIds: ["capstone", "lifeline", "aegis-ai", "blue-scribe"],
     },
     {
       id: "business",
@@ -251,7 +251,7 @@ export const siteContent = {
   },
 
   projects: [
-    // --- 7 LIVE DEPLOYED PRODUCTS ---
+    // --- 8 LIVE DEPLOYED PRODUCTS ---
     {
       id: "betta-pay",
       index: "01",
@@ -310,8 +310,36 @@ export const siteContent = {
       },
     },
     {
-      id: "aegis-ai",
+      id: "lifeline",
       index: "03",
+      title: "LifeLine",
+      tagline: "AI-verified disaster relief pool on NEAR with multi-agent consensus",
+      description:
+        "A public disaster relief pool on NEAR where funds move only when four independent verifier agents agree. Built backend services and on-chain/off-chain integrations connecting intake relays, agent quorum voting, and milestone-gated NGO payouts.",
+      category: "ai-web",
+      lenses: ["engineering", "product", "business"],
+      featured: true,
+      githubUrl: "https://github.com/LifeLine-NH/LIfeLine",
+      liveUrl: "https://lifeline-relief.vercel.app",
+      techStack: ["TypeScript", "Next.js", "NEAR Protocol", "AI Swarms", "Rust", "Backend & Integration"],
+      productImpact: {
+        opportunity:
+          "Disaster relief pools are vulnerable to fake reports, prompt injections, sybil floods, and unverified NGO delivery claims.",
+        execution:
+          "Engineered the backend services and cross-layer integrations connecting field-report intake relays, a 4-agent verifier swarm (geo spread, external weather/alert data, severity scoring, and red-team defense), and NEAR smart contract execution with capped spending and two-tranche milestone payouts.",
+        businessValue:
+          "Protects donor capital with deterministic contract caps, verifiable SHA-256 evidence hashes, and transparent on-chain auditability for every vote and disbursement.",
+        highlights: [
+          "Backend orchestration & integration linking intake relays, 4-verifier AI swarm, and NEAR Testnet contracts",
+          "End-to-end integration of NEP-141 donation flows, NGO bidding, and two-tranche delivery verification",
+          "Client-side SHA-256 evidence hash verification and NEAR Intents live payout quotes",
+          "Defense against prompt injection, keyword spam, sybil report floods, and inflated delivery claims",
+        ],
+      },
+    },
+    {
+      id: "aegis-ai",
+      index: "04",
       title: "Aegis AI",
       tagline: "AI-powered geospatial disaster triage & relief coordination",
       description:
@@ -338,7 +366,7 @@ export const siteContent = {
     },
     {
       id: "blue-scribe",
-      index: "04",
+      index: "05",
       title: "Scribe",
       tagline: "AI audio transcription studio powered by Gemini 2.5 Flash",
       description:
@@ -365,7 +393,7 @@ export const siteContent = {
     },
     {
       id: "jdc-watches",
-      index: "05",
+      index: "06",
       title: "JDC Luxury Watches",
       tagline: "High-touch luxury e-commerce with WhatsApp concierge checkout",
       description:
@@ -392,7 +420,7 @@ export const siteContent = {
     },
     {
       id: "soul-srpg",
-      index: "06",
+      index: "07",
       title: "SOUL Protocol",
       tagline: "Portable digital identity & reputation passport",
       description:
@@ -419,7 +447,7 @@ export const siteContent = {
     },
     {
       id: "invincible-token",
-      index: "07",
+      index: "08",
       title: "Invincible Token & Faucet",
       tagline: "Self-serve token distribution portal & testnet faucet",
       description:
@@ -448,7 +476,7 @@ export const siteContent = {
     // --- 8 ADDITIONAL PRODUCT, AI & PROTOCOL SYSTEMS ---
     {
       id: "preflight",
-      index: "08",
+      index: "09",
       title: "PreFlight",
       tagline: "Human-readable transaction safety & risk intelligence",
       description:
@@ -473,7 +501,7 @@ export const siteContent = {
     },
     {
       id: "relaypay-stellar",
-      index: "09",
+      index: "10",
       title: "RelayPay",
       tagline: "Drop-in checkout widget & payment-intent API",
       description:
@@ -498,7 +526,7 @@ export const siteContent = {
     },
     {
       id: "starsight",
-      index: "10",
+      index: "11",
       title: "StarSight",
       tagline: "AI risk analytics & decision support for tokenized assets",
       description:
@@ -523,7 +551,7 @@ export const siteContent = {
     },
     {
       id: "anima",
-      index: "11",
+      index: "12",
       title: "ANIMA",
       tagline: "AI companion with user-owned persistent memory",
       description:
@@ -548,7 +576,7 @@ export const siteContent = {
     },
     {
       id: "verivault",
-      index: "12",
+      index: "13",
       title: "VeriVault",
       tagline: "Compliant financial privacy & selective disclosure",
       description:
@@ -573,7 +601,7 @@ export const siteContent = {
     },
     {
       id: "ARES",
-      index: "13",
+      index: "14",
       title: "Ares Protocol",
       tagline: "Institutional-grade treasury management & spending controls",
       description:
@@ -598,7 +626,7 @@ export const siteContent = {
     },
     {
       id: "foundry-diamonds",
-      index: "14",
+      index: "15",
       title: "Foundry Diamonds",
       tagline: "Developer framework for modular, upgradeable smart contracts",
       description:
@@ -623,7 +651,7 @@ export const siteContent = {
     },
     {
       id: "monadrpg",
-      index: "15",
+      index: "16",
       title: "MonadRPG",
       tagline: "Verifiable user progression & privacy-preserving credentials",
       description:
