@@ -91,7 +91,7 @@ export const siteContent = {
         "Rapid MVP shipping & iteration",
         "End-to-end product ownership",
       ],
-      featuredProjectIds: ["betta-pay", "blue-scribe", "jdc-watches", "preflight"],
+      featuredProjectIds: ["betta-pay", "capstone", "blue-scribe", "jdc-watches"],
     },
     {
       id: "engineering",
@@ -99,14 +99,14 @@ export const siteContent = {
       title: "AI & Full-Stack Engineering",
       headline: "Fast, production-grade software.",
       summary:
-        "Shipping modern web platforms, AI workflows, and smart contracts using Next.js, TypeScript, Python, Gemini AI, Rust, and Solidity.",
+        "Shipping modern web platforms, AI workflows, and smart contracts using Next.js, TypeScript, Python, Gemini AI, Rust, Clarity, and Solidity.",
       deliverables: [
         "AI web apps & multi-agent workflows",
         "Next.js, TypeScript, Python & PostgreSQL",
-        "Payment & settlement smart contracts",
+        "Bitcoin L2 & payment settlement contracts",
         "Clean, responsive client interfaces",
       ],
-      featuredProjectIds: ["aegis-ai", "blue-scribe", "soul-srpg", "verivault"],
+      featuredProjectIds: ["capstone", "aegis-ai", "blue-scribe", "soul-srpg"],
     },
     {
       id: "business",
@@ -121,7 +121,7 @@ export const siteContent = {
         "Partner & ecosystem integration",
         "Clear product positioning & demos",
       ],
-      featuredProjectIds: ["betta-pay", "jdc-watches", "relaypay-stellar", "starsight"],
+      featuredProjectIds: ["betta-pay", "capstone", "jdc-watches", "relaypay-stellar"],
     },
   ] satisfies PillarItem[],
 
@@ -167,8 +167,8 @@ export const siteContent = {
           detail: "Engineering reliable REST APIs, spatial databases (PostGIS), event indexers, and commerce backends.",
         },
         {
-          name: "Smart Contracts (Rust / Soroban & Solidity)",
-          detail: "Developing non-custodial payment settlement, treasury vaults, and zero-knowledge verification systems.",
+          name: "Smart Contracts (Clarity, Rust/Soroban & Solidity)",
+          detail: "Developing Bitcoin L2 launchpads, non-custodial payment settlement, treasury vaults, and zero-knowledge verification systems.",
         },
       ],
     },
@@ -226,10 +226,11 @@ export const siteContent = {
 
   skills: {
     web3: [
-      "Product Strategy & Roadmapping",
-      "B2B & Merchant Onboarding",
-      "Stellar / Soroban",
+      "Clarity (Stacks / Bitcoin)",
       "Solidity & Foundry",
+      "Stellar / Soroban",
+      "SIP-009 & ERC Standards",
+      "Product Strategy & Roadmapping",
       "Zero-Knowledge (Noir, Circom)",
     ],
     frontend: [
@@ -250,7 +251,7 @@ export const siteContent = {
   },
 
   projects: [
-    // --- 6 LIVE DEPLOYED PRODUCTS ---
+    // --- 7 LIVE DEPLOYED PRODUCTS ---
     {
       id: "betta-pay",
       index: "01",
@@ -280,8 +281,37 @@ export const siteContent = {
       },
     },
     {
-      id: "aegis-ai",
+      id: "capstone",
       index: "02",
+      title: "Capstone",
+      tagline: "NFT launchpad & creator studio anchored to Bitcoin via Stacks",
+      description:
+        "A launchpad and studio for non-fungible tokens on Stacks. Features 1-transaction drops, direct creator treasury settlement, post-condition spend guarantees, and algorithmic vector artwork.",
+      category: "fintech-web3",
+      lenses: ["product", "engineering", "business"],
+      featured: true,
+      githubUrl: "https://github.com/therealjhay/Capstone",
+      liveUrl: "https://capstone-stx.vercel.app/",
+      techStack: ["Clarity 6", "Stacks / Bitcoin", "SIP-009", "Next.js", "TypeScript", "Tailwind CSS"],
+      productImpact: {
+        opportunity:
+          "Traditional NFT launchpads lock creators into custodial intermediaries, complex multi-step deployments, and opaque spending mechanisms.",
+        execution:
+          "Architected a Clarity smart contract (capstone-launchpad-v2) for 1-call drop configuration and zero-custody minting directly into the creator's vault with Stacks post-condition spend enforcement. Built an archival editorial frontend with live procedural token previews and real-time treasury telemetry.",
+        businessValue:
+          "Eliminates platform custody risks and deployment friction, allowing creators to launch drops in one transaction with guaranteed Bitcoin settlement and zero intermediary fees.",
+        highlights: [
+          "1-transaction drop configuration and direct creator treasury settlement",
+          "Stacks post-condition spend guarantees asserting exact micro-STX transfers",
+          "Algorithmic geometric vector art preview engine keyed to token IDs",
+          "SIP-009 compliant Clarity contract deployed to Stacks Testnet",
+          "Dual-state creator studio with live sales telemetry and one-click withdrawals",
+        ],
+      },
+    },
+    {
+      id: "aegis-ai",
+      index: "03",
       title: "Aegis AI",
       tagline: "AI-powered geospatial disaster triage & relief coordination",
       description:
@@ -308,7 +338,7 @@ export const siteContent = {
     },
     {
       id: "blue-scribe",
-      index: "03",
+      index: "04",
       title: "Scribe",
       tagline: "AI audio transcription studio powered by Gemini 2.5 Flash",
       description:
@@ -335,7 +365,7 @@ export const siteContent = {
     },
     {
       id: "jdc-watches",
-      index: "04",
+      index: "05",
       title: "JDC Luxury Watches",
       tagline: "High-touch luxury e-commerce with WhatsApp concierge checkout",
       description:
@@ -362,7 +392,7 @@ export const siteContent = {
     },
     {
       id: "soul-srpg",
-      index: "05",
+      index: "06",
       title: "SOUL Protocol",
       tagline: "Portable digital identity & reputation passport",
       description:
@@ -389,7 +419,7 @@ export const siteContent = {
     },
     {
       id: "invincible-token",
-      index: "06",
+      index: "07",
       title: "Invincible Token & Faucet",
       tagline: "Self-serve token distribution portal & testnet faucet",
       description:
@@ -418,7 +448,7 @@ export const siteContent = {
     // --- 8 ADDITIONAL PRODUCT, AI & PROTOCOL SYSTEMS ---
     {
       id: "preflight",
-      index: "07",
+      index: "08",
       title: "PreFlight",
       tagline: "Human-readable transaction safety & risk intelligence",
       description:
@@ -443,7 +473,7 @@ export const siteContent = {
     },
     {
       id: "relaypay-stellar",
-      index: "08",
+      index: "09",
       title: "RelayPay",
       tagline: "Drop-in checkout widget & payment-intent API",
       description:
@@ -468,7 +498,7 @@ export const siteContent = {
     },
     {
       id: "starsight",
-      index: "09",
+      index: "10",
       title: "StarSight",
       tagline: "AI risk analytics & decision support for tokenized assets",
       description:
@@ -493,7 +523,7 @@ export const siteContent = {
     },
     {
       id: "anima",
-      index: "10",
+      index: "11",
       title: "ANIMA",
       tagline: "AI companion with user-owned persistent memory",
       description:
@@ -518,7 +548,7 @@ export const siteContent = {
     },
     {
       id: "verivault",
-      index: "11",
+      index: "12",
       title: "VeriVault",
       tagline: "Compliant financial privacy & selective disclosure",
       description:
@@ -543,7 +573,7 @@ export const siteContent = {
     },
     {
       id: "ARES",
-      index: "12",
+      index: "13",
       title: "Ares Protocol",
       tagline: "Institutional-grade treasury management & spending controls",
       description:
@@ -568,7 +598,7 @@ export const siteContent = {
     },
     {
       id: "foundry-diamonds",
-      index: "13",
+      index: "14",
       title: "Foundry Diamonds",
       tagline: "Developer framework for modular, upgradeable smart contracts",
       description:
@@ -593,7 +623,7 @@ export const siteContent = {
     },
     {
       id: "monadrpg",
-      index: "14",
+      index: "15",
       title: "MonadRPG",
       tagline: "Verifiable user progression & privacy-preserving credentials",
       description:

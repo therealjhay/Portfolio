@@ -59,7 +59,13 @@ async function generatePDF() {
   });
   
   // Wait until network is idle to ensure fonts and styles are loaded
-  await page.goto(targetUrl, { waitUntil: 'networkidle0' });
+  try {
+    await page.goto(targetUrl, { waitUntil: 'networkidle0', timeout: 45000 });
+  } catch (err) {
+    console.log('Retrying navigation to', targetUrl);
+    await new Promise((r) => setTimeout(r, 2000));
+    await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 45000 });
+  }
 
   // Force light mode to prevent dark background boxes
   await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'light' }]);

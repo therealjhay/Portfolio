@@ -132,7 +132,7 @@ export const resumeData: ResumeData = {
   ],
   projects: siteContent.projects
     .filter((p) =>
-      ["betta-pay", "preflight", "ARES", "blue-scribe"].includes(p.id),
+      ["betta-pay", "capstone", "preflight", "ARES", "blue-scribe"].includes(p.id),
     )
     .map((p) => ({
       name: p.title,
@@ -146,10 +146,12 @@ export const resumeData: ResumeData = {
     })),
   skills: {
     web3: [
+      "Clarity (Stacks / Bitcoin)",
       "Solidity",
       "Smart Contract Security",
       "Foundry",
       "Rust (Soroban)",
+      "SIP-009 & ERC Standards",
       "Zero-Knowledge (Circom, Noir)",
       "Viem",
       "Ethers.js",

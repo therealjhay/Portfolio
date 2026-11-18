@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const ALLOWED_HOSTS = new Set(["bettapay-tech.vercel.app"]);
+const ALLOWED_HOSTS = new Set([
+  "bettapay-tech.vercel.app",
+  "capstone-stx.vercel.app",
+]);
 
 const FALLBACK_BETTAPAY_HTML = `<!DOCTYPE html>
 <html lang="en">
